@@ -1,0 +1,67 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<div class="card p-2 mb-0 mt-1">
+    <div class="align-items-center pt-2 pr-2 pl-2">
+        <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text float-left btn" type="button" @onclick="e => OnAddClient.InvokeAsync(Client)">
+            <h5 class="m-0">@_name</h5>
+        </button>
+    </div>
+    @if (string.IsNullOrEmpty(_description) == false)
+    {
+        <p class="card-text ml-2 mb-0">Описание: @_description</p>
+    }
+    <p class="card-text ml-2 mb-0">Количество видеороликов: @_count</p>
+    <p class="card-text ml-2 mb-0">Общая продолжительность: @_duration</p>
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public ClientChannel Client { get; set; }
+    [Parameter]
+    public EventCallback<ClientChannel> OnAddClient { get; set; }
+
+    private byte _red { get; set; } = 0;
+    private byte _green { get; set; } = 0;
+    private byte _blue { get; set; } = 0;
+
+    private string _name { get; set; } = string.Empty;
+    private string _description { get; set; } = string.Empty;
+
+    private int _count { get; set; } = 0;
+    private TimeSpan _duration { get; set; } = TimeSpan.Zero;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        var client = (await Container.AdvertisingClientManager.TryGet(Client.AdvertisingClientId)).Item2;
+        _name = client.Name;
+        _description = client.Description;
+        var (isSuccess, user) = await Container.UserManager.TryGet(client.OwnerId);
+        if (isSuccess)
+        {
+            _red = user.Red;
+            _green = user.Green;
+            _blue = user.Blue;
+        }
+        var videos = await Container.AdvertisingVideoManager.GetCollection(x => Client.AdvertisingVideosId.Contains(x.Id));
+        _duration = new TimeSpan(videos.Sum(video => video.Duration.Ticks));
+        _count = videos.Count();
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+}

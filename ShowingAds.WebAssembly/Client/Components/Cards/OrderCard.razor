@@ -1,0 +1,48 @@
+﻿@implements IDisposable
+@using ShowingAds.CoreLibrary.Models.Database
+
+<div class="card p-2 mb-0 mt-1">
+    <div class="align-items-center pt-2 pr-2 pl-2">
+        <button type="button" class="close float-right" @onclick="e => DeleteOrderCallback.InvokeAsync(Order.Id)">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="card-text float-left">
+            <h5 class="m-0">@_advertisingClient.Name</h5>
+        </div>
+    </div>
+    @if (string.IsNullOrEmpty(_advertisingClient.Description) == false)
+    {
+        <p class="card-text ml-2 mb-0">Описание: @_advertisingClient.Description</p>
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Order Order { get; set; }
+    [Parameter]
+    public EventCallback<Guid> DeleteOrderCallback { get; set; }
+
+    private AdvertisingClient _advertisingClient { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        var (isSuccess, clientChannel) = await Container.ClientChannelManager.TryGet(Order.ClientChannelConnectionId);
+        if (isSuccess)
+            (isSuccess, _advertisingClient) = await Container.AdvertisingClientManager.TryGet(clientChannel.AdvertisingClientId);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+}

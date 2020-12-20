@@ -1,0 +1,305 @@
+﻿@using Blazored.Modal.Services
+@using ShowingAds.CoreLibrary.Enums
+@using ShowingAds.CoreLibrary.Models.States
+@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Modals
+@inject IModalService Modal
+@implements IDisposable
+
+<div class="card mb-1">
+    <div class="align-items-center pt-2 pr-2 pl-2 mb-1">
+        <button type="button" class="close float-right" @onclick="() => DeleteChannelCallback.InvokeAsync(Channel.Id)">
+            <i class="fas fa-times"></i>
+        </button>
+        <button type="button" class="close mr-3 float-right" @onclick="() => UpdateChannelCallback.InvokeAsync(Channel)">
+            <i class="fas fa-sliders-h"></i>
+        </button>
+        <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text float-left btn" type="button" @onclick="() => _isCollapsed = !_isCollapsed">
+            <h5 class="m-0">@Channel.Name</h5>
+        </button>
+    </div>
+    <div class="card-text ml-2 mb-1">
+        @if (string.IsNullOrEmpty(Channel.Description) == false)
+        {
+            <p class="m-0">Описание: @Channel.Description</p>
+        }
+    </div>
+    <div class="@(_isCollapsed ? "collapse" : "collapse show")">
+        <p class="card-text ml-2 mb-0">Создал: @Channel.FounderName</p>
+        <div class="row mx-auto">
+            @if (Channel.LogoLeft == Guid.Empty)
+            {
+                <div class="col-sm-6 p-1"><img class="rounded image-link" style="max-width: 100%" href="/images/background.jpg" src="/images/background.jpg" /></div>
+            }
+            else
+            {
+                <div class="col-sm-6 p-1"><img class="rounded image-link" style="max-width: 100%" href="http://192.168.1.66:3666/logo?logo=@Channel.LogoLeft" src="http://192.168.1.66:3666/logo?logo=@Channel.LogoLeft" /></div>
+            }
+            @if (Channel.LogoRight == Guid.Empty)
+            {
+                <div class="col-sm-6 p-1"><img class="rounded image-link" style="max-width: 100%" href="/images/background.jpg" src="/images/background.jpg" /></div>
+            }
+            else
+            {
+                <div class="col-sm-6 p-1"><img class="rounded image-link" style="max-width: 100%" href="http://192.168.1.66:3666/logo?logo=@Channel.LogoRight" src="http://192.168.1.66:3666/logo?logo=@Channel.LogoRight" /></div>
+            }
+        </div>
+        <p class="card-text ml-2 mb-0">Ориентация экранов: @(Channel.DisplayOrientation == DisplayOrientation.Horizontal ? "Горизонтальная" : "Вертикальная")</p>
+        @if (string.IsNullOrEmpty(Channel.Ticker) == false)
+        {
+            <p class="card-text ml-2 mb-0">Бегущая строка: @Channel.Ticker</p>
+            <p class="card-text ml-2 mb-0">Интервал бегущей строки: @Channel.TickerInterval.TotalMinutes мин</p>
+        }
+        <p class="card-text ml-2 mb-1">Время перезагрузки приставки (каждый день): @Channel.ReloadTime</p>
+        <div class="row mx-auto">
+            <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text col btn m-1" type="button" data-toggle="collapse" data-target="#contents-@Channel.Id" aria-expanded="false" aria-controls="contents-@Channel.Id">
+                <h5 class="m-0">Контент</h5>
+            </button>
+            <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text col btn m-1" type="button" data-toggle="collapse" data-target="#clients-@Channel.Id" aria-expanded="false" aria-controls="clients-@Channel.Id">
+                <h5 class="m-0">Клиенты</h5>
+            </button>
+            <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text col btn m-1" type="button" data-toggle="collapse" data-target="#orders-@Channel.Id" aria-expanded="false" aria-controls="orders-@Channel.Id">
+                <h5 class="m-0">Очередность</h5>
+            </button>
+            <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text col btn m-1" type="button" data-toggle="collapse" data-target="#devices-@Channel.Id" aria-expanded="false" aria-controls="devices-@Channel.Id">
+                <h5 class="m-0">Приставки</h5>
+            </button>
+        </div>
+        <div class="accordion mx-auto" id="panel-@Channel.Id">
+            <div id="contents-@Channel.Id" class="collapse border rounded m-1 p-1" data-parent="#panel-@Channel.Id">
+                <div class="card text-center plus mb-1" @onclick="e => AddContent()">
+                    <i class="fas fa-plus fa-5x"></i>
+                </div>
+                @foreach (var content in _contents)
+                {
+                    <ContentCard @key="Channel.Id.ToString() + content.Id" Content="content" DeleteContentCallback="RemoveContent" />
+                }
+            </div>
+            <div id="clients-@Channel.Id" class="collapse border rounded m-1 p-1" data-parent="#panel-@Channel.Id">
+                <div class="card text-center plus mb-1" @onclick="e => AddClient()">
+                    <i class="fas fa-plus fa-5x"></i>
+                </div>
+                @foreach (var client in _clients)
+                {
+                    <ClientCard @key="Channel.Id.ToString() + client.Id" Client="client" DeleteClientCallback="RemoveClient" />
+                }
+            </div>
+            <div id="orders-@Channel.Id" class="collapse border rounded m-1 p-1" data-parent="#panel-@Channel.Id">
+                <div class="card text-center plus mb-1" @onclick="e => AddOrder()">
+                    <i class="fas fa-plus fa-5x"></i>
+                </div>
+                @foreach (var order in _orders)
+                {
+                    <OrderCard @key="Channel.Id.ToString() + order.Id" Order="order" DeleteOrderCallback="RemoveOrder" />
+                }
+            </div>
+            <div id="devices-@Channel.Id" class="collapse border rounded m-1 p-1" data-parent="#panel-@Channel.Id">
+                <div class="card text-center plus mb-1" @onclick="e => AddDevice()">
+                    <i class="fas fa-plus fa-5x"></i>
+                </div>
+                @foreach (var device in _devices)
+                {
+                    <DeviceCard @key="Channel.Id.ToString() + device.Id" Device="device" OnClose="RemoveDevice" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Channel Channel { get; set; }
+    [Parameter]
+    public EventCallback<Channel> UpdateChannelCallback { get; set; }
+    [Parameter]
+    public EventCallback<Guid> DeleteChannelCallback { get; set; }
+
+    private List<Content> _contents { get; set; }
+    private List<ClientChannel> _clients { get; set; }
+    private List<Order> _orders { get; set; }
+    private List<DeviceState> _devices { get; set; }
+
+    private byte _red { get; set; } = 0;
+    private byte _green { get; set; } = 0;
+    private byte _blue { get; set; } = 0;
+    private bool _isCollapsed { get; set; } = true;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        var (isSuccess, user) = await Container.UserManager.TryGet(Channel.OwnerId);
+        if (isSuccess)
+        {
+            _red = user.Red;
+            _green = user.Green;
+            _blue = user.Blue;
+        }
+        _contents = (await Container.ContentManager.GetCollection(
+            x => Channel.ContentsId.Contains(x.Id))).OrderBy(x => x.Name).ToList();
+        _clients = (await Container.ClientChannelManager.GetCollection(
+            x => Channel.Id == x.ChannelId)).OrderBy(x => x.Id).ToList();
+        _orders = (await Container.OrderManager.GetCollection(
+            x => Channel.Id == x.ChannelId)).OrderBy(x => x.OrderField).ToList();
+        _devices = (await Container.DeviceManager.GetCollection(
+            x => Channel.Id == x.ChannelId)).OrderBy(x => x.Name).ToList();
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private void AddContent()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Channel", Channel);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<AddContentModal>("Альтернативный контент", parameters, options);
+    }
+
+    private async void RemoveContent(Guid content)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            Channel.ContentsId.Remove(content);
+            await Container.ChannelManager.TryAddOrUpdate(Channel.Id, Channel);
+        }
+    }
+
+    private void AddClient()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Channel", Channel);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<AddClientModal>("Клиенты", parameters, options);
+    }
+
+    private async void RemoveClient(Guid client)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            await Container.ClientChannelManager.TryDelete(client);
+        }
+    }
+
+    private void AddOrder()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Channel", Channel);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<AddOrderModal>("Клиенты", parameters, options);
+    }
+
+    private async void RemoveOrder(Guid order)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            await Container.OrderManager.TryDelete(order);
+        }
+    }
+
+    private void AddDevice()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Channel", Channel);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<AddDeviceModal>("Приставки", parameters, options);
+    }
+
+    private void ShowDevice(DeviceState device)
+    {
+        //var parameters = new ModalParameters();
+        //parameters.Add("Container", Container);
+        //parameters.Add("Device", device);
+        //var options = new ModalOptions()
+        //{
+        //    ContentScrollable = true,
+        //    Animation = ModalAnimation.FadeIn(0.5),
+        //    Class = "blazored-modal collection-size"
+        //};
+
+        //Modal.Show<DeviceInfoModal>("Информация о приставке", parameters, options);
+    }
+
+    private async void RemoveDevice(DeviceState device)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            device.ChannelId = Guid.Empty;
+            await Container.DeviceManager.TryAddOrUpdate(device.Id, device);
+        }
+    }
+}

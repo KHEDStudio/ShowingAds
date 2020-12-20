@@ -1,0 +1,111 @@
+﻿@page "/"
+@attribute [Authorize]
+@implements IDisposable
+@inject IJSRuntime JSRuntime
+@inject IModalService Modal
+@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using ShowingAds.WebAssembly.Client.Components.Forms
+@using ShowingAds.WebAssembly.Client.Components.Modals
+
+<link rel="stylesheet" href="/css/control-panel.css" />
+<PageTitle Value="ShowingAds | Control Panel" />
+
+@if (_channels == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <CascadingValue Value="Container">
+        <div class="container-fluid mt-3 mb-3">
+            <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
+                <div class="card rounded">
+                    <div class="card-body text-center text-uppercase">
+                        <h1 style="font-weight: 900;">панель управления</h1>
+                    </div>
+                </div>
+            </Animate>
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
+                        <MainInfo />
+                        <InfoPanel />
+                    </Animate>
+                </div>
+                <div class="col-sm">
+                    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
+                        <div class="card text-center plus mb-1" @onclick="e => CreateOrUpdateChannel()">
+                            <i class="fas fa-plus fa-5x"></i>
+                        </div>
+                        @foreach (var channel in _channels)
+                        {
+                            <ChannelCard @key="channel.Id" Channel="channel" UpdateChannelCallback="CreateOrUpdateChannel" DeleteChannelCallback="DeleteChannel" />
+                        }
+                    </Animate>
+                </div>
+            </div>
+        </div>
+    </CascadingValue>
+}
+
+@code {
+    public AppContainer Container = AppContainer.GetInstance();
+
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private IEnumerable<Channel> _channels { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        await Container.HubConnectionStartAsync(default);
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        //await JSRuntime.InvokeVoidAsync("CollapseHide");
+        _channels = await Container.ChannelManager.GetCollection(x => true);
+        _channels = _channels.OrderBy(x => x.Name);
+        await InvokeAsync(() => StateHasChanged());
+        await JSRuntime.InvokeVoidAsync("ImageLinkInit");
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private void CreateOrUpdateChannel(Channel channel = default)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Channel", channel);
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal"
+        };
+
+        Modal.Show<ChannelForm>("Channel", parameters, options);
+    }
+
+    private async void DeleteChannel(Guid channel)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+            await Container.ChannelManager.TryDelete(channel);
+    }
+}

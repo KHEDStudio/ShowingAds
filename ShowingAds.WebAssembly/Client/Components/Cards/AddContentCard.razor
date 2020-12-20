@@ -1,0 +1,61 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<div class="card p-2 mb-0 mt-1">
+    <div class="align-items-center pt-2 pr-2 pl-2">
+        <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text float-left btn" type="button" @onclick="e => OnAddContent.InvokeAsync(Content)">
+            <h5 class="m-0">@Content.Name</h5>
+        </button>
+    </div>
+    @if (string.IsNullOrEmpty(Content.Description) == false)
+    {
+        <p class="card-text ml-2 mb-0">Описание: @Content.Description</p>
+    }
+    <p class="card-text ml-2 mb-0">Количество видеороликов: @_count</p>
+    <p class="card-text ml-2 mb-0">Общая продолжительность: @_duration</p>
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Content Content { get; set; }
+    [Parameter]
+    public EventCallback<Content> OnAddContent { get; set; }
+
+    private byte _red { get; set; } = 0;
+    private byte _green { get; set; } = 0;
+    private byte _blue { get; set; } = 0;
+
+    private int _count { get; set; } = 0;
+    private TimeSpan _duration { get; set; } = TimeSpan.Zero;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        var (isSuccess, user) = await Container.UserManager.TryGet(Content.OwnerId);
+        if (isSuccess)
+        {
+            _red = user.Red;
+            _green = user.Green;
+            _blue = user.Blue;
+        }
+        var videos = await Container.ContentVideoManager.GetCollection(x => x.ContentId == Content.Id);
+        _duration = new TimeSpan(videos.Sum(video => video.Duration.Ticks));
+        _count = videos.Count();
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+}

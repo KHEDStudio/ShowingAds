@@ -1,0 +1,89 @@
+﻿@using System.Threading
+@using ShowingAds.CoreLibrary.Enums
+@using ShowingAds.CoreLibrary.Models.States
+@implements IDisposable
+
+<div class="card p-2 mb-0 mt-1 @(Device.DeviceStatus != 0 ? "offline-card" : string.Empty)">
+    <div class="align-items-center pt-2 pr-2 pl-2">
+        <button type="button" class="close float-right" @onclick="e => OnClose.InvokeAsync(Device)">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="card-text float-left btn @(Device.DeviceStatus != 0 ? "btn-danger" : "btn-success")" type="button" @onclick="e => OnName.InvokeAsync(Device)">
+            <h5 class="m-0">@Device.Name</h5>
+        </button>
+    </div>
+    <p class="card-text ml-2 mb-0">Адрес: @Device.Address</p>
+    <p class="card-text ml-2 mb-0">Видеоролики: @Device.TotalContents шт.</p>
+    @if (Device.DeviceStatus.HasFlag(DeviceStatus.Offline))
+    {
+        <p class="card-text ml-2 mb-0">Статус: Offline</p>
+        <p class="card-text ml-2 mb-0">Была в сети: @Device.LastOnline.ToString("dd.MM.yyyy HH:mm:ss") (@_timeHasPassed)</p>
+    }
+    else
+    {
+        <p class="card-text ml-2 mb-0">Статус: Online</p>
+        @if (Device.DeviceStatus != 0)
+        {
+            <div class="card-body pt-1 pb-1 mt-0">
+                <p class="card-text ml-2 mb-0">Ошибки:</p>
+                <ul class="ml-2 mb-0">
+                    @if (Device.DeviceStatus.HasFlag(DeviceStatus.CannotDownloadFile))
+                    {
+                        <li v-if="device.status_code >> 1 & 0x1">Не удается скачать видеоролик</li>
+                    }
+                    @if (Device.DeviceStatus.HasFlag(DeviceStatus.VideoViewLostFocus))
+                    {
+                        <li v-if="device.status_code >> 2 & 0x1">Что-то мешает воспроизведению видеоролика</li>
+                    }
+                    @if (Device.DeviceStatus.HasFlag(DeviceStatus.HDMICableUnplagged))
+                    {
+                        <li v-if="device.status_code >> 3 & 0x1">HDMI кабель не подсоединен</li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public DeviceState Device { get; set; }
+    [Parameter]
+    public EventCallback<DeviceState> OnName { get; set; }
+    [Parameter]
+    public EventCallback<DeviceState> OnClose { get; set; }
+
+    private Timer _timer { get; set; }
+    private string _timeHasPassed { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        _timer = new Timer(async obj =>
+        {
+            var diff = DateTime.Now - Device.LastOnline;
+            if (diff.TotalDays > 1)
+                _timeHasPassed = $"{(int)diff.TotalDays} дней назад";
+            else if (diff.TotalHours > 1)
+                _timeHasPassed = $"{(int)diff.TotalHours} часов назад";
+            else if (diff.TotalMinutes > 1)
+                _timeHasPassed = $"{(int)diff.TotalMinutes} минут назад";
+            else _timeHasPassed = $"{(int)diff.TotalSeconds} секунд назад";
+            await InvokeAsync(() => StateHasChanged());
+        }, default, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+}

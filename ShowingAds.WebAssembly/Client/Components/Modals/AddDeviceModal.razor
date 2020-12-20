@@ -1,0 +1,58 @@
+﻿@using ShowingAds.CoreLibrary.Models.States
+@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<CascadingValue Value="Container">
+    <div class="m-1 p-1">
+        @if (_devices == null)
+        {
+            <p>Loading!!!</p>
+        }
+        else
+        {
+            @foreach (var device in _devices)
+            {
+                <DeviceCard @key="device.Id" Device="device" OnName="AddDevice" />
+            }
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Channel Channel { get; set; }
+    [Parameter]
+    public EventCallback<DeviceState> DeleteDeviceCallback { get; set; }
+
+    private IEnumerable<DeviceState> _devices { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        OnUpdate();
+        Container.ChannelUpdated += OnUpdate;
+        return base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        _devices = await Container.DeviceManager.GetCollection(x => x.ChannelId == Guid.Empty);
+        _devices = _devices.OrderBy(x => x.Name);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private async void AddDevice(DeviceState device)
+    {
+        device.ChannelId = Channel.Id;
+        await Container.DeviceManager.TryAddOrUpdate(device.Id, device);
+    }
+}

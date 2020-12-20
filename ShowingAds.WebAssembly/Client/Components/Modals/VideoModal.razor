@@ -1,0 +1,91 @@
+﻿@using ShowingAds.CoreLibrary.Interfaces
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using ShowingAds.WebAssembly.Client.Components.Forms
+@inject IModalService Modal
+@implements IDisposable
+
+@if (Videos == null)
+{
+    <p>Loading!!!</p>
+}
+else
+{
+<div class="card-columns p-2">
+    <div class="card text-center plus mb-1" @onclick="CreateVideos">
+        <i class="fas fa-plus fa-5x"></i>
+    </div>
+    @foreach (var video in Videos)
+    {
+        <VideoCard @key="video.GetKey()" Video="video" OnDeleteCallback="@OnDelete" />
+    }
+</div>
+}
+
+@code {
+    [Parameter]
+    public bool IsContentVideos { get; set; }
+    [Parameter]
+    public Guid CollectionId { get; set; }
+    [Parameter]
+    public AppContainer Container { get; set; }
+
+    public IEnumerable<IModel<Guid>> Videos { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        return base.OnInitializedAsync();
+    }
+
+    private void CreateVideos()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("IsContentVideos", IsContentVideos);
+        parameters.Add("CollectionId", CollectionId);
+        parameters.Add("Container", Container);
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal"
+        };
+
+        Modal.Show<VideoForm>("Channel", parameters, options);
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private async void OnUpdate()
+    {
+        if (IsContentVideos)
+            Videos = await Container.ContentVideoManager.GetCollection(x => x.ContentId == CollectionId);
+        else
+            Videos = await Container.AdvertisingVideoManager.GetCollection(x => x.AdvertisingClientId == CollectionId);
+        Videos = Videos.OrderBy(x => x.GetKey());
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    private async void OnDelete(Guid video)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            if (IsContentVideos)
+                await Container.ContentVideoManager.TryDelete(video);
+            else
+                await Container.AdvertisingVideoManager.TryDelete(video);
+        }
+    }
+}

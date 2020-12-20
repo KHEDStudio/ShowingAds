@@ -1,0 +1,16 @@
+﻿<div class="text-center">
+    <h4>Are you sure?</h4>
+</div>
+<button class="btn btn-danger float-right" type="button" @onclick="OnSubmit">
+    <h5>Delete</h5>
+</button>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance BlazoredModal { get; set; }
+
+    private void OnSubmit()
+    {
+        BlazoredModal.Close(ModalResult.Ok(string.Empty));
+    }
+}

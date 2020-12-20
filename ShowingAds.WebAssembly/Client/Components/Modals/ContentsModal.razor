@@ -1,0 +1,83 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using ShowingAds.WebAssembly.Client.Components.Forms
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<CascadingValue Value="Container">
+    <div class="m-1 p-1">
+        @if (_contents == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            <div class="card text-center plus mb-1" @onclick="e => CreateOrUpdateContent()">
+                <i class="fas fa-plus fa-5x"></i>
+            </div>
+            @foreach (var content in _contents)
+            {
+                <ContentCard Content="content" UpdateContentCallback="CreateOrUpdateContent" DeleteContentCallback="DeleteContent" />
+            }
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+
+    private IEnumerable<Content> _contents { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        _contents = await Container.ContentManager.GetCollection(x => true);
+        _contents = _contents.OrderBy(x => x.Name);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private void CreateOrUpdateContent(Content content = default)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Content", content);
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal"
+        };
+
+        Modal.Show<ContentForm>("Content", parameters, options);
+    }
+
+    private async void DeleteContent(Guid content)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            await Container.ContentManager.TryDelete(content);
+        }
+    }
+}

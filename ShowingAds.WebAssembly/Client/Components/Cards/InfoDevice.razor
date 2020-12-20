@@ -1,0 +1,91 @@
+﻿@using System.Threading
+@using ShowingAds.CoreLibrary.Enums
+@using ShowingAds.CoreLibrary.Models.States
+@implements IDisposable
+
+<div class="card mt-1 mb-0 @(Device.DeviceStatus != 0 ? "offline-card" : string.Empty)">
+    <div class="card-title p-2 mb-0">
+        <div class="row mb-0">
+            <strong class="col"><i class="fas @(Device.DeviceStatus.HasFlag(DeviceStatus.Offline) ? "fa-unlink text-danger" : "fa-link text-success")"></i> @(string.IsNullOrEmpty(ChannelName) ? $"{Device.Name}" : $"{ChannelName} -> {Device.Name}")<small class="text-muted ml-2">(@Device.Address)</small></strong>
+            @if (Device.DeviceStatus.HasFlag(DeviceStatus.Offline))
+            {
+                <div class="col d-flex justify-content-end align-items-center">
+                    <small class="text-muted">@Device.LastOnline.ToString("dd.MM.yyyy HH:mm:ss") (@_timeHasPassed)</small>
+                </div>
+            }
+        </div>
+    </div>
+    @if (Device.DeviceStatus.HasFlag(DeviceStatus.Offline))
+    {
+        <div class="card-body pt-1 pb-1 mb-0">
+            <p class="card-text ml-2">Статус: Offline</p>
+        </div>
+    }
+    else
+    {
+        <div class="card-body pt-1 pb-1 mb-0">
+            <p class="card-text ml-2">Статус: Online</p>
+        </div>
+        @if (Device.DeviceStatus != 0)
+        {
+            <div class="card-body pt-1 pb-1 mt-0">
+                <p class="card-text ml-2 mb-0">Ошибки:</p>
+                <ul class="ml-2 mb-0">
+                    @if (Device.DeviceStatus.HasFlag(DeviceStatus.CannotDownloadFile))
+                    {
+                        <li v-if="device.status_code >> 1 & 0x1">Не удается скачать видеоролик</li>
+                    }
+                    @if (Device.DeviceStatus.HasFlag(DeviceStatus.VideoViewLostFocus))
+                    {
+                        <li v-if="device.status_code >> 2 & 0x1">Что-то мешает воспроизведению видеоролика</li>
+                    }
+                    @if (Device.DeviceStatus.HasFlag(DeviceStatus.HDMICableUnplagged))
+                    {
+                        <li v-if="device.status_code >> 3 & 0x1">HDMI кабель не подсоединен</li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public string ChannelName { get; set; }
+    [Parameter]
+    public DeviceState Device { get; set; }
+
+    private Timer _timer { get; set; }
+    public string _timeHasPassed { get; private set; } = string.Empty;
+
+    protected override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        _timer = new Timer(async obj =>
+        {
+            var diff = DateTime.Now - Device.LastOnline;
+            if (diff.TotalDays > 1)
+                _timeHasPassed = $"{(int)diff.TotalDays} дней назад";
+            else if (diff.TotalHours > 1)
+                _timeHasPassed = $"{(int)diff.TotalHours} часов назад";
+            else if (diff.TotalMinutes > 1)
+                _timeHasPassed = $"{(int)diff.TotalMinutes} минут назад";
+            else _timeHasPassed = $"{(int)diff.TotalSeconds} секунд назад";
+            await InvokeAsync(() => StateHasChanged());
+        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        OnUpdate();
+        return base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+}

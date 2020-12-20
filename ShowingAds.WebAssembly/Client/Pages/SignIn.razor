@@ -1,0 +1,73 @@
+﻿@page "/login"
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+@using ShowingAds.CoreLibrary.Models.Login
+
+<link rel="stylesheet" href="/css/sign-in.css" />
+<PageTitle Value="ShowingAds | Sign In" />
+
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1)">
+                <div class="signin-form">
+                    <form @onkeypress="OnEnter">
+                        <h1>SignIn</h1>
+                        <input name="username" disabled="@_isLoading" type="text" placeholder="Login" @bind="_username" @bind:event="oninput" class="txtb mt-4">
+                        <input name="password" disabled="@_isLoading" type="password" placeholder="Password" @bind="_password" @bind:event="oninput" class="txtb mt-4">
+                        <div class="d-flex justify-content-center">
+                            <div hidden="@(_isLoading == false)" class="spinner-border text-primary mt-3" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <h4 hidden="@_isLoading" class="text-danger mt-3">@_responseMessage</h4>
+                        <input type="button" value="Sign In" class="signin-btn mt-4 mb-2" @onclick="OnLogin">
+                    </form>
+                </div>
+            </Animate>
+        </div>
+    </div>
+</div>
+
+<div class="shadow"></div>
+
+@code {
+    private bool _isLoading { get; set; } = false;
+
+    private LoginUser _login { get; set; }
+    private string _username { get; set; }
+    private string _password { get; set; }
+
+    private string _responseMessage;
+
+    private async Task OnEnter(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+            await OnLogin();
+    }
+
+    private async Task OnLogin()
+    {
+        _isLoading = true;
+
+        if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
+        {
+            _responseMessage = "Введите логин и пароль";
+        }
+        else
+        {
+            _login = new LoginUser(_username, _password);
+            var result = await AuthService.Login(_login);
+            if (result.Item1)
+            {
+                var container = AppContainer.GetInstance();
+                container.User = result.Item2;
+                NavigationManager.NavigateTo("/");
+            }
+            else
+                _responseMessage = "Введены неверные данные!";
+        }
+
+        _isLoading = false;
+    }
+}

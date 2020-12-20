@@ -1,0 +1,45 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using Tewr.Blazor.FileReader
+@inject IFileReaderService fileReaderService
+
+<EditForm Model="Client" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Название</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Client.Name" />
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Описание</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Client.Description" />
+    </div>
+    <button type="submit" class="btn btn-primary float-right">Отправить</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public AdvertisingClient Client { get; set; }
+    [CascadingParameter]
+    public BlazoredModalInstance BlazoredModal { get; set; }
+
+    protected override Task OnParametersSetAsync()
+    {
+        if (Client == default)
+            Client = new AdvertisingClient(Guid.NewGuid(), Container.User.Name,
+                string.Empty, string.Empty, Container.User.Id, null);
+        return base.OnParametersSetAsync();
+    }
+
+    private async Task OnSubmit()
+    {
+        await Container.AdvertisingClientManager.TryAddOrUpdate(Client.Id, Client);
+        await BlazoredModal.Close();
+    }
+}

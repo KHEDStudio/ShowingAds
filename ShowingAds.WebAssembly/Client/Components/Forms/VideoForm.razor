@@ -1,0 +1,108 @@
+﻿@using Tewr.Blazor.FileReader
+@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.CoreLibrary.Models.FilesService
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using ShowingAds.WebAssembly.Client.BusinessLayer.FileUploaders
+@inject IFileReaderService fileReaderService
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Видео</span>
+    </div>
+    <input multiple id="file-input" type="file" class="form-control" @ref=_videos>
+</div>
+@if (videos == null)
+{
+    <button type="button" class="btn btn-primary float-right" @onclick="OnSubmit">Отправить</button>
+}
+else
+{
+    <FileUploaderCard Container="Container" @ref="_uploaderCard" />
+}
+
+@code {
+    [Parameter]
+    public bool IsContentVideos { get; set; }
+    [Parameter]
+    public Guid CollectionId { get; set; }
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [CascadingParameter]
+    public BlazoredModalInstance BlazoredModal { get; set; }
+
+    private VideoUploader _uploader { get; set; }
+    private FileUploaderCard _uploaderCard { get; set; }
+
+    private ElementReference _videos { get; set; }
+    private IEnumerable<IFileReference> videos { get; set; }
+
+    private async void OnSubmit()
+    {
+        videos = await fileReaderService.CreateReference(_videos).EnumerateFilesAsync();
+        await InvokeAsync(() => StateHasChanged());
+        if (IsContentVideos)
+            await ContentVideoUpload();
+        else await AdvertisingVideoUpload();
+    }
+
+    private async Task ContentVideoUpload()
+    {
+        if (videos != null)
+        {
+            var counter = 0;
+            foreach (var video in videos)
+            {
+                UpdateFileName(video);
+                var (isSuccess, response) = await UploadVideo(video);
+                counter++;
+                _uploaderCard.OnProgressUpdated((double)counter / (double)videos.Count() * 100);
+                if (isSuccess)
+                {
+                    var newValue = new ContentVideo(response.FileGuid, response.Duration, CollectionId);
+                    await Container.ContentVideoManager.TryAddOrUpdate(newValue.Id, newValue);
+                }
+            }
+        }
+    }
+
+    private async Task AdvertisingVideoUpload()
+    {
+        if (videos != null)
+        {
+            var counter = 0;
+            foreach (var video in videos)
+            {
+                UpdateFileName(video);
+                var (isSuccess, response) = await UploadVideo(video);
+                counter++;
+                _uploaderCard.OnProgressUpdated((double)counter / (double)videos.Count() * 100);
+                if (isSuccess)
+                {
+                    var newValue = new AdvertisingVideo(response.FileGuid, response.Duration, CollectionId);
+                    await Container.AdvertisingVideoManager.TryAddOrUpdate(newValue.Id, newValue);
+                }
+            }
+        }
+    }
+
+    private async Task UpdateFileName(IFileReference file)
+    {
+        var fileInfo = await file.ReadFileInfoAsync();
+        await _uploaderCard.OnStartUploadFile(fileInfo.Name);
+    }
+
+    private async Task<(bool, FileUploadResponse)> UploadVideo(IFileReference video)
+    {
+        if (_uploader == null)
+        {
+            _uploader = new VideoUploader();
+            _uploader.UploadFailed += UploadFailed;
+        }
+        return await _uploader.TryUploadAsync(video, int.MaxValue);
+    }
+
+    public void UploadFailed(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}

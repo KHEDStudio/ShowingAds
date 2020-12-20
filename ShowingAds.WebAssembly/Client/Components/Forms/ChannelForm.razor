@@ -1,0 +1,135 @@
+﻿@using Tewr.Blazor.FileReader
+@using System.Linq
+@using System.IO
+@using ShowingAds.CoreLibrary.Enums
+@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.CoreLibrary.Models.FilesService
+@using ShowingAds.WebAssembly.Client.BusinessLayer.FileUploaders
+@inject IFileReaderService fileReaderService
+
+<EditForm Model="Channel" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Название</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Channel.Name" />
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Описание</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Channel.Description" />
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Логотип слева</span>
+        </div>
+        <input type="file" class="form-control" @ref=_logoLeft>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Логотип справа</span>
+        </div>
+        <input type="file" class="form-control" @ref=_logoRight>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Бегущая строка</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Channel.Ticker" />
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Интервал строки</span>
+        </div>
+        <input type="time" class="form-control" placeholder="00:00" @bind-value="_timeTicker">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Время перегрузки</span>
+        </div>
+        <input type="time" class="form-control" placeholder="00:00" @bind-value="_timeReload">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Ориентация экрана</span>
+        </div>
+        <InputSelect Class="custom-select" TValue="DisplayOrientation" @bind-Value="Channel.DisplayOrientation">
+            <option value="@DisplayOrientation.Horizontal" selected>Горизонтальная</option>
+            <option value="@DisplayOrientation.Vertical">Вертикальная</option>
+        </InputSelect>
+    </div>
+    @if (_isLoading)
+    {
+        <button disabled type="submit" class="btn btn-primary float-right">Загрузка...</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary float-right">Отправить</button>
+    }
+</EditForm>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Channel Channel { get; set; }
+    [CascadingParameter]
+    public BlazoredModalInstance BlazoredModal { get; set; }
+
+    private bool _isLoading { get; set; } = false;
+
+    private DateTime _timeReload { get; set; }
+    private DateTime _timeTicker { get; set; }
+    private ElementReference _logoLeft { get; set; }
+    private ElementReference _logoRight { get; set; }
+
+    protected override Task OnParametersSetAsync()
+    {
+        if (Channel == default)
+            Channel = new Channel(Guid.NewGuid(), Container.User.Name, string.Empty, string.Empty, Guid.Empty, Guid.Empty, string.Empty,
+                TimeSpan.Zero, TimeSpan.Zero, DisplayOrientation.Horizontal, Container.User.Id, default, default);
+        return base.OnParametersSetAsync();
+    }
+
+    private async Task OnSubmit()
+    {
+        _isLoading = true;
+        Channel.ReloadTime = _timeReload.TimeOfDay;
+        Channel.TickerInterval = _timeTicker.TimeOfDay;
+        var uploader = new LogoUploader();
+        uploader.UploadFailed += e => Console.WriteLine(e.Message);
+        var leftLogo = await fileReaderService.CreateReference(_logoLeft).EnumerateFilesAsync();
+        var rightLogo = await fileReaderService.CreateReference(_logoRight).EnumerateFilesAsync();
+        var tasks = new List<Task<(bool, FileUploadResponse)>>
+        {
+            uploader.TryUploadAsync(leftLogo.FirstOrDefault(), 3),
+            uploader.TryUploadAsync(rightLogo.FirstOrDefault(), 3)
+        };
+        var logos = await Task.WhenAll(tasks);
+        if (logos[0].Item1)
+            Channel.LogoLeft = logos[0].Item2.FileGuid;
+        if (logos[1].Item1)
+            Channel.LogoRight = logos[1].Item2.FileGuid;
+        var isSuccess = await Container.ChannelManager.TryAddOrUpdate(Channel.Id, Channel);
+        if (isSuccess)
+            await BlazoredModal.Close(ModalResult.Ok(isSuccess));
+        _isLoading = false;
+    }
+
+    private async Task<(IFileInfo, Stream)> GetNameAndStream(ElementReference logo)
+    {
+        var _logo = (await fileReaderService.CreateReference(logo)
+            .EnumerateFilesAsync()).FirstOrDefault();
+        if (_logo == null)
+            return (null, null);
+        var logoInfo = await _logo.ReadFileInfoAsync();
+        Stream logoStream;
+        using (var ms = await _logo.CreateMemoryStreamAsync((int)logoInfo.Size))
+            logoStream = new MemoryStream(ms.ToArray());
+        return (logoInfo, logoStream);
+    }
+}

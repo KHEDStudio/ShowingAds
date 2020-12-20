@@ -1,0 +1,2012 @@
+2020-11-26 19:23:50.4070 Info Message Template Auto Format enabled
+2020-11-26 19:23:50.4284 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 19:23:50.4832 Info Adding target FileTarget(Name=allfile)
+2020-11-26 19:23:50.4983 Info Adding target FileTarget(Name=ownlog)
+2020-11-26 19:23:50.4983 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-26 19:23:50.5586 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-26 19:25:33.8517 Info Message Template Auto Format enabled
+2020-11-26 19:25:33.8788 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 19:25:33.9459 Info Adding target FileTarget(Name=allfile)
+2020-11-26 19:25:33.9586 Info Adding target FileTarget(Name=ownlog)
+2020-11-26 19:25:33.9691 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-26 19:25:34.0126 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-26 22:22:21.1172 Info Message Template Auto Format enabled
+2020-11-26 22:22:21.1388 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 22:22:21.2013 Info Adding target FileTarget(Name=allfile)
+2020-11-26 22:22:21.2013 Info Adding target FileTarget(Name=ownlog)
+2020-11-26 22:22:21.2247 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-26 22:22:21.2612 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 11:22:08.6643 Info Message Template Auto Format enabled
+2020-11-27 11:22:08.6962 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 11:22:08.8131 Info Adding target FileTarget(Name=allfile)
+2020-11-27 11:22:08.8380 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 11:22:08.8650 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 11:22:08.9505 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 11:29:20.2725 Info Message Template Auto Format enabled
+2020-11-27 11:29:20.2957 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 11:29:20.3693 Info Adding target FileTarget(Name=allfile)
+2020-11-27 11:29:20.3837 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 11:29:20.3969 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 11:29:20.4458 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 12:10:17.0280 Info Message Template Auto Format enabled
+2020-11-27 12:10:17.0576 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 12:10:17.1408 Info Adding target FileTarget(Name=allfile)
+2020-11-27 12:10:17.1580 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 12:10:17.1784 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 12:10:17.2365 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 12:35:03.2621 Info Message Template Auto Format enabled
+2020-11-27 12:35:03.2819 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 12:35:03.3544 Info Adding target FileTarget(Name=allfile)
+2020-11-27 12:35:03.3722 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 12:35:03.3917 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 12:35:03.4570 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 12:48:33.6115 Info Message Template Auto Format enabled
+2020-11-27 12:48:33.6416 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 12:48:33.7512 Info Adding target FileTarget(Name=allfile)
+2020-11-27 12:48:33.7770 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 12:48:33.7997 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 12:48:33.8829 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 12:49:15.8099 Info Message Template Auto Format enabled
+2020-11-27 12:49:15.8434 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 12:49:15.9529 Info Adding target FileTarget(Name=allfile)
+2020-11-27 12:49:15.9769 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 12:49:15.9988 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 12:49:16.0815 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 13:01:17.0992 Info Message Template Auto Format enabled
+2020-11-27 13:01:17.1286 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 13:01:17.2291 Info Adding target FileTarget(Name=allfile)
+2020-11-27 13:01:17.2541 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 13:01:17.2759 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 13:01:17.3545 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 13:06:21.7311 Info Message Template Auto Format enabled
+2020-11-27 13:06:21.7628 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 13:06:21.9005 Info Adding target FileTarget(Name=allfile)
+2020-11-27 13:06:21.9232 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 13:06:21.9455 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 13:06:22.0081 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 13:28:00.4449 Info Message Template Auto Format enabled
+2020-11-27 13:28:00.4756 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 13:28:00.5626 Info Adding target FileTarget(Name=allfile)
+2020-11-27 13:28:00.5815 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 13:28:00.6028 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 13:28:00.6701 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 13:32:28.9914 Info Message Template Auto Format enabled
+2020-11-27 13:32:29.0338 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 13:32:29.1455 Info Adding target FileTarget(Name=allfile)
+2020-11-27 13:32:29.1684 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 13:32:29.1933 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 13:32:29.2737 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 13:37:54.3347 Info Message Template Auto Format enabled
+2020-11-27 13:37:54.3676 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 13:37:54.4689 Info Adding target FileTarget(Name=allfile)
+2020-11-27 13:37:54.4894 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 13:37:54.5134 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 13:37:54.5822 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 13:48:33.0723 Info Message Template Auto Format enabled
+2020-11-27 13:48:33.1027 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 13:48:33.2092 Info Adding target FileTarget(Name=allfile)
+2020-11-27 13:48:33.2315 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 13:48:33.2555 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 13:48:33.3218 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 14:03:05.3504 Info Message Template Auto Format enabled
+2020-11-27 14:03:05.3729 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 14:03:05.4480 Info Adding target FileTarget(Name=allfile)
+2020-11-27 14:03:05.4630 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 14:03:05.4788 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 14:03:05.5307 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 14:07:01.7473 Info Message Template Auto Format enabled
+2020-11-27 14:07:01.7805 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 14:07:01.8999 Info Adding target FileTarget(Name=allfile)
+2020-11-27 14:07:01.9223 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 14:07:01.9473 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 14:07:02.0362 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-27 14:09:13.8599 Info Message Template Auto Format enabled
+2020-11-27 14:09:13.8849 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-27 14:09:13.9565 Info Adding target FileTarget(Name=allfile)
+2020-11-27 14:09:13.9765 Info Adding target FileTarget(Name=ownlog)
+2020-11-27 14:09:13.9944 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-27 14:09:14.0544 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 05:39:44.3559 Info Message Template Auto Format enabled
+2020-11-29 05:39:44.3989 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 05:39:44.4656 Info Adding target FileTarget(Name=allfile)
+2020-11-29 05:39:44.4822 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 05:39:44.4932 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 05:39:44.5359 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 05:45:09.9186 Info Message Template Auto Format enabled
+2020-11-29 05:45:09.9418 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 05:45:10.0061 Info Adding target FileTarget(Name=allfile)
+2020-11-29 05:45:10.0209 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 05:45:10.0335 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 05:45:10.0789 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 05:48:16.6543 Info Message Template Auto Format enabled
+2020-11-29 05:48:16.6787 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 05:48:16.7525 Info Adding target FileTarget(Name=allfile)
+2020-11-29 05:48:16.7655 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 05:48:16.7798 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 05:48:16.8243 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 05:50:15.2850 Info Message Template Auto Format enabled
+2020-11-29 05:50:15.3236 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 05:50:15.3858 Info Adding target FileTarget(Name=allfile)
+2020-11-29 05:50:15.4133 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 05:50:15.4358 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 05:50:15.4806 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 05:51:28.0297 Info Message Template Auto Format enabled
+2020-11-29 05:51:28.0475 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 05:51:28.1175 Info Adding target FileTarget(Name=allfile)
+2020-11-29 05:51:28.1175 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 05:51:28.1421 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 05:51:28.1867 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 05:52:03.2906 Info Message Template Auto Format enabled
+2020-11-29 05:52:03.3093 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 05:52:03.3731 Info Adding target FileTarget(Name=allfile)
+2020-11-29 05:52:03.3863 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 05:52:03.4027 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 05:52:03.4536 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-29 09:01:31.1556 Info Message Template Auto Format enabled
+2020-11-29 09:01:31.1808 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-29 09:01:31.2845 Info Adding target FileTarget(Name=allfile)
+2020-11-29 09:01:31.3144 Info Adding target FileTarget(Name=ownlog)
+2020-11-29 09:01:31.3319 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-29 09:01:31.3943 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 06:51:43.1511 Info Message Template Auto Format enabled
+2020-11-30 06:51:43.1696 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 06:51:43.2310 Info Adding target FileTarget(Name=allfile)
+2020-11-30 06:51:43.2461 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 06:51:43.2461 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 06:51:43.2964 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:03:02.6628 Info Message Template Auto Format enabled
+2020-11-30 07:03:02.6805 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:03:02.7363 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:03:02.7483 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:03:02.7592 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:03:02.8003 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:23:31.3503 Info Message Template Auto Format enabled
+2020-11-30 07:23:31.3683 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:23:31.4187 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:23:31.4310 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:23:31.4310 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:23:31.4778 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:24:48.2903 Info Message Template Auto Format enabled
+2020-11-30 07:24:48.3150 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:24:48.3966 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:24:48.4173 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:24:48.4347 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:24:48.4924 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:33:25.5436 Info Message Template Auto Format enabled
+2020-11-30 07:33:25.5632 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:33:25.6209 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:33:25.6356 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:33:25.6492 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:33:25.6972 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:40:31.4914 Info Message Template Auto Format enabled
+2020-11-30 07:40:31.5109 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:40:31.5753 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:40:31.5874 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:40:31.5874 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:40:31.6444 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:41:16.9696 Info Message Template Auto Format enabled
+2020-11-30 07:41:16.9880 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:41:17.0594 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:41:17.0836 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:41:17.0981 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:41:17.1465 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:43:31.2916 Info Message Template Auto Format enabled
+2020-11-30 07:43:31.3181 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:43:31.3823 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:43:31.3958 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:43:31.4084 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:43:31.4503 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:44:17.8597 Info Message Template Auto Format enabled
+2020-11-30 07:44:17.8815 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:44:17.9368 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:44:17.9494 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:44:17.9494 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:44:17.9977 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:44:55.5714 Info Message Template Auto Format enabled
+2020-11-30 07:44:55.5922 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:44:55.6485 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:44:55.6485 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:44:55.6709 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:44:55.7075 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 07:46:13.4952 Info Message Template Auto Format enabled
+2020-11-30 07:46:13.5152 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 07:46:13.5693 Info Adding target FileTarget(Name=allfile)
+2020-11-30 07:46:13.5815 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 07:46:13.5928 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 07:46:13.6284 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 12:34:31.0741 Info Message Template Auto Format enabled
+2020-11-30 12:34:31.0917 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 12:34:31.1467 Info Adding target FileTarget(Name=allfile)
+2020-11-30 12:34:31.1593 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 12:34:31.1710 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 12:34:31.2174 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 13:36:14.2070 Info Message Template Auto Format enabled
+2020-11-30 13:36:14.2359 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 13:36:14.3283 Info Adding target FileTarget(Name=allfile)
+2020-11-30 13:36:14.3479 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 13:36:14.3661 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 13:36:14.4301 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 13:40:41.2282 Info Message Template Auto Format enabled
+2020-11-30 13:40:41.2481 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 13:40:41.3012 Info Adding target FileTarget(Name=allfile)
+2020-11-30 13:40:41.3140 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 13:40:41.3251 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 13:40:41.3615 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 13:42:54.2139 Info Message Template Auto Format enabled
+2020-11-30 13:42:54.2311 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 13:42:54.2845 Info Adding target FileTarget(Name=allfile)
+2020-11-30 13:42:54.2978 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 13:42:54.3082 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 13:42:54.3450 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:14:16.3565 Info Message Template Auto Format enabled
+2020-11-30 14:14:16.3736 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:14:16.4291 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:14:16.4421 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:14:16.4543 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:14:16.4924 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:15:33.9970 Info Message Template Auto Format enabled
+2020-11-30 14:15:34.0148 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:15:34.0667 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:15:34.0799 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:15:34.0918 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:15:34.1326 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:17:20.1248 Info Message Template Auto Format enabled
+2020-11-30 14:17:20.1413 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:17:20.1937 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:17:20.2077 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:17:20.2212 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:17:20.2624 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:19:09.5473 Info Message Template Auto Format enabled
+2020-11-30 14:19:09.5664 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:19:09.6242 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:19:09.6373 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:19:09.6498 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:19:09.6921 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:20:33.4641 Info Message Template Auto Format enabled
+2020-11-30 14:20:33.4825 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:20:33.5348 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:20:33.5467 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:20:33.5576 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:20:33.5939 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:21:25.3151 Info Message Template Auto Format enabled
+2020-11-30 14:21:25.3310 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:21:25.3797 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:21:25.3916 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:21:25.4021 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:21:25.4374 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:22:09.5481 Info Message Template Auto Format enabled
+2020-11-30 14:22:09.5730 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:22:09.6299 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:22:09.6418 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:22:09.6531 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:22:09.6966 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:23:58.8955 Info Message Template Auto Format enabled
+2020-11-30 14:23:58.9136 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:23:58.9689 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:23:58.9812 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:23:58.9944 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:23:59.0319 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:25:37.1135 Info Message Template Auto Format enabled
+2020-11-30 14:25:37.1310 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:25:37.1858 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:25:37.1977 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:25:37.1977 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:25:37.2434 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:47:54.4899 Info Message Template Auto Format enabled
+2020-11-30 14:47:54.5056 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:47:54.5586 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:47:54.5730 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:47:54.5730 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:47:54.6261 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:50:15.7841 Info Message Template Auto Format enabled
+2020-11-30 14:50:15.8028 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:50:15.8540 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:50:15.8671 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:50:15.8671 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:50:15.9196 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-30 14:54:36.0678 Info Message Template Auto Format enabled
+2020-11-30 14:54:36.0841 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-30 14:54:36.1325 Info Adding target FileTarget(Name=allfile)
+2020-11-30 14:54:36.1443 Info Adding target FileTarget(Name=ownlog)
+2020-11-30 14:54:36.1546 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-11-30 14:54:36.2003 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:29:39.6671 Info Message Template Auto Format enabled
+2020-12-01 06:29:39.6936 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:29:39.7913 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:29:39.8299 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:29:39.8507 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:29:39.9100 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:32:05.5315 Info Message Template Auto Format enabled
+2020-12-01 06:32:05.5509 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:32:05.6116 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:32:05.6310 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:32:05.6420 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:32:05.6863 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:33:15.5333 Info Message Template Auto Format enabled
+2020-12-01 06:33:15.5558 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:33:15.6228 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:33:15.6417 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:33:15.6547 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:33:15.6981 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:37:13.3154 Info Message Template Auto Format enabled
+2020-12-01 06:37:13.3336 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:37:13.3987 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:37:13.4165 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:37:13.4317 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:37:13.4776 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:41:11.6886 Info Message Template Auto Format enabled
+2020-12-01 06:41:11.7042 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:41:11.7547 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:41:11.7656 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:41:11.7762 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:41:11.8133 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:54:39.1350 Info Message Template Auto Format enabled
+2020-12-01 06:54:39.1597 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:54:39.2169 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:54:39.2299 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:54:39.2299 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:54:39.2961 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 06:59:57.4452 Info Message Template Auto Format enabled
+2020-12-01 06:59:57.4691 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 06:59:57.5701 Info Adding target FileTarget(Name=allfile)
+2020-12-01 06:59:57.5891 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 06:59:57.6055 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 06:59:57.6815 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 23:03:29.9014 Info Message Template Auto Format enabled
+2020-12-01 23:03:29.9234 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 23:03:29.9880 Info Adding target FileTarget(Name=allfile)
+2020-12-01 23:03:30.0032 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 23:03:30.0155 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 23:03:30.0608 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 23:05:09.7304 Info Message Template Auto Format enabled
+2020-12-01 23:05:09.7522 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 23:05:09.8290 Info Adding target FileTarget(Name=allfile)
+2020-12-01 23:05:09.8510 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 23:05:09.8703 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 23:05:09.9337 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 23:09:05.8370 Info Message Template Auto Format enabled
+2020-12-01 23:09:05.8828 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 23:09:05.9894 Info Adding target FileTarget(Name=allfile)
+2020-12-01 23:09:06.0277 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 23:09:06.0483 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 23:09:06.1288 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 23:14:12.6019 Info Message Template Auto Format enabled
+2020-12-01 23:14:12.6233 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 23:14:12.6885 Info Adding target FileTarget(Name=allfile)
+2020-12-01 23:14:12.7060 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 23:14:12.7246 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 23:14:12.7890 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-01 23:16:06.9551 Info Message Template Auto Format enabled
+2020-12-01 23:16:06.9829 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-01 23:16:07.0829 Info Adding target FileTarget(Name=allfile)
+2020-12-01 23:16:07.1054 Info Adding target FileTarget(Name=ownlog)
+2020-12-01 23:16:07.1246 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-01 23:16:07.1842 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 02:21:33.2993 Info Message Template Auto Format enabled
+2020-12-02 02:21:33.3252 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 02:21:33.4221 Info Adding target FileTarget(Name=allfile)
+2020-12-02 02:21:33.4431 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 02:21:33.4610 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 02:21:33.5499 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 02:22:47.1868 Info Message Template Auto Format enabled
+2020-12-02 02:22:47.2200 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 02:22:47.3103 Info Adding target FileTarget(Name=allfile)
+2020-12-02 02:22:47.3287 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 02:22:47.3479 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 02:22:47.4102 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 02:33:23.2655 Info Message Template Auto Format enabled
+2020-12-02 02:33:23.3044 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 02:33:23.4155 Info Adding target FileTarget(Name=allfile)
+2020-12-02 02:33:23.4339 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 02:33:23.4529 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 02:33:23.5232 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 02:33:51.7110 Info Message Template Auto Format enabled
+2020-12-02 02:33:51.7423 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 02:33:51.8345 Info Adding target FileTarget(Name=allfile)
+2020-12-02 02:33:51.8555 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 02:33:51.8812 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 02:33:51.9556 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 02:39:54.6777 Info Message Template Auto Format enabled
+2020-12-02 02:39:54.7131 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 02:39:54.8472 Info Adding target FileTarget(Name=allfile)
+2020-12-02 02:39:54.8736 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 02:39:54.9040 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 02:39:55.0675 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:21:07.9708 Info Message Template Auto Format enabled
+2020-12-02 14:21:08.0030 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:21:08.1186 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:21:08.1430 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:21:08.1646 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:21:08.2308 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:23:20.3900 Info Message Template Auto Format enabled
+2020-12-02 14:23:20.4253 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:23:20.5133 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:23:20.5392 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:23:20.5587 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:23:20.6389 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:26:30.7573 Info Message Template Auto Format enabled
+2020-12-02 14:26:30.7745 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:26:30.8236 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:26:30.8362 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:26:30.8362 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:26:30.8849 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:28:39.9851 Info Message Template Auto Format enabled
+2020-12-02 14:28:40.0166 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:28:40.1039 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:28:40.1349 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:28:40.1541 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:28:40.2233 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:53:34.4472 Info Message Template Auto Format enabled
+2020-12-02 14:53:34.4892 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:53:34.6112 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:53:34.6345 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:53:34.6566 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:53:34.7384 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:55:37.7540 Info Message Template Auto Format enabled
+2020-12-02 14:55:37.7925 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:55:37.9361 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:55:37.9654 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:55:37.9941 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:55:38.1132 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 14:56:56.8731 Info Message Template Auto Format enabled
+2020-12-02 14:56:56.9280 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 14:56:57.0373 Info Adding target FileTarget(Name=allfile)
+2020-12-02 14:56:57.0604 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 14:56:57.0822 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 14:56:57.1681 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 18:43:16.7038 Info Message Template Auto Format enabled
+2020-12-02 18:43:16.7246 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 18:43:16.7974 Info Adding target FileTarget(Name=allfile)
+2020-12-02 18:43:16.8160 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 18:43:16.8318 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 18:43:16.8847 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-02 18:54:58.1371 Info Message Template Auto Format enabled
+2020-12-02 18:54:58.1696 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-02 18:54:58.2797 Info Adding target FileTarget(Name=allfile)
+2020-12-02 18:54:58.3021 Info Adding target FileTarget(Name=ownlog)
+2020-12-02 18:54:58.3235 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-02 18:54:58.3876 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 06:43:33.4206 Info Message Template Auto Format enabled
+2020-12-03 06:43:33.4367 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 06:43:33.4858 Info Adding target FileTarget(Name=allfile)
+2020-12-03 06:43:33.4981 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 06:43:33.5081 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 06:43:33.5432 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 06:52:37.7770 Info Message Template Auto Format enabled
+2020-12-03 06:52:37.8062 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 06:52:37.9148 Info Adding target FileTarget(Name=allfile)
+2020-12-03 06:52:37.9369 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 06:52:37.9622 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 06:52:38.0730 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 06:55:29.2177 Info Message Template Auto Format enabled
+2020-12-03 06:55:29.2606 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 06:55:29.3964 Info Adding target FileTarget(Name=allfile)
+2020-12-03 06:55:29.4437 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 06:55:29.4716 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 06:55:29.5620 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 06:57:42.5490 Info Message Template Auto Format enabled
+2020-12-03 06:57:42.5867 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 06:57:42.6953 Info Adding target FileTarget(Name=allfile)
+2020-12-03 06:57:42.7198 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 06:57:42.7468 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 06:57:42.8297 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 07:06:32.8211 Info Message Template Auto Format enabled
+2020-12-03 07:06:32.8676 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 07:06:32.9904 Info Adding target FileTarget(Name=allfile)
+2020-12-03 07:06:33.0238 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 07:06:33.0447 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 07:06:33.1175 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 07:12:09.8830 Info Message Template Auto Format enabled
+2020-12-03 07:12:09.9220 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 07:12:10.0425 Info Adding target FileTarget(Name=allfile)
+2020-12-03 07:12:10.0669 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 07:12:10.0924 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 07:12:10.1814 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 07:13:46.9053 Info Message Template Auto Format enabled
+2020-12-03 07:13:46.9499 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 07:13:47.0910 Info Adding target FileTarget(Name=allfile)
+2020-12-03 07:13:47.1218 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 07:13:47.1505 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 07:13:47.2473 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 07:16:21.1864 Info Message Template Auto Format enabled
+2020-12-03 07:16:21.2233 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 07:16:21.3306 Info Adding target FileTarget(Name=allfile)
+2020-12-03 07:16:21.3587 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 07:16:21.3825 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 07:16:21.4676 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 07:56:23.3749 Info Message Template Auto Format enabled
+2020-12-03 07:56:23.4011 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 07:56:23.4931 Info Adding target FileTarget(Name=allfile)
+2020-12-03 07:56:23.5207 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 07:56:23.5414 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 07:56:23.5999 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 07:59:44.2348 Info Message Template Auto Format enabled
+2020-12-03 07:59:44.2800 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 07:59:44.3846 Info Adding target FileTarget(Name=allfile)
+2020-12-03 07:59:44.4069 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 07:59:44.4290 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 07:59:44.4845 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 08:04:21.4020 Info Message Template Auto Format enabled
+2020-12-03 08:04:21.4347 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 08:04:21.5451 Info Adding target FileTarget(Name=allfile)
+2020-12-03 08:04:21.5691 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 08:04:21.5938 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 08:04:21.6788 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 08:50:25.1137 Info Message Template Auto Format enabled
+2020-12-03 08:50:25.1445 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 08:50:25.2524 Info Adding target FileTarget(Name=allfile)
+2020-12-03 08:50:25.2779 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 08:50:25.2956 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 08:50:25.3734 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 09:44:21.6510 Info Message Template Auto Format enabled
+2020-12-03 09:44:21.6978 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 09:44:21.8395 Info Adding target FileTarget(Name=allfile)
+2020-12-03 09:44:21.8723 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 09:44:21.9001 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 09:44:21.9928 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 09:48:08.4689 Info Message Template Auto Format enabled
+2020-12-03 09:48:08.5120 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 09:48:08.6229 Info Adding target FileTarget(Name=allfile)
+2020-12-03 09:48:08.6488 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 09:48:08.6714 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 09:48:08.7527 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 09:50:03.1629 Info Message Template Auto Format enabled
+2020-12-03 09:50:03.1987 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 09:50:03.3337 Info Adding target FileTarget(Name=allfile)
+2020-12-03 09:50:03.3582 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 09:50:03.3823 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 09:50:03.4677 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 09:52:08.2920 Info Message Template Auto Format enabled
+2020-12-03 09:52:08.3228 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 09:52:08.4716 Info Adding target FileTarget(Name=allfile)
+2020-12-03 09:52:08.4997 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 09:52:08.5285 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 09:52:08.6231 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 09:59:01.4185 Info Message Template Auto Format enabled
+2020-12-03 09:59:01.4647 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 09:59:01.6155 Info Adding target FileTarget(Name=allfile)
+2020-12-03 09:59:01.6738 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 09:59:01.7067 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 09:59:01.8276 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:01:30.9819 Info Message Template Auto Format enabled
+2020-12-03 10:01:31.0254 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:01:31.1339 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:01:31.1666 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:01:31.1988 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:01:31.2787 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:03:07.4226 Info Message Template Auto Format enabled
+2020-12-03 10:03:07.4586 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:03:07.5757 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:03:07.6050 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:03:07.6302 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:03:07.7125 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:06:04.9350 Info Message Template Auto Format enabled
+2020-12-03 10:06:04.9719 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:06:05.0945 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:06:05.1161 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:06:05.1363 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:06:05.2149 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:09:43.5441 Info Message Template Auto Format enabled
+2020-12-03 10:09:43.5930 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:09:43.7379 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:09:43.7650 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:09:43.7924 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:09:43.8776 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:16:59.3845 Info Message Template Auto Format enabled
+2020-12-03 10:16:59.4302 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:16:59.5567 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:16:59.5977 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:16:59.6217 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:16:59.7176 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:19:32.3937 Info Message Template Auto Format enabled
+2020-12-03 10:19:32.4270 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:19:32.5301 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:19:32.5548 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:19:32.5773 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:19:32.6516 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:21:22.7121 Info Message Template Auto Format enabled
+2020-12-03 10:21:22.7569 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:21:22.8833 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:21:22.9147 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:21:22.9400 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:21:23.0230 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:25:04.7852 Info Message Template Auto Format enabled
+2020-12-03 10:25:04.8202 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:25:04.9484 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:25:04.9767 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:25:05.0018 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:25:05.0976 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:27:31.5496 Info Message Template Auto Format enabled
+2020-12-03 10:27:31.5826 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:27:31.7095 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:27:31.7315 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:27:31.7542 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:27:31.8419 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:40:34.7482 Info Message Template Auto Format enabled
+2020-12-03 10:40:34.7946 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:40:34.9288 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:40:34.9651 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:40:35.0055 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:40:35.1277 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 10:41:28.7609 Info Message Template Auto Format enabled
+2020-12-03 10:41:28.8003 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 10:41:28.9475 Info Adding target FileTarget(Name=allfile)
+2020-12-03 10:41:28.9753 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 10:41:29.0019 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 10:41:29.1133 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 11:01:41.8995 Info Message Template Auto Format enabled
+2020-12-03 11:01:41.9339 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 11:01:42.0423 Info Adding target FileTarget(Name=allfile)
+2020-12-03 11:01:42.0758 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 11:01:42.1005 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 11:01:42.1916 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 11:02:52.8705 Info Message Template Auto Format enabled
+2020-12-03 11:02:52.9146 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 11:02:53.0476 Info Adding target FileTarget(Name=allfile)
+2020-12-03 11:02:53.0731 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 11:02:53.0988 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 11:02:53.1885 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 17:43:39.7301 Info Message Template Auto Format enabled
+2020-12-03 17:43:39.7772 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 17:43:39.9031 Info Adding target FileTarget(Name=allfile)
+2020-12-03 17:43:39.9382 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 17:43:39.9640 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 17:43:40.0781 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 19:32:28.8511 Info Message Template Auto Format enabled
+2020-12-03 19:32:28.9652 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 19:32:29.0744 Info Adding target FileTarget(Name=allfile)
+2020-12-03 19:32:29.0980 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 19:32:29.1171 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 19:32:29.1892 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 19:34:31.2428 Info Message Template Auto Format enabled
+2020-12-03 19:34:31.2764 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 19:34:31.3763 Info Adding target FileTarget(Name=allfile)
+2020-12-03 19:34:31.3977 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 19:34:31.4233 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 19:34:31.5170 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-03 19:43:25.1982 Info Message Template Auto Format enabled
+2020-12-03 19:43:25.4432 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-03 19:43:25.5455 Info Adding target FileTarget(Name=allfile)
+2020-12-03 19:43:25.5691 Info Adding target FileTarget(Name=ownlog)
+2020-12-03 19:43:25.5922 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-03 19:43:25.6508 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 16:37:13.1101 Info Message Template Auto Format enabled
+2020-12-04 16:37:13.1467 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 16:37:13.2627 Info Adding target FileTarget(Name=allfile)
+2020-12-04 16:37:13.2856 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 16:37:13.3078 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 16:37:13.3830 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 16:40:12.9885 Info Message Template Auto Format enabled
+2020-12-04 16:40:13.0287 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 16:40:13.1475 Info Adding target FileTarget(Name=allfile)
+2020-12-04 16:40:13.1694 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 16:40:13.1953 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 16:40:13.2788 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 16:51:45.4448 Info Message Template Auto Format enabled
+2020-12-04 16:51:45.5894 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 16:51:45.7204 Info Adding target FileTarget(Name=allfile)
+2020-12-04 16:51:45.7545 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 16:51:45.7886 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 16:51:45.8771 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:19:33.0639 Info Message Template Auto Format enabled
+2020-12-04 17:19:33.0884 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:19:33.2045 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:19:33.2332 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:19:33.2585 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:19:33.3654 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:22:46.7336 Info Message Template Auto Format enabled
+2020-12-04 17:22:46.7639 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:22:46.8851 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:22:46.9114 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:22:46.9318 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:22:47.0000 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:24:03.8144 Info Message Template Auto Format enabled
+2020-12-04 17:24:03.8522 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:24:03.9903 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:24:04.0283 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:24:04.0611 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:24:04.1557 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:25:04.6869 Info Message Template Auto Format enabled
+2020-12-04 17:25:04.7230 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:25:04.8471 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:25:04.9380 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:25:04.9841 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:25:05.0818 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:27:34.1281 Info Message Template Auto Format enabled
+2020-12-04 17:27:34.1621 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:27:34.2617 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:27:34.2981 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:28:13.3285 Info Message Template Auto Format enabled
+2020-12-04 17:28:13.3530 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:28:13.4548 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:28:13.4770 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:28:13.4954 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:28:13.5673 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:29:17.4267 Info Message Template Auto Format enabled
+2020-12-04 17:29:17.4586 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:29:17.5831 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:29:17.6032 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:29:17.6281 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:29:17.7250 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:30:02.4574 Info Message Template Auto Format enabled
+2020-12-04 17:30:02.4982 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:30:02.6446 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:30:02.6748 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:30:02.7055 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:30:02.8738 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:31:36.4709 Info Message Template Auto Format enabled
+2020-12-04 17:31:36.4968 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:31:36.6083 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:31:36.6330 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:31:36.6563 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:31:36.7428 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:32:39.6686 Info Message Template Auto Format enabled
+2020-12-04 17:32:39.6981 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:32:39.8143 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:32:39.8425 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:32:39.8689 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:32:39.9808 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:34:38.0376 Info Message Template Auto Format enabled
+2020-12-04 17:34:38.0543 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:34:38.1046 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:34:38.1046 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:34:38.1255 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:34:38.1602 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:37:14.1455 Info Message Template Auto Format enabled
+2020-12-04 17:37:14.1811 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:37:14.2856 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:37:14.3034 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:37:14.3234 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:37:14.3821 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:40:14.8376 Info Message Template Auto Format enabled
+2020-12-04 17:40:14.9739 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:40:15.0939 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:40:15.1132 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:40:15.1308 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:40:15.2189 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:44:57.3516 Info Message Template Auto Format enabled
+2020-12-04 17:44:57.3772 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:44:57.4954 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:44:57.5252 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:44:57.5485 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:44:57.6335 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:52:19.9395 Info Message Template Auto Format enabled
+2020-12-04 17:52:20.0766 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:52:20.1793 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:52:20.1965 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:52:20.2174 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:52:20.2834 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:53:52.7997 Info Message Template Auto Format enabled
+2020-12-04 17:53:52.8365 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:53:52.9333 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:53:52.9508 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:53:52.9681 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:53:53.0710 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 17:55:20.4699 Info Message Template Auto Format enabled
+2020-12-04 17:55:20.5042 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 17:55:20.6354 Info Adding target FileTarget(Name=allfile)
+2020-12-04 17:55:20.6646 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 17:55:20.6859 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 17:55:20.7739 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:00:42.5673 Info Message Template Auto Format enabled
+2020-12-04 18:00:42.5997 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:00:42.7090 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:00:42.7358 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:00:42.7614 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:00:42.8375 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:03:18.1152 Info Message Template Auto Format enabled
+2020-12-04 18:03:18.1604 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:03:18.2845 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:03:18.3034 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:03:18.3281 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:03:18.4200 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:15:29.0079 Info Message Template Auto Format enabled
+2020-12-04 18:15:29.0469 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:15:29.1731 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:15:29.2224 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:15:29.2434 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:15:29.3121 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:18:32.8704 Info Message Template Auto Format enabled
+2020-12-04 18:18:32.9044 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:18:33.0404 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:18:33.0728 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:18:33.0955 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:18:33.1835 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:19:49.6647 Info Message Template Auto Format enabled
+2020-12-04 18:19:49.6906 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:19:49.7850 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:19:49.8145 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:19:49.8325 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:19:49.9078 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:21:23.6159 Info Message Template Auto Format enabled
+2020-12-04 18:21:23.6426 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:21:23.7511 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:21:23.7731 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:21:23.7939 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:21:23.8933 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:24:50.0496 Info Message Template Auto Format enabled
+2020-12-04 18:24:50.0818 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:24:50.2129 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:24:50.2373 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:24:50.2628 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:24:50.3668 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:27:50.1885 Info Message Template Auto Format enabled
+2020-12-04 18:27:50.2340 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:27:50.3531 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:27:50.3928 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:27:50.4270 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:27:50.5567 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:29:14.0624 Info Message Template Auto Format enabled
+2020-12-04 18:29:14.0938 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:29:14.2060 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:29:14.2315 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:29:14.2536 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:29:14.3694 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:30:50.4613 Info Message Template Auto Format enabled
+2020-12-04 18:30:50.4872 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:30:50.6046 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:30:50.6341 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:30:50.6601 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:30:50.7635 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:31:51.0887 Info Message Template Auto Format enabled
+2020-12-04 18:31:51.1197 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:31:51.2539 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:31:51.3014 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:31:51.3383 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:31:51.4459 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:33:10.1513 Info Message Template Auto Format enabled
+2020-12-04 18:33:10.1843 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:33:10.2967 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:33:10.3286 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:33:10.3573 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:33:10.4598 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 18:34:33.9742 Info Message Template Auto Format enabled
+2020-12-04 18:34:34.0090 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 18:34:34.1325 Info Adding target FileTarget(Name=allfile)
+2020-12-04 18:34:34.1549 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 18:34:34.1786 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 18:34:34.2718 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 20:42:17.0222 Info Message Template Auto Format enabled
+2020-12-04 20:42:17.0587 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 20:42:17.1885 Info Adding target FileTarget(Name=allfile)
+2020-12-04 20:42:17.2353 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 20:42:17.2938 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 20:42:17.4248 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 20:43:50.2993 Info Message Template Auto Format enabled
+2020-12-04 20:43:50.3190 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 20:43:50.3903 Info Adding target FileTarget(Name=allfile)
+2020-12-04 20:43:50.4075 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 20:43:50.4365 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 20:43:50.5585 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 20:46:44.9378 Info Message Template Auto Format enabled
+2020-12-04 20:46:44.9847 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 20:46:45.1168 Info Adding target FileTarget(Name=allfile)
+2020-12-04 20:46:45.1392 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 20:46:45.1639 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 20:46:45.2232 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 20:50:49.2753 Info Message Template Auto Format enabled
+2020-12-04 20:50:49.3080 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 20:50:49.4302 Info Adding target FileTarget(Name=allfile)
+2020-12-04 20:50:49.4654 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 20:50:49.4967 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 20:50:49.5878 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 20:54:09.4162 Info Message Template Auto Format enabled
+2020-12-04 20:54:09.4530 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 20:54:09.5969 Info Adding target FileTarget(Name=allfile)
+2020-12-04 20:54:09.6322 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 20:54:09.6639 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 20:54:09.7874 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 20:57:22.2657 Info Message Template Auto Format enabled
+2020-12-04 20:57:22.2944 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 20:57:22.4055 Info Adding target FileTarget(Name=allfile)
+2020-12-04 20:57:22.4272 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 20:57:22.4511 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 20:57:22.5515 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:02:20.1612 Info Message Template Auto Format enabled
+2020-12-04 21:02:20.1962 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:02:20.3163 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:02:20.3413 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:02:20.3696 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:02:20.4710 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:04:46.6038 Info Message Template Auto Format enabled
+2020-12-04 21:04:46.6433 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:04:46.7670 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:04:46.7927 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:04:46.8176 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:04:46.9202 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:08:01.8786 Info Message Template Auto Format enabled
+2020-12-04 21:08:01.9072 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:08:02.0128 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:08:02.0400 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:08:02.0634 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:08:02.1728 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:17:41.7805 Info Message Template Auto Format enabled
+2020-12-04 21:17:41.8210 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:17:41.9416 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:17:41.9654 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:17:41.9901 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:17:42.0807 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:30:52.5063 Info Message Template Auto Format enabled
+2020-12-04 21:30:52.5402 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:30:52.6518 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:30:52.6794 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:30:52.7050 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:30:52.7927 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:44:01.7349 Info Message Template Auto Format enabled
+2020-12-04 21:44:01.7685 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:44:01.8859 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:44:01.9061 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:44:01.9303 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:44:02.0219 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-04 21:44:36.3640 Info Message Template Auto Format enabled
+2020-12-04 21:44:36.4042 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-04 21:44:36.5467 Info Adding target FileTarget(Name=allfile)
+2020-12-04 21:44:36.5887 Info Adding target FileTarget(Name=ownlog)
+2020-12-04 21:44:36.6273 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-04 21:44:36.7346 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 05:50:01.0197 Info Message Template Auto Format enabled
+2020-12-07 05:50:01.0497 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 05:50:01.1586 Info Adding target FileTarget(Name=allfile)
+2020-12-07 05:50:01.1812 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 05:50:01.1812 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 05:50:01.2905 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 05:59:20.6993 Info Message Template Auto Format enabled
+2020-12-07 05:59:20.7186 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 05:59:20.7903 Info Adding target FileTarget(Name=allfile)
+2020-12-07 05:59:20.7996 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 05:59:20.8082 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 05:59:20.8518 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:03:19.3799 Info Message Template Auto Format enabled
+2020-12-07 06:03:19.4015 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:03:19.4842 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:03:19.4981 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:03:19.5167 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:03:19.5782 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:04:18.5659 Info Message Template Auto Format enabled
+2020-12-07 06:04:18.5798 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:04:18.6430 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:04:18.6522 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:04:18.6522 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:04:18.7009 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:07:48.2819 Info Message Template Auto Format enabled
+2020-12-07 06:07:48.3113 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:07:48.3989 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:07:48.4139 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:07:48.4256 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:07:48.4883 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:08:09.8543 Info Message Template Auto Format enabled
+2020-12-07 06:08:09.9259 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:08:10.0148 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:08:10.0297 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:08:10.0421 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:08:10.0987 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:09:26.2148 Info Message Template Auto Format enabled
+2020-12-07 06:09:26.2371 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:09:26.3394 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:09:26.3394 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:09:26.3645 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:09:26.4456 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:13:17.9680 Info Message Template Auto Format enabled
+2020-12-07 06:13:17.9884 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:13:18.0613 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:13:18.0756 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:13:18.0756 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:13:18.1400 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:14:37.0336 Info Message Template Auto Format enabled
+2020-12-07 06:14:37.0517 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:14:37.1283 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:14:37.1400 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:14:37.1507 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:14:37.2167 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 06:16:26.0163 Info Message Template Auto Format enabled
+2020-12-07 06:16:26.0447 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 06:16:26.1876 Info Adding target FileTarget(Name=allfile)
+2020-12-07 06:16:26.2041 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 06:16:26.2180 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 06:16:26.3006 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 07:36:13.7207 Info Message Template Auto Format enabled
+2020-12-07 07:36:13.7488 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 07:36:13.8517 Info Adding target FileTarget(Name=allfile)
+2020-12-07 07:36:13.8642 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 07:36:13.8757 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 07:36:13.9430 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:02:24.7469 Info Message Template Auto Format enabled
+2020-12-07 08:02:24.7702 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:02:24.8196 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:02:24.8261 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:02:24.8261 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:02:24.8696 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:07:45.4509 Info Message Template Auto Format enabled
+2020-12-07 08:07:45.4990 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:07:45.6345 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:07:45.6588 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:07:45.6793 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:07:45.7832 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:10:27.1659 Info Message Template Auto Format enabled
+2020-12-07 08:10:27.1874 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:10:27.2526 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:10:27.2655 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:10:27.2750 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:10:27.3413 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:12:16.8853 Info Message Template Auto Format enabled
+2020-12-07 08:12:16.9036 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:12:16.9733 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:12:16.9837 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:12:16.9837 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:12:17.0307 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:33:29.3534 Info Message Template Auto Format enabled
+2020-12-07 08:33:29.3780 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:33:29.4627 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:33:29.4627 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:33:29.4783 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:33:29.5307 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:35:16.4251 Info Message Template Auto Format enabled
+2020-12-07 08:35:16.4546 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:35:16.5321 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:35:16.5418 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:35:16.5418 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:35:16.5952 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:36:48.2795 Info Message Template Auto Format enabled
+2020-12-07 08:36:48.3136 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:36:48.4729 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:36:48.4927 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:36:48.5056 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:36:48.5779 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:47:15.7777 Info Message Template Auto Format enabled
+2020-12-07 08:47:15.7949 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:47:15.8723 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:47:15.8723 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:47:15.8931 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:47:15.9459 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:47:59.7621 Info Message Template Auto Format enabled
+2020-12-07 08:47:59.7837 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:47:59.8943 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:47:59.9375 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:47:59.9492 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:48:00.0243 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:49:12.6571 Info Message Template Auto Format enabled
+2020-12-07 08:49:12.6788 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:49:12.7773 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:49:12.7938 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:49:12.8088 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:49:12.8820 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 08:51:21.8548 Info Message Template Auto Format enabled
+2020-12-07 08:51:21.8793 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 08:51:21.9474 Info Adding target FileTarget(Name=allfile)
+2020-12-07 08:51:21.9474 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 08:51:21.9675 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 08:51:22.0366 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 09:03:33.8867 Info Message Template Auto Format enabled
+2020-12-07 09:03:33.9028 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 09:03:33.9769 Info Adding target FileTarget(Name=allfile)
+2020-12-07 09:03:33.9858 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 09:03:33.9858 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 09:03:34.0329 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 09:07:21.3172 Info Message Template Auto Format enabled
+2020-12-07 09:07:21.3342 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 09:07:21.4161 Info Adding target FileTarget(Name=allfile)
+2020-12-07 09:07:21.4265 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 09:07:21.4357 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 09:07:21.5170 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 09:10:24.3463 Info Message Template Auto Format enabled
+2020-12-07 09:10:24.3645 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 09:10:24.4664 Info Adding target FileTarget(Name=allfile)
+2020-12-07 09:10:24.4881 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 09:10:24.4993 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 09:10:24.5660 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 09:14:48.1572 Info Message Template Auto Format enabled
+2020-12-07 09:14:48.1832 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 09:14:48.2648 Info Adding target FileTarget(Name=allfile)
+2020-12-07 09:14:48.2648 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 09:14:48.2823 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 09:14:48.3357 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 11:07:57.4965 Info Message Template Auto Format enabled
+2020-12-07 11:07:57.5143 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 11:07:57.5870 Info Adding target FileTarget(Name=allfile)
+2020-12-07 11:07:57.5975 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 11:07:57.6071 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 11:07:57.6496 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 11:13:11.1595 Info Message Template Auto Format enabled
+2020-12-07 11:13:11.1779 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 11:13:11.2625 Info Adding target FileTarget(Name=allfile)
+2020-12-07 11:13:11.3256 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 11:13:11.3256 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 11:13:11.3846 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 11:39:52.7896 Info Message Template Auto Format enabled
+2020-12-07 11:39:52.8191 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 11:39:52.9231 Info Adding target FileTarget(Name=allfile)
+2020-12-07 11:39:52.9367 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 11:39:52.9504 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 11:39:53.0186 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 11:48:12.7239 Info Message Template Auto Format enabled
+2020-12-07 11:48:12.7467 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 11:48:12.8346 Info Adding target FileTarget(Name=allfile)
+2020-12-07 11:48:12.8478 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 11:48:12.8572 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 11:48:12.9236 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 11:49:36.5310 Info Message Template Auto Format enabled
+2020-12-07 11:49:36.5470 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 11:49:36.6253 Info Adding target FileTarget(Name=allfile)
+2020-12-07 11:49:36.6395 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 11:49:36.6395 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 11:49:36.7067 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 11:50:51.6898 Info Message Template Auto Format enabled
+2020-12-07 11:50:51.7141 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 11:50:51.8003 Info Adding target FileTarget(Name=allfile)
+2020-12-07 11:50:51.8115 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 11:50:51.8115 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 11:50:51.8844 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 12:02:21.0789 Info Message Template Auto Format enabled
+2020-12-07 12:02:21.1012 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 12:02:21.1958 Info Adding target FileTarget(Name=allfile)
+2020-12-07 12:02:21.2065 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 12:02:21.2190 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 12:02:21.2814 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 12:04:44.3578 Info Message Template Auto Format enabled
+2020-12-07 12:04:44.3783 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 12:04:44.4818 Info Adding target FileTarget(Name=allfile)
+2020-12-07 12:04:44.4971 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 12:04:44.5101 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 12:04:44.6553 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 12:07:44.8426 Info Message Template Auto Format enabled
+2020-12-07 12:07:44.8674 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 12:07:44.9649 Info Adding target FileTarget(Name=allfile)
+2020-12-07 12:07:44.9808 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 12:07:44.9969 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 12:07:45.0730 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 14:28:59.5175 Info Message Template Auto Format enabled
+2020-12-07 14:28:59.5365 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 14:28:59.6137 Info Adding target FileTarget(Name=allfile)
+2020-12-07 14:28:59.6237 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 14:28:59.6350 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 14:28:59.6958 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 14:33:21.1103 Info Message Template Auto Format enabled
+2020-12-07 14:33:21.1241 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 14:33:21.1802 Info Adding target FileTarget(Name=allfile)
+2020-12-07 14:33:21.1883 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 14:33:21.1883 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 14:33:21.2359 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 14:45:47.9259 Info Message Template Auto Format enabled
+2020-12-07 14:45:47.9414 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 14:45:48.0020 Info Adding target FileTarget(Name=allfile)
+2020-12-07 14:45:48.0144 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 14:45:48.0144 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 14:45:48.0585 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 14:52:25.0624 Info Message Template Auto Format enabled
+2020-12-07 14:52:25.0813 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 14:52:25.1605 Info Adding target FileTarget(Name=allfile)
+2020-12-07 14:52:25.1712 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 14:52:25.1712 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 14:52:25.2472 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-07 18:45:22.9559 Info Message Template Auto Format enabled
+2020-12-07 18:45:22.9780 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-07 18:45:23.0820 Info Adding target FileTarget(Name=allfile)
+2020-12-07 18:45:23.1002 Info Adding target FileTarget(Name=ownlog)
+2020-12-07 18:45:23.1101 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-07 18:45:23.1863 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 09:21:48.0341 Info Message Template Auto Format enabled
+2020-12-08 09:21:48.0579 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 09:21:48.1443 Info Adding target FileTarget(Name=allfile)
+2020-12-08 09:21:48.1658 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 09:21:48.1779 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 09:21:48.2747 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 09:23:37.0281 Info Message Template Auto Format enabled
+2020-12-08 09:23:37.0471 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 09:23:37.1394 Info Adding target FileTarget(Name=allfile)
+2020-12-08 09:23:37.1503 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 09:23:37.1503 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 09:23:37.2269 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 10:02:25.6100 Info Message Template Auto Format enabled
+2020-12-08 10:02:25.6279 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 10:02:25.7216 Info Adding target FileTarget(Name=allfile)
+2020-12-08 10:02:25.7340 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 10:02:25.7340 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 10:02:25.8019 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 12:17:01.4376 Info Message Template Auto Format enabled
+2020-12-08 12:17:01.4575 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 12:17:01.5528 Info Adding target FileTarget(Name=allfile)
+2020-12-08 12:17:01.5632 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 12:17:01.5751 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 12:17:01.6309 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 12:18:49.4400 Info Message Template Auto Format enabled
+2020-12-08 12:18:49.4624 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 12:18:49.5683 Info Adding target FileTarget(Name=allfile)
+2020-12-08 12:18:49.5825 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 12:18:49.5938 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 12:18:49.6788 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 12:21:28.0873 Info Message Template Auto Format enabled
+2020-12-08 12:21:28.1063 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 12:21:28.1937 Info Adding target FileTarget(Name=allfile)
+2020-12-08 12:21:28.2040 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 12:21:28.2151 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 12:21:28.2685 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 12:44:12.3643 Info Message Template Auto Format enabled
+2020-12-08 12:44:12.3813 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 12:44:12.4663 Info Adding target FileTarget(Name=allfile)
+2020-12-08 12:44:12.4784 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 12:44:12.4784 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 12:44:12.5410 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 12:44:40.0886 Info Message Template Auto Format enabled
+2020-12-08 12:44:40.1137 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 12:44:40.2316 Info Adding target FileTarget(Name=allfile)
+2020-12-08 12:44:40.2474 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 12:44:40.2615 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 12:44:40.3337 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 12:46:48.9467 Info Message Template Auto Format enabled
+2020-12-08 12:46:49.0255 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 12:46:49.1279 Info Adding target FileTarget(Name=allfile)
+2020-12-08 12:46:49.1547 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 12:46:49.1740 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 12:46:49.3036 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 13:01:17.5483 Info Message Template Auto Format enabled
+2020-12-08 13:01:17.5628 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 13:01:17.6312 Info Adding target FileTarget(Name=allfile)
+2020-12-08 13:01:17.6421 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 13:01:17.6515 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 13:01:17.7078 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 13:04:13.8856 Info Message Template Auto Format enabled
+2020-12-08 13:04:13.9046 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 13:04:13.9977 Info Adding target FileTarget(Name=allfile)
+2020-12-08 13:04:13.9977 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 13:04:14.0189 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 13:04:14.0846 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 13:06:53.9899 Info Message Template Auto Format enabled
+2020-12-08 13:06:54.0042 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 13:06:54.0732 Info Adding target FileTarget(Name=allfile)
+2020-12-08 13:06:54.0732 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 13:06:54.0910 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 13:06:54.1589 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 13:09:57.1620 Info Message Template Auto Format enabled
+2020-12-08 13:09:57.1850 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 13:09:57.2912 Info Adding target FileTarget(Name=allfile)
+2020-12-08 13:09:57.2912 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 13:09:57.3154 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 13:09:57.3797 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 13:11:21.4688 Info Message Template Auto Format enabled
+2020-12-08 13:11:21.4904 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 13:11:21.5641 Info Adding target FileTarget(Name=allfile)
+2020-12-08 13:11:21.5765 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 13:11:21.5765 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 13:11:21.6372 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-08 13:18:15.1487 Info Message Template Auto Format enabled
+2020-12-08 13:18:15.1704 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-08 13:18:15.2782 Info Adding target FileTarget(Name=allfile)
+2020-12-08 13:18:15.2982 Info Adding target FileTarget(Name=ownlog)
+2020-12-08 13:18:15.3101 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-08 13:18:15.3790 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-09 08:59:11.3945 Info Message Template Auto Format enabled
+2020-12-09 08:59:11.4259 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-09 08:59:11.5030 Info Adding target FileTarget(Name=allfile)
+2020-12-09 08:59:11.5189 Info Adding target FileTarget(Name=ownlog)
+2020-12-09 08:59:11.5257 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-09 08:59:11.5634 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-09 09:00:44.1116 Info Message Template Auto Format enabled
+2020-12-09 09:00:44.1260 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-09 09:00:44.2018 Info Adding target FileTarget(Name=allfile)
+2020-12-09 09:00:44.2133 Info Adding target FileTarget(Name=ownlog)
+2020-12-09 09:00:44.2133 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-09 09:00:44.2813 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-09 09:02:53.9557 Info Message Template Auto Format enabled
+2020-12-09 09:02:53.9730 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-09 09:02:54.0723 Info Adding target FileTarget(Name=allfile)
+2020-12-09 09:02:54.0723 Info Adding target FileTarget(Name=ownlog)
+2020-12-09 09:02:54.0986 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-09 09:02:54.1668 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 07:51:45.7421 Info Message Template Auto Format enabled
+2020-12-10 07:51:45.7902 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 07:51:45.8787 Info Adding target FileTarget(Name=allfile)
+2020-12-10 07:51:45.8951 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 07:51:45.9064 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 07:51:45.9645 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:03:39.4377 Info Message Template Auto Format enabled
+2020-12-10 08:03:39.4579 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:03:39.5419 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:03:39.5513 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:03:39.5513 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:03:39.6239 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:08:09.0747 Info Message Template Auto Format enabled
+2020-12-10 08:08:09.0927 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:08:09.1627 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:08:09.1747 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:08:09.1747 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:08:09.2288 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:19:54.0270 Info Message Template Auto Format enabled
+2020-12-10 08:19:54.0446 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:19:54.1069 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:19:54.1197 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:19:54.1269 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:19:54.1752 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:24:56.7700 Info Message Template Auto Format enabled
+2020-12-10 08:24:56.7939 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:24:56.8696 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:24:56.8824 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:24:56.8937 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:24:56.9652 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:26:35.9428 Info Message Template Auto Format enabled
+2020-12-10 08:26:35.9578 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:26:36.0295 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:26:36.0434 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:26:36.0541 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:26:36.1029 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:27:31.1714 Info Message Template Auto Format enabled
+2020-12-10 08:27:31.1898 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:27:31.2745 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:27:31.2867 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:27:31.2965 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:27:31.3543 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:31:16.6949 Info Message Template Auto Format enabled
+2020-12-10 08:31:16.7287 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:31:16.8568 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:31:16.8770 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:31:16.8770 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:31:16.9747 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:34:29.4372 Info Message Template Auto Format enabled
+2020-12-10 08:34:29.4570 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:34:29.5574 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:34:29.5824 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:34:29.5824 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:34:29.6613 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:39:33.7555 Info Message Template Auto Format enabled
+2020-12-10 08:39:33.7702 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:39:33.8298 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:39:33.8298 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:39:33.8439 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:39:33.8894 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 08:56:16.3237 Info Message Template Auto Format enabled
+2020-12-10 08:56:16.3452 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 08:56:16.4246 Info Adding target FileTarget(Name=allfile)
+2020-12-10 08:56:16.4389 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 08:56:16.4389 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 08:56:16.4948 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 09:13:39.4206 Info Message Template Auto Format enabled
+2020-12-10 09:13:39.4416 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 09:13:39.5330 Info Adding target FileTarget(Name=allfile)
+2020-12-10 09:13:39.5330 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 09:13:39.5509 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 09:13:39.6064 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 09:15:52.6571 Info Message Template Auto Format enabled
+2020-12-10 09:15:52.6571 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 09:15:52.7518 Info Adding target FileTarget(Name=allfile)
+2020-12-10 09:15:52.7518 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 09:15:52.7686 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 09:15:52.8178 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 09:19:26.6390 Info Message Template Auto Format enabled
+2020-12-10 09:19:26.6572 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 09:19:26.7351 Info Adding target FileTarget(Name=allfile)
+2020-12-10 09:19:26.7351 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 09:19:26.7565 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 09:19:26.8279 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 09:36:38.9071 Info Message Template Auto Format enabled
+2020-12-10 09:36:38.9263 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 09:36:38.9922 Info Adding target FileTarget(Name=allfile)
+2020-12-10 09:36:39.0045 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 09:36:39.0045 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 09:36:39.0693 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 09:38:21.9063 Info Message Template Auto Format enabled
+2020-12-10 09:38:21.9063 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 09:38:21.9717 Info Adding target FileTarget(Name=allfile)
+2020-12-10 09:38:21.9717 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 09:38:21.9881 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 09:38:22.0292 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 09:39:10.2181 Info Message Template Auto Format enabled
+2020-12-10 09:39:10.2350 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 09:39:10.2953 Info Adding target FileTarget(Name=allfile)
+2020-12-10 09:39:10.3135 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 09:39:10.3135 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 09:39:10.3899 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 10:07:24.1008 Info Message Template Auto Format enabled
+2020-12-10 10:07:24.1338 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 10:07:24.2463 Info Adding target FileTarget(Name=allfile)
+2020-12-10 10:07:24.2923 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 10:07:24.3036 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 10:07:24.3614 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 10:54:00.7439 Info Message Template Auto Format enabled
+2020-12-10 10:54:00.7578 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 10:54:00.8200 Info Adding target FileTarget(Name=allfile)
+2020-12-10 10:54:00.8336 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 10:54:00.8336 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 10:54:00.8972 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 10:59:35.2754 Info Message Template Auto Format enabled
+2020-12-10 10:59:35.3037 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 10:59:35.3981 Info Adding target FileTarget(Name=allfile)
+2020-12-10 10:59:35.4152 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 10:59:35.4262 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 10:59:35.4913 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 11:00:00.9899 Info Message Template Auto Format enabled
+2020-12-10 11:00:01.0079 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 11:00:01.0870 Info Adding target FileTarget(Name=allfile)
+2020-12-10 11:00:01.0961 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 11:00:01.0961 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 11:00:01.1599 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 11:01:54.8465 Info Message Template Auto Format enabled
+2020-12-10 11:01:54.8465 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 11:01:54.9285 Info Adding target FileTarget(Name=allfile)
+2020-12-10 11:01:54.9419 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 11:01:54.9419 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 11:01:54.9999 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 11:03:01.2373 Info Message Template Auto Format enabled
+2020-12-10 11:03:01.2546 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 11:03:01.3444 Info Adding target FileTarget(Name=allfile)
+2020-12-10 11:03:01.3444 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 11:03:01.3664 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 11:03:01.4253 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-10 11:08:52.7402 Info Message Template Auto Format enabled
+2020-12-10 11:08:52.7598 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-10 11:08:52.8374 Info Adding target FileTarget(Name=allfile)
+2020-12-10 11:08:52.8471 Info Adding target FileTarget(Name=ownlog)
+2020-12-10 11:08:52.8471 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-10 11:08:52.9065 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-11 09:25:28.2370 Info Message Template Auto Format enabled
+2020-12-11 09:25:28.2881 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-11 09:25:28.4151 Info Adding target FileTarget(Name=allfile)
+2020-12-11 09:25:28.4379 Info Adding target FileTarget(Name=ownlog)
+2020-12-11 09:25:28.4520 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-11 09:25:28.5496 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-11 09:46:03.9717 Info Message Template Auto Format enabled
+2020-12-11 09:46:04.0433 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-11 09:46:04.1347 Info Adding target FileTarget(Name=allfile)
+2020-12-11 09:46:04.1347 Info Adding target FileTarget(Name=ownlog)
+2020-12-11 09:46:04.1585 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-11 09:46:04.2263 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:14:49.2902 Info Message Template Auto Format enabled
+2020-12-13 11:14:49.3119 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:14:49.3972 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:14:49.4109 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:14:49.4193 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:14:49.4789 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:17:23.0128 Info Message Template Auto Format enabled
+2020-12-13 11:17:23.0311 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:17:23.1049 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:17:23.1049 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:17:23.1235 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:17:23.1701 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:20:15.0871 Info Message Template Auto Format enabled
+2020-12-13 11:20:15.1058 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:20:15.1862 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:20:15.2394 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:20:15.2521 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:20:15.3235 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:21:52.9865 Info Message Template Auto Format enabled
+2020-12-13 11:21:53.0073 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:21:53.0908 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:21:53.0908 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:21:53.1174 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:21:53.1725 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:24:55.8038 Info Message Template Auto Format enabled
+2020-12-13 11:24:55.8186 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:24:55.8815 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:24:55.8892 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:24:55.8892 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:24:55.9516 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:26:47.0968 Info Message Template Auto Format enabled
+2020-12-13 11:26:47.1243 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:26:47.2121 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:26:47.2284 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:26:47.2284 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:26:47.2858 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:28:45.9569 Info Message Template Auto Format enabled
+2020-12-13 11:28:45.9762 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:28:46.0529 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:28:46.0631 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:28:46.0753 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:28:46.1426 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:31:29.0863 Info Message Template Auto Format enabled
+2020-12-13 11:31:29.0990 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:31:29.1476 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:31:29.1556 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:31:29.1556 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:31:29.1921 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-13 11:33:22.2529 Info Message Template Auto Format enabled
+2020-12-13 11:33:22.2693 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-13 11:33:22.3554 Info Adding target FileTarget(Name=allfile)
+2020-12-13 11:33:22.3693 Info Adding target FileTarget(Name=ownlog)
+2020-12-13 11:33:22.3693 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-13 11:33:22.4392 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-16 10:19:01.3052 Info Message Template Auto Format enabled
+2020-12-16 10:19:01.3229 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-16 10:19:01.3882 Info Adding target FileTarget(Name=allfile)
+2020-12-16 10:19:01.4013 Info Adding target FileTarget(Name=ownlog)
+2020-12-16 10:19:01.4013 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-16 10:19:01.4622 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-16 10:31:48.7049 Info Message Template Auto Format enabled
+2020-12-16 10:31:48.7227 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-16 10:31:48.8388 Info Adding target FileTarget(Name=allfile)
+2020-12-16 10:31:48.8567 Info Adding target FileTarget(Name=ownlog)
+2020-12-16 10:31:48.8567 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-16 10:31:48.9404 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 12:47:46.1548 Info Message Template Auto Format enabled
+2020-12-18 12:47:46.1821 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 12:47:46.2930 Info Adding target FileTarget(Name=allfile)
+2020-12-18 12:47:46.3157 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 12:47:46.3297 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 12:47:46.4088 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:17:07.0232 Info Message Template Auto Format enabled
+2020-12-18 13:17:07.0348 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:17:07.1200 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:17:07.1291 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:17:07.1291 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:17:07.1776 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:19:49.4924 Info Message Template Auto Format enabled
+2020-12-18 13:19:49.5096 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:19:49.5993 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:19:49.6110 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:19:49.6110 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:19:49.7070 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:20:18.8196 Info Message Template Auto Format enabled
+2020-12-18 13:20:18.8379 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:20:18.9502 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:20:18.9641 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:20:18.9743 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:20:19.0607 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:35:27.5716 Info Message Template Auto Format enabled
+2020-12-18 13:35:27.5943 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:35:27.6866 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:35:27.6966 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:35:27.7038 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:35:27.7542 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:39:54.0153 Info Message Template Auto Format enabled
+2020-12-18 13:39:54.0355 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:39:54.1033 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:39:54.1113 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:39:54.1113 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:39:54.1710 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:43:47.1092 Info Message Template Auto Format enabled
+2020-12-18 13:43:47.1600 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:43:47.2370 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:43:47.2514 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:43:47.2514 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:43:47.3142 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:45:53.3394 Info Message Template Auto Format enabled
+2020-12-18 13:45:53.3608 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:45:53.4391 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:45:53.4391 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:45:53.4622 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:45:53.5260 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:52:35.1014 Info Message Template Auto Format enabled
+2020-12-18 13:52:35.1211 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:52:35.2120 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:52:35.2276 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:52:35.2440 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:52:35.3262 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 13:57:36.2048 Info Message Template Auto Format enabled
+2020-12-18 13:57:36.2230 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 13:57:36.2828 Info Adding target FileTarget(Name=allfile)
+2020-12-18 13:57:36.2828 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 13:57:36.2967 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 13:57:36.3325 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 16:11:54.9706 Info Message Template Auto Format enabled
+2020-12-18 16:11:54.9933 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 16:11:55.0880 Info Adding target FileTarget(Name=allfile)
+2020-12-18 16:11:55.1065 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 16:11:55.1176 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 16:11:55.1770 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 16:15:19.4667 Info Message Template Auto Format enabled
+2020-12-18 16:15:19.4906 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 16:15:19.5643 Info Adding target FileTarget(Name=allfile)
+2020-12-18 16:15:19.5643 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 16:15:19.5822 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 16:15:19.6320 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 16:20:07.1878 Info Message Template Auto Format enabled
+2020-12-18 16:20:07.2035 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 16:20:07.2744 Info Adding target FileTarget(Name=allfile)
+2020-12-18 16:20:07.2883 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 16:20:07.3001 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 16:20:07.3697 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 16:23:26.3476 Info Message Template Auto Format enabled
+2020-12-18 16:23:26.3718 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 16:23:26.4693 Info Adding target FileTarget(Name=allfile)
+2020-12-18 16:23:26.4693 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 16:23:26.4903 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 16:23:26.5505 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 16:29:15.4320 Info Message Template Auto Format enabled
+2020-12-18 16:29:15.4819 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 16:29:15.5877 Info Adding target FileTarget(Name=allfile)
+2020-12-18 16:29:15.5991 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 16:29:15.6101 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 16:29:15.6799 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 16:30:03.2520 Info Message Template Auto Format enabled
+2020-12-18 16:30:03.2699 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 16:30:03.3426 Info Adding target FileTarget(Name=allfile)
+2020-12-18 16:30:03.3535 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 16:30:03.3630 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 16:30:03.4465 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:01:49.5640 Info Message Template Auto Format enabled
+2020-12-18 17:01:49.5788 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:01:49.6638 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:01:49.6921 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:01:49.6921 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:01:49.7555 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:13:05.5147 Info Message Template Auto Format enabled
+2020-12-18 17:13:05.5345 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:13:05.6191 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:13:05.6324 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:13:05.6406 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:13:05.6967 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:26:32.3876 Info Message Template Auto Format enabled
+2020-12-18 17:26:32.4131 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:26:32.5194 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:26:32.5430 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:26:32.5593 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:26:32.6344 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:27:58.8053 Info Message Template Auto Format enabled
+2020-12-18 17:27:58.8263 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:27:58.9260 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:27:58.9413 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:27:58.9413 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:27:59.0195 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:30:06.4330 Info Message Template Auto Format enabled
+2020-12-18 17:30:06.4525 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:30:06.5312 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:30:06.5312 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:30:06.5552 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:30:06.6144 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:31:35.8841 Info Message Template Auto Format enabled
+2020-12-18 17:31:35.9086 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:31:36.0064 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:31:36.0199 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:31:36.0199 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:31:36.0860 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-18 17:35:21.3216 Info Message Template Auto Format enabled
+2020-12-18 17:35:21.3409 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-18 17:35:21.4420 Info Adding target FileTarget(Name=allfile)
+2020-12-18 17:35:21.4549 Info Adding target FileTarget(Name=ownlog)
+2020-12-18 17:35:21.4549 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-18 17:35:21.5350 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 12:14:44.6605 Info Message Template Auto Format enabled
+2020-12-19 12:14:44.7101 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 12:14:44.7854 Info Adding target FileTarget(Name=allfile)
+2020-12-19 12:14:44.7952 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 12:14:44.7952 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 12:14:44.8665 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 13:39:39.9792 Info Message Template Auto Format enabled
+2020-12-19 13:39:39.9974 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 13:39:40.0944 Info Adding target FileTarget(Name=allfile)
+2020-12-19 13:39:40.1068 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 13:39:40.1198 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 13:39:40.1936 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 13:42:16.9958 Info Message Template Auto Format enabled
+2020-12-19 13:42:17.0195 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 13:42:17.1072 Info Adding target FileTarget(Name=allfile)
+2020-12-19 13:42:17.1197 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 13:42:17.1197 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 13:42:17.1907 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 13:46:21.7478 Info Message Template Auto Format enabled
+2020-12-19 13:46:21.7729 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 13:46:21.8494 Info Adding target FileTarget(Name=allfile)
+2020-12-19 13:46:21.8599 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 13:46:21.8688 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 13:46:21.9499 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 13:49:53.9964 Info Message Template Auto Format enabled
+2020-12-19 13:49:54.0179 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 13:49:54.1077 Info Adding target FileTarget(Name=allfile)
+2020-12-19 13:49:54.1077 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 13:49:54.1306 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 13:49:54.1857 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 14:13:19.4810 Info Message Template Auto Format enabled
+2020-12-19 14:13:19.4978 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 14:13:19.5800 Info Adding target FileTarget(Name=allfile)
+2020-12-19 14:13:19.5938 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 14:13:19.6039 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 14:13:19.6550 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-19 14:15:18.1682 Info Message Template Auto Format enabled
+2020-12-19 14:15:18.1939 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-19 14:15:18.2875 Info Adding target FileTarget(Name=allfile)
+2020-12-19 14:15:18.2966 Info Adding target FileTarget(Name=ownlog)
+2020-12-19 14:15:18.2966 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-19 14:15:18.3636 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 10:31:19.8248 Info Message Template Auto Format enabled
+2020-12-20 10:31:19.8830 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 10:31:19.9535 Info Adding target FileTarget(Name=allfile)
+2020-12-20 10:31:19.9630 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 10:31:19.9630 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 10:31:20.0110 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 10:33:37.2386 Info Message Template Auto Format enabled
+2020-12-20 10:33:37.2589 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 10:33:37.3329 Info Adding target FileTarget(Name=allfile)
+2020-12-20 10:33:37.3406 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 10:33:37.3406 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 10:33:37.3833 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 10:34:32.3712 Info Message Template Auto Format enabled
+2020-12-20 10:34:32.3847 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 10:34:32.4511 Info Adding target FileTarget(Name=allfile)
+2020-12-20 10:34:32.4627 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 10:34:32.4627 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 10:34:32.5214 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 10:38:04.2897 Info Message Template Auto Format enabled
+2020-12-20 10:38:04.3142 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 10:38:04.3866 Info Adding target FileTarget(Name=allfile)
+2020-12-20 10:38:04.3866 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 10:38:04.4090 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 10:38:04.4673 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 10:39:20.5198 Info Message Template Auto Format enabled
+2020-12-20 10:39:20.5354 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 10:39:20.6085 Info Adding target FileTarget(Name=allfile)
+2020-12-20 10:39:20.6196 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 10:39:20.6196 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 10:39:20.6918 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 10:48:50.6738 Info Message Template Auto Format enabled
+2020-12-20 10:48:50.6945 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 10:48:50.7820 Info Adding target FileTarget(Name=allfile)
+2020-12-20 10:48:50.7972 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 10:48:50.8080 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 10:48:50.8703 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 11:25:07.3353 Info Message Template Auto Format enabled
+2020-12-20 11:25:07.3507 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 11:25:07.4066 Info Adding target FileTarget(Name=allfile)
+2020-12-20 11:25:07.4066 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 11:25:07.4210 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 11:25:07.4549 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 11:45:01.9481 Info Message Template Auto Format enabled
+2020-12-20 11:45:01.9695 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 11:45:02.0492 Info Adding target FileTarget(Name=allfile)
+2020-12-20 11:45:02.0623 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 11:45:02.0753 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 11:45:02.1316 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 11:45:39.6725 Info Message Template Auto Format enabled
+2020-12-20 11:45:39.6926 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 11:45:39.8013 Info Adding target FileTarget(Name=allfile)
+2020-12-20 11:45:39.8188 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 11:45:39.8309 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 11:45:39.8974 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 11:46:39.9045 Info Message Template Auto Format enabled
+2020-12-20 11:46:39.9230 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 11:46:40.0026 Info Adding target FileTarget(Name=allfile)
+2020-12-20 11:46:40.0159 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 11:46:40.0256 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 11:46:40.1331 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 11:51:07.0958 Info Message Template Auto Format enabled
+2020-12-20 11:51:07.1185 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 11:51:07.2117 Info Adding target FileTarget(Name=allfile)
+2020-12-20 11:51:07.2269 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 11:51:07.2388 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 11:51:07.2985 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:10:24.0568 Info Message Template Auto Format enabled
+2020-12-20 12:10:24.0829 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:10:24.1872 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:10:24.2009 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:10:24.2009 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:10:24.2830 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:11:39.3914 Info Message Template Auto Format enabled
+2020-12-20 12:11:39.4014 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:11:39.4760 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:11:39.4848 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:11:39.4848 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:11:39.5539 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:13:28.4903 Info Message Template Auto Format enabled
+2020-12-20 12:13:28.5085 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:13:28.5855 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:13:28.5974 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:13:28.6079 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:13:28.6826 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:16:07.1392 Info Message Template Auto Format enabled
+2020-12-20 12:16:07.1560 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:16:07.2778 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:16:07.2914 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:16:07.2914 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:16:07.3542 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:20:07.7704 Info Message Template Auto Format enabled
+2020-12-20 12:20:07.8022 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:20:07.8997 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:20:07.9114 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:20:07.9210 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:20:07.9778 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:40:53.4356 Info Message Template Auto Format enabled
+2020-12-20 12:40:53.4535 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:40:53.5313 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:40:53.5453 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:40:53.5453 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:40:53.6016 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 12:44:41.0568 Info Message Template Auto Format enabled
+2020-12-20 12:44:41.0730 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 12:44:41.1431 Info Adding target FileTarget(Name=allfile)
+2020-12-20 12:44:41.1546 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 12:44:41.1546 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 12:44:41.2241 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 15:52:38.5578 Info Message Template Auto Format enabled
+2020-12-20 15:52:38.5578 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 15:52:38.6391 Info Adding target FileTarget(Name=allfile)
+2020-12-20 15:52:38.6555 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 15:52:38.6555 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 15:52:38.7277 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 15:53:33.4140 Info Message Template Auto Format enabled
+2020-12-20 15:53:33.4349 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 15:53:33.5114 Info Adding target FileTarget(Name=allfile)
+2020-12-20 15:53:33.5114 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 15:53:33.5306 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 15:53:33.5828 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 16:00:12.9305 Info Message Template Auto Format enabled
+2020-12-20 16:00:12.9850 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 16:00:13.0835 Info Adding target FileTarget(Name=allfile)
+2020-12-20 16:00:13.0966 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 16:00:13.1053 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 16:00:13.1553 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 16:14:20.3673 Info Message Template Auto Format enabled
+2020-12-20 16:14:20.3980 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 16:14:20.5058 Info Adding target FileTarget(Name=allfile)
+2020-12-20 16:14:20.5199 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 16:14:20.5294 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 16:14:20.5934 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 16:46:37.2113 Info Message Template Auto Format enabled
+2020-12-20 16:46:37.2299 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 16:46:37.3220 Info Adding target FileTarget(Name=allfile)
+2020-12-20 16:46:37.3220 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 16:46:37.3459 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 16:46:37.4274 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 16:48:24.9294 Info Message Template Auto Format enabled
+2020-12-20 16:48:24.9515 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 16:48:25.0505 Info Adding target FileTarget(Name=allfile)
+2020-12-20 16:48:25.0661 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 16:48:25.0795 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 16:48:25.1378 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:09:04.2705 Info Message Template Auto Format enabled
+2020-12-20 17:09:04.2873 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:09:04.4028 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:09:04.4161 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:09:04.4161 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:09:04.4960 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:15:57.3187 Info Message Template Auto Format enabled
+2020-12-20 17:15:57.3355 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:15:57.4281 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:15:57.4405 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:15:57.4502 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:15:57.5290 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:26:56.2867 Info Message Template Auto Format enabled
+2020-12-20 17:26:56.3091 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:26:56.4176 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:26:56.4176 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:26:56.4381 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:26:56.4884 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:32:28.2839 Info Message Template Auto Format enabled
+2020-12-20 17:32:28.2961 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:32:28.3562 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:32:28.3562 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:32:28.3701 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:32:28.4066 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:34:00.0529 Info Message Template Auto Format enabled
+2020-12-20 17:34:00.0750 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:34:00.1692 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:34:00.2030 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:34:00.2157 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:34:00.2870 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:40:35.0534 Info Shutdown() called. Logger closing...
+2020-12-20 17:40:35.0534 Info Closing old configuration.
+2020-12-20 17:40:35.0624 Info Logger has been closed down.
+2020-12-20 17:40:35.0624 Info AppDomain Shutting down. Logger closing...
+2020-12-20 17:40:35.0624 Info Logger has been shut down.
+2020-12-20 17:40:51.8976 Info Message Template Auto Format enabled
+2020-12-20 17:40:51.9162 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:40:51.9732 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:40:51.9814 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:40:51.9814 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:40:52.0311 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:42:32.8805 Info Message Template Auto Format enabled
+2020-12-20 17:42:32.8991 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:42:32.9607 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:42:32.9705 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:42:32.9705 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:42:33.0396 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:45:15.5056 Info Message Template Auto Format enabled
+2020-12-20 17:45:15.5228 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:45:15.5992 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:45:15.6288 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:45:15.6397 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:45:15.7046 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:46:32.5991 Info Message Template Auto Format enabled
+2020-12-20 17:46:32.6194 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:46:32.6981 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:46:32.6981 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:46:32.7216 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:46:32.7809 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:47:45.8407 Info Shutdown() called. Logger closing...
+2020-12-20 17:47:45.8407 Info Closing old configuration.
+2020-12-20 17:47:45.8407 Info Logger has been closed down.
+2020-12-20 17:47:45.8569 Info AppDomain Shutting down. Logger closing...
+2020-12-20 17:47:45.8569 Info Logger has been shut down.
+2020-12-20 17:50:31.2657 Info Message Template Auto Format enabled
+2020-12-20 17:50:31.2850 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:50:31.3470 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:50:31.3559 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:50:31.3559 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:50:31.4135 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:51:10.5451 Info Message Template Auto Format enabled
+2020-12-20 17:51:10.5699 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:51:10.6308 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:51:10.6405 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:51:10.6405 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:51:10.7006 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:55:41.0524 Info Message Template Auto Format enabled
+2020-12-20 17:55:41.0724 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:55:41.1596 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:55:41.1726 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:55:41.1852 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:55:41.2436 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 17:57:28.5517 Info Message Template Auto Format enabled
+2020-12-20 17:57:28.5697 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 17:57:28.6574 Info Adding target FileTarget(Name=allfile)
+2020-12-20 17:57:28.6711 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 17:57:28.6816 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 17:57:28.7331 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 18:29:27.8408 Info Message Template Auto Format enabled
+2020-12-20 18:29:27.8604 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 18:29:27.9827 Info Adding target FileTarget(Name=allfile)
+2020-12-20 18:29:27.9827 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 18:29:28.0034 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 18:29:28.0615 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 18:37:31.0208 Info Message Template Auto Format enabled
+2020-12-20 18:37:31.0344 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 18:37:31.0963 Info Adding target FileTarget(Name=allfile)
+2020-12-20 18:37:31.1106 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 18:37:31.1191 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 18:37:31.1637 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 18:41:33.3260 Info Message Template Auto Format enabled
+2020-12-20 18:41:33.3473 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 18:41:33.4576 Info Adding target FileTarget(Name=allfile)
+2020-12-20 18:41:33.4726 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 18:41:33.4855 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 18:41:33.5474 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 18:46:02.5373 Info Message Template Auto Format enabled
+2020-12-20 18:46:02.5482 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 18:46:02.6168 Info Adding target FileTarget(Name=allfile)
+2020-12-20 18:46:02.6261 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 18:46:02.6401 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 18:46:02.7171 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 19:16:31.1817 Info Message Template Auto Format enabled
+2020-12-20 19:16:31.1998 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 19:16:31.2808 Info Adding target FileTarget(Name=allfile)
+2020-12-20 19:16:31.2928 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 19:16:31.2928 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 19:16:31.3621 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 19:19:50.5084 Info Message Template Auto Format enabled
+2020-12-20 19:19:50.5351 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 19:19:50.6121 Info Adding target FileTarget(Name=allfile)
+2020-12-20 19:19:50.6241 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 19:19:50.6241 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 19:19:50.6976 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 19:22:15.8325 Info Message Template Auto Format enabled
+2020-12-20 19:22:15.8450 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 19:22:15.9149 Info Adding target FileTarget(Name=allfile)
+2020-12-20 19:22:15.9251 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 19:22:15.9251 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 19:22:15.9770 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 19:37:19.0091 Info Message Template Auto Format enabled
+2020-12-20 19:37:19.0263 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 19:37:19.0991 Info Adding target FileTarget(Name=allfile)
+2020-12-20 19:37:19.1101 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 19:37:19.1207 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 19:37:19.1909 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 19:51:05.5234 Info Message Template Auto Format enabled
+2020-12-20 19:51:05.5413 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 19:51:05.6251 Info Adding target FileTarget(Name=allfile)
+2020-12-20 19:51:05.6370 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 19:51:05.6370 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 19:51:05.7230 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 19:55:25.3912 Info Message Template Auto Format enabled
+2020-12-20 19:55:25.4186 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 19:55:25.4892 Info Adding target FileTarget(Name=allfile)
+2020-12-20 19:55:25.4996 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 19:55:25.5097 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 19:55:25.5626 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 20:06:01.7056 Info Message Template Auto Format enabled
+2020-12-20 20:06:01.7244 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 20:06:01.8102 Info Adding target FileTarget(Name=allfile)
+2020-12-20 20:06:01.8102 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 20:06:01.8303 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 20:06:01.9009 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 20:18:55.2959 Info Message Template Auto Format enabled
+2020-12-20 20:18:55.3181 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 20:18:55.3954 Info Adding target FileTarget(Name=allfile)
+2020-12-20 20:18:55.4123 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 20:18:55.4212 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 20:18:55.4759 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 20:19:26.4018 Info Message Template Auto Format enabled
+2020-12-20 20:19:26.4211 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 20:19:26.5029 Info Adding target FileTarget(Name=allfile)
+2020-12-20 20:19:26.5137 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 20:19:26.5137 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 20:19:26.5776 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config
+2020-12-20 20:38:45.0684 Info Message Template Auto Format enabled
+2020-12-20 20:38:45.0844 Info Loading assembly: NLog.Web.AspNetCore
+2020-12-20 20:38:45.1579 Info Adding target FileTarget(Name=allfile)
+2020-12-20 20:38:45.1679 Info Adding target FileTarget(Name=ownlog)
+2020-12-20 20:38:45.1679 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2020-12-20 20:38:45.2316 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\ShowingAds\ShowingAds.WebAssembly\Server\bin\Debug\netcoreapp3.1\nlog.config

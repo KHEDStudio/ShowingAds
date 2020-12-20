@@ -1,0 +1,87 @@
+﻿@using System.Threading
+@using Blazored.Modal.Services
+@using ShowingAds.CoreLibrary.Enums
+@using ShowingAds.WebAssembly.Client.Components.Modals
+@inject IModalService Modal
+
+<div class="card">
+    <div class="card-body text-center">
+        <h2 class="card-title text-uppercase text-muted">Текущее время</h2>
+        <h1 id="current-time" class="card-text">@CurrentTime.ToString("dd.MM.yyyy HH:mm:ss")</h1>
+        <div class="card-body text-center mt-2">
+            <h2 class="card-title text-uppercase text-muted">учетная запись:</h2>
+            <h3 class="card-text">Логин: @Container.User.Name</h3>
+            <h3 class="card-text">Email: @Container.User.MailAddress.Address</h3>
+            @if (Container.User.Role == UserRole.User)
+            {
+                <button href="../control_panel/workers/" class="btn btn-outline-success ajax-all-workers ml-2 mt-2">Работники</button>
+                <button href="../control_panel/contents/" class="btn btn-outline-primary ajax-all-content ml-2 mt-2" @onclick="OnContentModal">Альтернативный контент</button>
+            }
+            <button href="../control_panel/clients/" class="btn btn-outline-primary ajax-all-clients ml-2 mt-2" @onclick="OnClientModal">Клиенты</button>
+            <button href="../control_panel/devices/" class="btn btn-outline-primary ajax-all-devices ml-2 mt-2" @onclick="OnDeviceModal">Приставки</button>
+            <button class="btn btn-outline-warning ml-2 mt-2" onclick="openAjaxPopup('../account/change_password/', false, false, false, false, false)">Изменить пароль</button>
+            <button class="btn btn-outline-warning ml-2 mt-2" onclick="openAjaxPopup('../account/change_email/', false, false, false, false, false)">Изменить Email</button>
+            <button class="btn btn-outline-danger ml-2 mt-2" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public AppContainer Container { get; set; }
+
+    private Timer _timer { get; set; }
+    public DateTime CurrentTime { get; set; } = DateTime.Now;
+
+    protected override Task OnInitializedAsync()
+    {
+        _timer = new Timer(async obj =>
+        {
+            CurrentTime = DateTime.Now;
+            await InvokeAsync(() => StateHasChanged());
+        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        return base.OnInitializedAsync();
+    }
+
+    private void OnContentModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<ContentsModal>("Альтернативный контент", parameters, options);
+    }
+
+    private void OnClientModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<ClientsModal>("Клиенты", parameters, options);
+    }
+
+    private void OnDeviceModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal collection-size"
+        };
+
+        Modal.Show<DevicesModal>("Устройства", parameters, options);
+    }
+}

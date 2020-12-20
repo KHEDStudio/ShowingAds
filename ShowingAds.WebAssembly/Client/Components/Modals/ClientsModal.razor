@@ -1,0 +1,83 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using ShowingAds.WebAssembly.Client.Components.Forms
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<CascadingValue Value="Container">
+    <div class="m-1 p-1">
+        @if (_clients == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            <div class="card text-center plus mb-1" @onclick="e => CreateOrUpdateClient()">
+                <i class="fas fa-plus fa-5x"></i>
+            </div>
+            @foreach (var client in _clients)
+            {
+                <AdvertisingClientCard AdvertisingClient="client" DeleteClientCallback="DeleteClient" UpdateClientCallback="CreateOrUpdateClient" />
+            }
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+
+    private IEnumerable<AdvertisingClient> _clients { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        return base.OnInitializedAsync();
+    }
+
+    private void CreateOrUpdateClient(AdvertisingClient client = default)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Container", Container);
+        parameters.Add("Client", client);
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal"
+        };
+
+        Modal.Show<ClientForm>("Client", parameters, options);
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private async void OnUpdate()
+    {
+        _clients = await Container.AdvertisingClientManager.GetCollection(x => true);
+        _clients = _clients.OrderBy(x => x.Name);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    private async void DeleteClient(Guid client)
+    {
+        var options = new ModalOptions()
+        {
+            HideHeader = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal confirm-size"
+        };
+
+        var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
+        var result = await formModel.Result;
+        if (result.Cancelled == false)
+        {
+            await Container.AdvertisingClientManager.TryDelete(client);
+        }
+    }
+}

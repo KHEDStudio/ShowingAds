@@ -1,0 +1,100 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using ShowingAds.CoreLibrary.Enums;
+using ShowingAds.CoreLibrary.Models.Database;
+using ShowingAds.CoreLibrary.Models.States;
+using ShowingAds.DevicesService.BusinessLayer;
+using ShowingAds.DevicesService.BusinessLayer.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+namespace ShowingAds.DevicesService.Controllers
+{
+    [Route("[controller]")]
+    [ApiController]
+    public class DeviceController : ControllerBase
+    {
+        private DeviceManager _manager => DeviceManager.GetInstance();
+        private ILogger<DeviceController> _logger { get; }
+
+        public DeviceController(ILogger<DeviceController> logger) => _logger = logger;
+
+        [HttpGet("channel")]
+        public async Task<ActionResult> GetChannel()
+        {
+            _logger.LogInformation($"Device {HttpContext.User.Identity.Name} -> {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
+            var isSuccess = Guid.TryParse(HttpContext.User.Identity.Name, out var deviceId);
+            if (isSuccess)
+            {
+                var (_isSuccess, device) = await _manager.TryGet(deviceId);
+                if (_isSuccess)
+                {
+                    if (device.ChannelId == Guid.Empty)
+                        return StatusCode(StatusCodes.Status204NoContent);
+                    var channelJson = await _manager.GetChannelJson(device.ChannelId);
+                    return StatusCode(StatusCodes.Status200OK, channelJson);
+                }
+            }
+            return StatusCode(StatusCodes.Status404NotFound);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetDevices()
+        {
+            _logger.LogInformation($"Get devices {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
+            var devices = await _manager.GetCollection(x => true);
+            var json = JsonConvert.SerializeObject(devices);
+            return StatusCode(StatusCodes.Status200OK, json);
+        }
+
+        [HttpPost("status")]
+        public async Task<ActionResult> SetDeviceStatus([FromQuery] DeviceStatus status, Guid device)
+        {
+            _logger.LogInformation($"Set status device {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
+            var isSuccess = await _manager.SetDeviceStatus(device, status);
+            if (isSuccess)
+                return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPost("content")]
+        public async Task<ActionResult> SetContentCount([FromQuery] int count)
+        {
+            _logger.LogInformation($"Set content count {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
+            var isSuccess = Guid.TryParse(HttpContext.User.Identity.Name, out var deviceId);
+            if (isSuccess)
+            {
+                isSuccess = await _manager.SetTotalContentVideos(deviceId, count);
+                if (isSuccess)
+                    return StatusCode(StatusCodes.Status200OK);
+            }
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> PutDevice([FromBody] Device device)
+        {
+            _logger.LogInformation($"Put device ({device.Id}) {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
+            var isSuccess = await _manager.TryUpdateDevice(device);
+            if (isSuccess)
+                return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status400BadRequest);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteDevice([FromQuery] Guid device)
+        {
+            _logger.LogInformation($"Delete device ({device}) {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
+            var (isSuccess, _) = await _manager.TryDelete(device);
+            if (isSuccess)
+                return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status404NotFound);
+        }
+    }
+}

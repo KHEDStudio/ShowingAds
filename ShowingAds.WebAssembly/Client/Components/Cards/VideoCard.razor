@@ -1,0 +1,17 @@
+﻿@using ShowingAds.CoreLibrary.Interfaces
+
+<div class="card p-2 mt-1">
+    <button type="button" class="close float-right" @onclick="() => OnDeleteCallback.InvokeAsync(Video.GetKey())">
+        <i class="fas fa-times"></i>
+    </button>
+    <video controls preload="metadata" class="img-fluid rounded">
+        <source src="http://192.168.1.66:3666/video?video=@Video.GetKey()" />
+    </video>
+</div>
+
+@code {
+    [Parameter]
+    public IModel<Guid> Video { get; set; }
+    [Parameter]
+    public EventCallback<Guid> OnDeleteCallback { get; set; }
+}

@@ -1,0 +1,45 @@
+﻿@using Tewr.Blazor.FileReader
+@using ShowingAds.CoreLibrary.Models.Database
+@inject IFileReaderService fileReaderService
+
+<EditForm Model="Content" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Название</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Content.Name" />
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Описание</span>
+        </div>
+        <InputText Class="form-control" placeholder="..." @bind-Value="Content.Description" />
+    </div>
+    <button type="submit" class="btn btn-primary float-right">Отправить</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Content Content { get; set; }
+    [CascadingParameter]
+    public BlazoredModalInstance BlazoredModal { get; set; }
+
+    protected override Task OnParametersSetAsync()
+    {
+        if (Content == default)
+            Content = new Content(Guid.NewGuid(), Container.User.Name,
+                string.Empty, string.Empty, Container.User.Id);
+        return base.OnParametersSetAsync();
+    }
+
+    private async Task OnSubmit()
+    {
+        await Container.ContentManager.TryAddOrUpdate(Content.Id, Content);
+        await BlazoredModal.Close();
+    }
+}

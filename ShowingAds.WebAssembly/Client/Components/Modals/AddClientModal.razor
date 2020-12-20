@@ -1,0 +1,56 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<CascadingValue Value="Container">
+    <div class="m-1 p-1">
+        @if (_сlients == null)
+        {
+            <p>Loading!!!</p>
+        }
+        else
+        {
+            @foreach (var client in _сlients)
+            {
+                <AddClientCard @key="client.Id" Client="client" OnAddClient="AddClient" />
+            }
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public Channel Channel { get; set; }
+
+    private IEnumerable<AdvertisingClient> _сlients { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        OnUpdate();
+        Container.ChannelUpdated += OnUpdate;
+        return base.OnInitializedAsync();
+    }
+
+    private async void OnUpdate()
+    {
+        var connections = await Container.ClientChannelManager.GetCollection(x => x.ChannelId == Channel.Id);
+        _сlients = await Container.AdvertisingClientManager.GetCollection(x => connections.Any(y => y.AdvertisingClientId == x.Id) == false);
+        _сlients = _сlients.OrderBy(x => x.Name);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private async void AddClient(AdvertisingClient client)
+    {
+        var connection = new ClientChannel(Guid.NewGuid(), TimeSpan.Zero, Channel.Id, client.Id, default);
+        await Container.ClientChannelManager.TryAddOrUpdate(connection.Id, connection);
+    }
+}
