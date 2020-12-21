@@ -31,9 +31,15 @@ namespace ShowingAds.WebAssembly.Client
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddFileReaderService();
 
+#if DEBUG
             Settings.ServerPath = new Uri("http://192.168.1.66:63880/");
             Settings.NotifyPath = new Uri("http://192.168.1.66:3669/notify/");
             Settings.FileServicePath = new Uri("http://192.168.1.66:3666/");
+#else
+            Settings.ServerPath = new Uri("http://31.184.219.123:63880/");
+            Settings.NotifyPath = new Uri("http://31.184.219.123:3669/notify/");
+            Settings.FileServicePath = new Uri("http://31.184.219.123:3666/");
+#endif
 
             await builder.Build().RunAsync();
         }

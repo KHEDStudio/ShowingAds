@@ -47,6 +47,7 @@ namespace ShowingAds.FilesService.Controllers
             var guid = Guid.NewGuid();
             var extension = Path.GetExtension(file.FileName);
             string filePath = $"{_logoDirectory}/{guid}{extension}";
+            _logger.LogInformation($"Save logo path: {filePath}");
             try
             {
                 if (Directory.Exists(_logoDirectory) == false)
@@ -59,7 +60,7 @@ namespace ShowingAds.FilesService.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.LogError(ex.ToString());
                 var _file = new FileInfo(filePath);
                 if (_file.Exists)
                     _file.Delete();

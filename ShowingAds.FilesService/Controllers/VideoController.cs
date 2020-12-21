@@ -47,6 +47,7 @@ namespace ShowingAds.FilesService.Controllers
             var guid = Guid.NewGuid();
             var extension = Path.GetExtension(file.FileName);
             string filePath = $"{_videoDirectory}/{guid}{extension}";
+            _logger.LogInformation($"Save video path: {filePath}");
             try
             {
                 if (Directory.Exists(_videoDirectory) == false)
@@ -59,7 +60,7 @@ namespace ShowingAds.FilesService.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.LogError(ex.ToString());
                 var _file = new FileInfo(filePath);
                 if (_file.Exists)
                     _file.Delete();
@@ -69,12 +70,9 @@ namespace ShowingAds.FilesService.Controllers
 
         private long GetDurationVideo(string filePath)
         {
+            _logger.LogInformation($"Get duration video by path: {filePath}");
             var ffProbe = new NReco.VideoInfo.FFProbe();
-#if DEBUG
-            var videoInfo = ffProbe.GetMediaInfo("/app/" + filePath);
-#else
             var videoInfo = ffProbe.GetMediaInfo(filePath);
-#endif
             return videoInfo.Duration.Ticks;
         }
 

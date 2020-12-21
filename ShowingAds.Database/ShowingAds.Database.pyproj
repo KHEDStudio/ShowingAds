@@ -59,9 +59,12 @@
   <ItemGroup>
     <Folder Include="DatabaseApi\" />
     <Folder Include="DatabaseApi\migrations\" />
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="ShowingAdsDatabase\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
