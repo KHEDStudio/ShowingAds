@@ -55,7 +55,7 @@ else
                 UpdateFileName(video);
                 var (isSuccess, response) = await UploadVideo(video);
                 counter++;
-                _uploaderCard.OnProgressUpdated((double)counter / (double)videos.Count() * 100);
+                _uploaderCard.OnProgressTotalUpdated((double)counter / (double)videos.Count() * 100);
                 if (isSuccess)
                 {
                     var newValue = new ContentVideo(response.FileGuid, response.Duration, CollectionId);
@@ -75,7 +75,7 @@ else
                 UpdateFileName(video);
                 var (isSuccess, response) = await UploadVideo(video);
                 counter++;
-                _uploaderCard.OnProgressUpdated((double)counter / (double)videos.Count() * 100);
+                _uploaderCard.OnProgressTotalUpdated((double)counter / (double)videos.Count() * 100);
                 if (isSuccess)
                 {
                     var newValue = new AdvertisingVideo(response.FileGuid, response.Duration, CollectionId);
@@ -97,6 +97,7 @@ else
         {
             _uploader = new VideoUploader();
             _uploader.UploadFailed += UploadFailed;
+            _uploader.OnProgressUploading += async progress => await _uploaderCard.OnProgressUpdated(progress);
         }
         return await _uploader.TryUploadAsync(video, int.MaxValue);
     }

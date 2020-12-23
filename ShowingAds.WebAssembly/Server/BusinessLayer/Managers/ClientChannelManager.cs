@@ -1,5 +1,6 @@
 ﻿using Nito.AsyncEx;
 using NLog;
+using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.DataProviders;
 using ShowingAds.CoreLibrary.Managers;
 using ShowingAds.CoreLibrary.Models.Database;
@@ -20,14 +21,14 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
         private ClientChannelManager() : base(new WebProvider<Guid, ClientChannel>(Settings.ClientChannelsPath))
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            UpdateOrInitializeModels(default, default);
+            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize ClientChannels...");
-            base.UpdateOrInitializeModels(sender, e);
-            _syncTimer.Start();
+            _logger.Info("Update or initialize ClientChannels...");
+            base.UpdateOrInitializeModels();
         }
 
         public async Task<IEnumerable<ClientChannel>> GetPermittedModels(List<int> users)

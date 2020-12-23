@@ -58,7 +58,10 @@ namespace ShowingAds.CoreLibrary.Models.Database
 
         public object Clone()
         {
-            return MemberwiseClone();
+            var other = (Channel)MemberwiseClone();
+            other.WorkersId = new List<int>(WorkersId);
+            other.ContentsId = new List<Guid>(ContentsId);
+            return other;
         }
 
         public Guid GetKey() => Id;

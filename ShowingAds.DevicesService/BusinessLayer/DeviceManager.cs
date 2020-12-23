@@ -28,10 +28,10 @@ namespace ShowingAds.DevicesService.BusinessLayer
         {
             _logger = LogManager.GetCurrentClassLogger();
             _syncLock = new AsyncLock();
-            UpdateOrInitializeModels(default, default);
+            UpdateOrInitializeModels();
         }
 
-        protected async override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected async override void UpdateOrInitializeModels()
         {
             _logger.Info("Initialize devices...");
             using (await _mutex.LockAsync())

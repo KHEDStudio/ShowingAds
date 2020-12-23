@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShowingAds.CoreLibrary;
+using ShowingAds.WebAssembly.Server.BusinessLayer.Managers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +22,14 @@ namespace ShowingAds.WebAssembly.Server
             Settings.DjangoPath = configuration.GetValue<Uri>("DjangoPath");
             Settings.DevicesServicePath = configuration.GetValue<Uri>("DevicesServicePath");
             Settings.NotifyPath = configuration.GetValue<Uri>("NotifyPath");
+            Task.Run(InitEventBus);
+        }
+
+        private void InitEventBus()
+        {
+            var eventBus = EventBus.GetInstance();
+            var manager = UserManager.GetInstance();
+            eventBus.ManagersUpdated += manager.NotifyAll;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

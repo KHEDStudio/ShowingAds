@@ -1,5 +1,6 @@
 ﻿using Nito.AsyncEx;
 using NLog;
+using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.DataProviders;
 using ShowingAds.CoreLibrary.Managers;
 using ShowingAds.CoreLibrary.Models.Database;
@@ -20,14 +21,14 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
         private UserManager() : base(new WebProvider<int, User>(Settings.UsersPath))
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            UpdateOrInitializeModels(default, default);
+            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize Users...");
-            base.UpdateOrInitializeModels(sender, e);
-            _syncTimer.Start();
+            _logger.Info("Update or initialize Users...");
+            base.UpdateOrInitializeModels();
         }
 
         public async Task<IEnumerable<User>> GetPermittedModels(List<int> users) =>

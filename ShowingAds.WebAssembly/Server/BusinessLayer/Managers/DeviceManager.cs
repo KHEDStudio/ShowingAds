@@ -1,5 +1,6 @@
 ﻿using Nito.AsyncEx;
 using NLog;
+using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.DataProviders;
 using ShowingAds.CoreLibrary.Managers;
 using ShowingAds.CoreLibrary.Models.States;
@@ -20,13 +21,14 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
         private DeviceManager() : base(new WebProvider<Guid, DeviceState>(Settings.DevicesPath))
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            UpdateOrInitializeModels(default, default);
+            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize Devices...");
-            base.UpdateOrInitializeModels(sender, e);
+            _logger.Info("Update or initialize Devices...");
+            base.UpdateOrInitializeModels();
         }
 
         public async Task<IEnumerable<DeviceState>> GetPermittedModels(List<int> users) =>
@@ -49,9 +51,8 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
                 {
                     _models.Add(newDevice.Id, newDevice);
                 }
+                NotifyUsers(device);
             }
-            var users = await _parser.GetUsers(device);
-            Notify(users.ToList());
         }
     }
 }

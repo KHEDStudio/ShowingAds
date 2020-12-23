@@ -11,6 +11,15 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers.Abstract
     {
         private ModelOwnerParser() { }
 
+        public async Task<IEnumerable<Guid>> GetSubscribers()
+        {
+            var userManager = UserManager.GetInstance();
+            var deviceManager = DeviceManager.GetInstance();
+            var users = await userManager.GetCollection(x => true);
+            var devices = await deviceManager.GetCollection(x => true);
+            return users.Select(x => x.Id.ToGuid()).Union(devices.Select(x => x.Id));
+        }
+
         public async Task<IEnumerable<Guid>> GetSubscribers(object model)
         {
             var users = await GetUsers(model);

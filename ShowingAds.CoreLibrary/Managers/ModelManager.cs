@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace ShowingAds.CoreLibrary.Managers
 {
@@ -18,19 +17,15 @@ namespace ShowingAds.CoreLibrary.Managers
         protected AsyncLock _mutex { get; }
         protected IDataProvider<TKey, TValue> _provider { get; set; }
         protected Dictionary<TKey, TValue> _models { get; set; }
-        protected Timer _syncTimer { get; set; }
 
         protected ModelManager(IDataProvider<TKey, TValue> provider)
         {
             _mutex = new AsyncLock();
             _provider = provider;
             _models = new Dictionary<TKey, TValue>();
-            _syncTimer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds);
-            _syncTimer.Elapsed += UpdateOrInitializeModels;
-            _syncTimer.AutoReset = false;
         }
 
-        protected async virtual void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected async virtual void UpdateOrInitializeModels()
         {
             using (await _mutex.LockAsync())
             {
@@ -78,6 +73,7 @@ namespace ShowingAds.CoreLibrary.Managers
             if (deleteResult)
             {
                 _models.Remove(model.Key);
+                EventBus.GetInstance().UpdateManagers();
                 return (true, model.Value);
             }
             else return (false, model.Value);

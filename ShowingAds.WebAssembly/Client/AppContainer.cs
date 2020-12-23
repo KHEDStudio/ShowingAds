@@ -16,6 +16,7 @@ namespace ShowingAds.WebAssembly.Client
 
         public User User { get; set; }
         private HubConnection _notifyHub { get; }
+        private Guid _lastMessageUUID { get; set; }
 
         public ChannelManager ChannelManager { get; private set; }
         public UserManager UserManager { get; private set; }
@@ -36,7 +37,11 @@ namespace ShowingAds.WebAssembly.Client
             _notifyHub.On<Guid>("ChannelUpdated", async (messageUUID) =>
             {
                 await _notifyHub.InvokeAsync("MessageUUID", messageUUID);
-                await ChannelUpdate();
+                if (_lastMessageUUID != messageUUID)
+                {
+                    _lastMessageUUID = messageUUID;
+                    await ChannelUpdate();
+                }
             });
             ChannelManager = ChannelManager.GetInstance();
             UserManager = UserManager.GetInstance();
@@ -47,7 +52,7 @@ namespace ShowingAds.WebAssembly.Client
             AdvertisingVideoManager = AdvertisingVideoManager.GetInstance();
             OrderManager = OrderManager.GetInstance();
             DeviceManager = DeviceManager.GetInstance();
-            var _ = ChannelUpdate();
+            Task.Run(ChannelUpdate);
         }
 
         private async Task ChannelUpdate()

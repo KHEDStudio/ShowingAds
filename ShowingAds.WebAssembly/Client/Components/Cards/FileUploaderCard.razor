@@ -9,6 +9,9 @@
     <div class="progress mr-2 ml-2 mb-2">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@_progress" aria-valuemin="0" aria-valuemax="100" style="width: @((int)_progress)%;">@_progress%</div>
     </div>
+    <div class="progress mr-2 ml-2 mb-2">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@_totalProgress" aria-valuemin="0" aria-valuemax="100" style="width: @((int)_totalProgress)%;">@_totalProgress%</div>
+    </div>
 </div>
 
 @code {
@@ -19,6 +22,7 @@
 
     private string _fileName { get; set; }
     private double _progress { get; set; } = 0;
+    private double _totalProgress { get; set; } = 0;
 
     public async Task OnStartUploadFile(string fileName)
     {
@@ -28,7 +32,13 @@
 
     public async Task OnProgressUpdated(double progress)
     {
-        _progress = progress;
+        _progress = Math.Round(progress, 2);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    public async Task OnProgressTotalUpdated(double progress)
+    {
+        _totalProgress = Math.Round(progress, 2);
         await InvokeAsync(() => StateHasChanged());
     }
 }

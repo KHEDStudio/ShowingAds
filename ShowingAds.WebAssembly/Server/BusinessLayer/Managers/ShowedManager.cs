@@ -1,5 +1,6 @@
 ﻿using Nito.AsyncEx;
 using NLog;
+using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.DataProviders;
 using ShowingAds.CoreLibrary.Managers;
 using ShowingAds.CoreLibrary.Models.Database;
@@ -14,20 +15,19 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
 {
     public sealed class ShowedManager : NotifyModelManager<Guid, Showed, ShowedManager>
     {
-        public event Action<Guid> ShowedUpdated;
         private Logger _logger { get; }
 
         private ShowedManager() : base(new WebProvider<Guid, Showed>(Settings.ShowedsPath))
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            UpdateOrInitializeModels(default, default);
+            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize Showeds...");
-            base.UpdateOrInitializeModels(sender, e);
-            _syncTimer.Start();
+            _logger.Info("Update or initialize Showeds...");
+            base.UpdateOrInitializeModels();
         }
     }
 }

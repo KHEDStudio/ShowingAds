@@ -15,6 +15,7 @@ namespace ShowingAds.WebAssembly.Client.BusinessLayer.FileUploaders.Abstract
     public abstract class FileUploader : IFileUploader
     {
         public event Action<Exception> UploadFailed;
+        public event Action<double> OnProgressUploading;
 
         protected abstract Uri _uploadUri { get; }
 
@@ -50,11 +51,17 @@ namespace ShowingAds.WebAssembly.Client.BusinessLayer.FileUploaders.Abstract
 
         private async Task<FileUploadResponse> StartUploadAsync(Stream stream, IFileInfo fileInfo)
         {
-            using (var httpClient = new HttpClient())
+            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(10) })
             {
                 var content = new MultipartFormDataContent();
                 content.Add(new StreamContent(stream), "file", fileInfo.Name);
-                var response = await httpClient.PostAsync(_uploadUri, content);
+                var httpContent = new ProgressableStreamContent(content, (s, t) =>
+                {
+                    var progress = s / (double)t * 100;
+                    Console.WriteLine($"Uploading: {progress}%");
+                    OnProgressUploading?.Invoke(progress);
+                });
+                var response = await httpClient.PostAsync(_uploadUri, httpContent);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();

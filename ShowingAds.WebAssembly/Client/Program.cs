@@ -29,7 +29,7 @@ namespace ShowingAds.WebAssembly.Client
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationUserProvider>();
             builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddFileReaderService();
+            builder.Services.AddFileReaderService(o => o.UseWasmSharedBuffer = true);
 
 #if DEBUG
             Settings.ServerPath = new Uri("http://192.168.1.66:63880/");

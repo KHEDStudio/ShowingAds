@@ -33,23 +33,26 @@ namespace ShowingAds.NotifyService.BusinessLayer
 
         private async void SendNotify(NotifySender sender)
         {
-            _logger.LogInformation("Sending notification...");
             try
             {
-                var uuid = Guid.Empty;
-                do
+                lock (_syncUUID)
+                    LastMessageUUID = Guid.Empty;
+                while (true)
                 {
+                    _logger.LogInformation("Sending notification...");
                     await sender.SendAsync(Clients);
                     await Task.Delay(200);
                     lock (_syncUUID)
-                        uuid = LastMessageUUID;
-                } while (sender.MessageUUID != uuid);
+                        if (sender.MessageUUID == LastMessageUUID)
+                            break;
+                }
+                _logger.LogInformation("Notification sent");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex.ToString());
+                _logger.LogInformation("Notification didn't send");
             }
-            _logger.LogInformation("Notification sended");
         }
 
         public void MessageUUID(Guid uuid)

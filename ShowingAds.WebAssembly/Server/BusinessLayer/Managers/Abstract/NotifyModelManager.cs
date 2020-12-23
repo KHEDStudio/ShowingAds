@@ -25,9 +25,7 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers.Abstract
         {
             var isSuccess = await base.TryAddOrUpdate(key, newValue);
             if (isSuccess)
-            {
-                var _ = StartNotifying(newValue);
-            }
+                NotifySubscribers(newValue);
             return isSuccess;
         }
 
@@ -35,9 +33,7 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers.Abstract
         {
             var (isSuccess, model) = await base.TryDelete(key);
             if (isSuccess)
-            {
-                var _ = StartNotifying(model);
-            }
+                NotifySubscribers(model);
             return (isSuccess, model);
         }
 
@@ -45,19 +41,29 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers.Abstract
         {
             var (isSuccess, model) = await base.TryDelete(filter);
             if (isSuccess)
-            {
-                var _ = StartNotifying(model);
-            }
+                NotifySubscribers(model);
             return (isSuccess, model);
         }
 
-        private async Task StartNotifying(TValue model)
+        protected async Task NotifySubscribers(TValue model)
         {
             var subscribers = await _parser.GetSubscribers(model);
-            Notify(subscribers.ToList());
+            await Notify(subscribers);
         }
 
-        public async Task Notify(List<Guid> subscribers)
+        protected async Task NotifyUsers(TValue model)
+        {
+            var users = await _parser.GetUsers(model);
+            await Notify(users);
+        }
+
+        public async void NotifyAll()
+        {
+            var subscribers = await _parser.GetSubscribers();
+            await Notify(subscribers);
+        }
+
+        private async Task Notify(IEnumerable<Guid> subscribers)
         {
             foreach (var subscriber in subscribers)
             {

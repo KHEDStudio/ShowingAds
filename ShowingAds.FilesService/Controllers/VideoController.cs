@@ -73,7 +73,9 @@ namespace ShowingAds.FilesService.Controllers
             _logger.LogInformation($"Get duration video by path: {filePath}");
             var ffProbe = new NReco.VideoInfo.FFProbe();
             var videoInfo = ffProbe.GetMediaInfo(filePath);
-            return videoInfo.Duration.Ticks;
+            var ticks = videoInfo.Duration.Ticks;
+            _logger.LogInformation($"Duration video by path {filePath} is {ticks}");
+            return ticks;
         }
 
         [HttpDelete]

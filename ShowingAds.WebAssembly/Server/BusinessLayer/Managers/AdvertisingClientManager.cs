@@ -1,5 +1,6 @@
 ﻿using Nito.AsyncEx;
 using NLog;
+using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.DataProviders;
 using ShowingAds.CoreLibrary.Managers;
 using ShowingAds.CoreLibrary.Models.Database;
@@ -20,14 +21,14 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
         private AdvertisingClientManager() : base(new WebProvider<Guid, AdvertisingClient>(Settings.AdvertisingClientsPath))
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            UpdateOrInitializeModels(default, default);
+            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize AdvertisingClients...");
-            base.UpdateOrInitializeModels(sender, e);
-            _syncTimer.Start();
+            _logger.Info("Update or initialize AdvertisingClients...");
+            base.UpdateOrInitializeModels();
         }
 
         public async Task<IEnumerable<AdvertisingClient>> GetPermittedModels(List<int> users) =>

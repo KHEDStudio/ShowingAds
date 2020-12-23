@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Nito.AsyncEx;
 using NLog;
+using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.DataProviders;
 using ShowingAds.CoreLibrary.Managers;
 using ShowingAds.CoreLibrary.Models.Database;
@@ -15,20 +16,19 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
 {
     public sealed class LogManager : NotifyModelManager<Guid, Log, LogManager>
     {
-        public event Action<Guid> LogUpdated;
         private Logger _logger { get; }
 
         private LogManager() : base(new WebProvider<Guid, Log>(Settings.LogsPath))
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            UpdateOrInitializeModels(default, default);
+            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize Logs...");
-            base.UpdateOrInitializeModels(sender, e);
-            _syncTimer.Start();
+            _logger.Info("Update or initialize Logs...");
+            base.UpdateOrInitializeModels();
         }
     }
 }

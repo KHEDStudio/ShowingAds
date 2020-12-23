@@ -143,7 +143,7 @@
             _blue = user.Blue;
         }
         _contents = (await Container.ContentManager.GetCollection(
-            x => Channel.ContentsId.Contains(x.Id))).OrderBy(x => x.Name).ToList();
+            x => Channel.ContentsId.Contains(x.Id))).OrderBy(x => x.Id).ToList();
         _clients = (await Container.ClientChannelManager.GetCollection(
             x => Channel.Id == x.ChannelId)).OrderBy(x => x.Id).ToList();
         _orders = (await Container.OrderManager.GetCollection(

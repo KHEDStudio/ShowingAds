@@ -28,14 +28,14 @@ namespace ShowingAds.NotifyService.BusinessLayer
         {
             _logger = LogManager.GetCurrentClassLogger();
             _syncMutex = new AsyncLock();
-            UpdateOrInitializeModels(default, default);
+            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels(object sender, ElapsedEventArgs e)
+        protected override void UpdateOrInitializeModels()
         {
-            _logger.Info("Initialize manager...");
+            _logger.Info("Initialize client manager...");
             _senders = new BlockingCollection<NotifySender>();
-            Task.Run(async () => await Sender());
+            Task.Run(Sender);
         }
 
         public async Task AddClient(Guid clientId, string connectionId)
