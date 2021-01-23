@@ -14,15 +14,16 @@ namespace ShowingAds.NotifyService.BusinessLayer
         private ILogger<NotifyHub> _logger { get; }
         private IClientManager _manager { get; }
 
-        private Guid LastMessageUUID { get; set; }
-        private readonly object _syncUUID = new object();
+        private Dictionary<Guid, bool> _confirmationReceived { get; set; }
+        private object _syncUUID { get; }
 
         public NotifyHub(ILogger<NotifyHub> logger)
         {
             _logger = logger;
             _manager = ClientManager.GetInstance();
             _manager.Notify += SendNotify;
-            LastMessageUUID = Guid.Empty;
+            _syncUUID = new object();
+            _confirmationReceived = new Dictionary<Guid, bool>();
         }
 
         public void ClientConnectedAsync(Guid clientId)
@@ -35,31 +36,46 @@ namespace ShowingAds.NotifyService.BusinessLayer
         {
             try
             {
+                var random = new Random();
                 lock (_syncUUID)
-                    LastMessageUUID = Guid.Empty;
-                while (true)
+                    _confirmationReceived.Add(sender.MessageUUID, false);
+                for (int i = 1; i <= 10; i++)
                 {
-                    _logger.LogInformation("Sending notification...");
+                    _logger.LogInformation($"Sending notification... Client {sender.ClientUUID} MessageUUID {sender.MessageUUID}");
                     await sender.SendAsync(Clients);
-                    await Task.Delay(200);
+                    await Task.Delay(TimeSpan.FromSeconds(1));
                     lock (_syncUUID)
-                        if (sender.MessageUUID == LastMessageUUID)
+                        if (_confirmationReceived[sender.MessageUUID])
                             break;
                 }
-                _logger.LogInformation("Notification sent");
+                lock (_syncUUID)
+                {
+                    if (_confirmationReceived[sender.MessageUUID] == false)
+                        _logger.LogInformation($"Not response. Client {sender.ClientUUID} MessageUUID {sender.MessageUUID}");
+                    else _logger.LogInformation($"Notification sent. Client {sender.ClientUUID} MessageUUID {sender.MessageUUID}");
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.ToString());
-                _logger.LogInformation("Notification didn't send");
+                _logger.LogInformation($"Notification didn't send. Client {sender.ClientUUID} MessageUUID {sender.MessageUUID}");
+            }
+            finally
+            {
+                lock (_syncUUID)
+                {
+                    _confirmationReceived.Remove(sender.MessageUUID);
+                    _logger.LogInformation($"Notifications left {_confirmationReceived.Count}");
+                }
             }
         }
 
         public void MessageUUID(Guid uuid)
         {
-            _logger.LogInformation("Set last message uuid");
+            _logger.LogInformation($"Set last message uuid {uuid}");
             lock (_syncUUID)
-                LastMessageUUID = uuid;
+                if (_confirmationReceived.ContainsKey(uuid))
+                    _confirmationReceived[uuid] = true;
         }
 
         public override Task OnDisconnectedAsync(Exception exception)

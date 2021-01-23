@@ -84,7 +84,7 @@ class Ads_Client_Channel(models.Model):
     channel = models.ForeignKey('DatabaseApi.Channel', on_delete=models.CASCADE, related_name='ads_clients')
     ads_client = models.ForeignKey('DatabaseApi.Ads_Client', on_delete=models.CASCADE, related_name='ads_channels')
     ads_videos = models.ManyToManyField('DatabaseApi.Ads_Video', blank=True)
-    interval = models.PositiveIntegerField(default=0, blank=False)
+    interval = models.BigIntegerField(default=0, blank=False)
 
 class Ads_Client(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)

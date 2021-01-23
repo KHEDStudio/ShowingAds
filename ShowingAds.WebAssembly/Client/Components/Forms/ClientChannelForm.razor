@@ -1,0 +1,48 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+
+<EditForm Model="Client" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Интервал показа</span>
+        </div>
+        <input type="time" class="form-control" placeholder="00:00" @bind-value="_interval">
+    </div>
+    @if (_isLoading)
+    {
+        <button disabled type="submit" class="btn btn-primary float-right">Загрузка...</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary float-right">Отправить</button>
+    }
+</EditForm>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public ClientChannel Client { get; set; }
+    [CascadingParameter]
+    public BlazoredModalInstance BlazoredModal { get; set; }
+
+    private bool _isLoading { get; set; } = false;
+
+    private DateTime _interval { get; set; }
+
+    private async Task OnSubmit()
+    {
+        _isLoading = true;
+        var (isSuccess, client) = await Container.ClientChannelManager.TryGet(Client.Id);
+        if (isSuccess)
+        {
+            client.Interval = _interval.TimeOfDay;
+            isSuccess = await Container.ClientChannelManager.TryAddOrUpdate(client.Id, client);
+            if (isSuccess)
+                await BlazoredModal.Close(ModalResult.Ok(isSuccess));
+        }
+        _isLoading = false;
+    }
+}

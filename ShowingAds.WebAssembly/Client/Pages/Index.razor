@@ -14,40 +14,40 @@
 
 @if (_channels == null)
 {
-<p>Loading...</p>
+    <p>Loading...</p>
 }
 else
 {
-<CascadingValue Value="Container">
-    <div class="container-fluid mt-3 mb-3">
-        <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
-            <div class="card rounded">
-                <div class="card-body text-center text-uppercase">
-                    <h1 style="font-weight: 900;">панель управления</h1>
+    <CascadingValue Value="Container">
+        <div class="container-fluid mt-3 mb-3">
+            <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
+                <div class="card rounded">
+                    <div class="card-body text-center text-uppercase">
+                        <h1 style="font-weight: 900;">панель управления</h1>
+                    </div>
+                </div>
+            </Animate>
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
+                        <MainInfo />
+                        <InfoPanel />
+                    </Animate>
+                </div>
+                <div class="col-sm">
+                    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
+                        <div class="card text-center plus mb-1" @onclick="e => CreateOrUpdateChannel()">
+                            <i class="fas fa-plus fa-5x"></i>
+                        </div>
+                        @foreach (var channel in _channels)
+                        {
+                            <ChannelCard @key="channel.Id" Channel="channel" UpdateChannelCallback="CreateOrUpdateChannel" DeleteChannelCallback="DeleteChannel" />
+                        }
+                    </Animate>
                 </div>
             </div>
-        </Animate>
-        <div class="row mt-3">
-            <div class="col-sm">
-                <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
-                    <MainInfo />
-                    <InfoPanel />
-                </Animate>
-            </div>
-            <div class="col-sm">
-                <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseOutCubic" Once="true">
-                    <div class="card text-center plus mb-1" @onclick="e => CreateOrUpdateChannel()">
-                        <i class="fas fa-plus fa-5x"></i>
-                    </div>
-                    @foreach (var channel in _channels)
-                        {
-                    <ChannelCard @key="channel.Id" Channel="channel" UpdateChannelCallback="CreateOrUpdateChannel" DeleteChannelCallback="DeleteChannel" />
-                        }
-                </Animate>
-            </div>
         </div>
-    </div>
-</CascadingValue>
+    </CascadingValue>
 }
 
 @code {

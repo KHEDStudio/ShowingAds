@@ -1,0 +1,32 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+
+<div class="card p-2 mt-1">
+    <div class="form-check">
+        @if (IsSelected)
+        {
+            <input class="form-check-input position-static" type="checkbox" checked @onchange="e => OnCheck(e.Value)">
+        }
+        else
+        {
+            <input class="form-check-input position-static" type="checkbox" @onchange="e => OnCheck(e.Value)">
+        }
+    </div>
+    <video controls preload="metadata" class="img-fluid rounded">
+        <source src="http://31.184.219.123:3666/video?video=@Video.Id" />
+    </video>
+</div>
+
+@code {
+    [Parameter]
+    public AdvertisingVideo Video { get; set; }
+    [Parameter]
+    public bool IsSelected { get; set; }
+    [Parameter]
+    public EventCallback<(bool, Guid)> OnSetCallback { get; set; }
+
+    private async void OnCheck(object obj)
+    {
+        var isSelected = Convert.ToBoolean(obj);
+        await OnSetCallback.InvokeAsync((isSelected, Video.Id));
+    }
+}

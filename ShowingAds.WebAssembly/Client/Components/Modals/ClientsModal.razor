@@ -18,7 +18,7 @@
             </div>
             @foreach (var client in _clients)
             {
-                <AdvertisingClientCard AdvertisingClient="client" DeleteClientCallback="DeleteClient" UpdateClientCallback="CreateOrUpdateClient" />
+                <AdvertisingClientCard @key="client.Id" AdvertisingClient="client" DeleteClientCallback="DeleteClient" UpdateClientCallback="CreateOrUpdateClient" />
             }
         }
     </div>

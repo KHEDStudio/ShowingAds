@@ -32,7 +32,7 @@ namespace ShowingAds.NotifyService.Controllers
             if (isSuccess)
             {
                 foreach (var connectionId in connections)
-                    _notifier.AddNotifyTask(new ChannelUpdated(connectionId));
+                    _notifier.AddNotifyTask(new ChannelUpdated(client, connectionId));
                 return StatusCode(StatusCodes.Status200OK);
             } else return StatusCode(StatusCodes.Status404NotFound);
         }

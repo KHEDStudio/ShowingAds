@@ -46,7 +46,7 @@
     {
         var (isSuccess, channel) = await Container.ChannelManager.TryGet(channelId);
         if (isSuccess)
-            return channel.Name;
+            return channel?.Name;
         return string.Empty;
     }
 

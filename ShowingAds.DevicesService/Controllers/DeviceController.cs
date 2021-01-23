@@ -11,8 +11,10 @@ using ShowingAds.DevicesService.BusinessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace ShowingAds.DevicesService.Controllers
 {
@@ -66,6 +68,9 @@ namespace ShowingAds.DevicesService.Controllers
         [HttpPost("content")]
         public async Task<ActionResult> SetContentCount([FromQuery] int count)
         {
+            var filter = RequestsFilter.GetInstance();
+            if (filter.IsBannedDevice(HttpContext.Connection.RemoteIpAddress))
+                return StatusCode(StatusCodes.Status429TooManyRequests);
             _logger.LogInformation($"Set content count {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
             var isSuccess = Guid.TryParse(HttpContext.User.Identity.Name, out var deviceId);
             if (isSuccess)

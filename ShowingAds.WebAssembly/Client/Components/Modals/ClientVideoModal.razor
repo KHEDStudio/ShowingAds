@@ -1,0 +1,61 @@
+﻿@using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Cards
+@using Blazored.Modal.Services
+@inject IModalService Modal
+@implements IDisposable
+
+<CascadingValue Value="Container">
+    @if (_videos == null)
+    {
+        <p>Loading!!!</p>
+    }
+    else
+    {
+        <div class="card-columns p-2">
+            @foreach (var pair in _videos)
+            {
+                <ClientVideoCard @key="pair.Item2.Id" Video="pair.Item2" IsSelected="pair.Item1" OnSetCallback="@OnSetVideo" />
+            }
+        </div>
+    }
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public AppContainer Container { get; set; }
+    [Parameter]
+    public ClientChannel Client { get; set; }
+
+    private IEnumerable<(bool, AdvertisingVideo)> _videos { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Container.ChannelUpdated += OnUpdate;
+        OnUpdate();
+        return base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        Container.ChannelUpdated -= OnUpdate;
+    }
+
+    private async void OnUpdate()
+    {
+        var enabledVideos = (await Container.AdvertisingVideoManager.GetCollection(
+            x => Client.AdvertisingVideosId.Contains(x.Id))).Select(x => (true, x));
+        var videos = (await Container.AdvertisingVideoManager.GetCollection(
+            x => x.AdvertisingClientId == Client.AdvertisingClientId)).Select(x => (false, x));
+        videos = videos.Where(x => enabledVideos.Any(y => y.x.Id == x.x.Id) == false);
+        _videos = enabledVideos.Union(videos).OrderBy(x => x.x.Id);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    private async void OnSetVideo((bool, Guid) pair)
+    {
+        if (pair.Item1)
+            Client.AdvertisingVideosId.Add(pair.Item2);
+        else Client.AdvertisingVideosId.Remove(pair.Item2);
+        await Container.ClientChannelManager.TryAddOrUpdate(Client.Id, Client);
+    }
+}

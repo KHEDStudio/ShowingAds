@@ -1,5 +1,7 @@
 ﻿@using Blazored.Modal.Services
 @using ShowingAds.CoreLibrary.Models.Database
+@using ShowingAds.WebAssembly.Client.Components.Modals
+@using ShowingAds.WebAssembly.Client.Components.Forms 
 @inject IModalService Modal
 @implements IDisposable
 
@@ -7,6 +9,9 @@
     <div class="align-items-center pt-2 pr-2 pl-2">
         <button type="button" class="close float-right" @onclick="e => DeleteClientCallback.InvokeAsync(Client.Id)">
             <i class="fas fa-times"></i>
+        </button>
+        <button type="button" class="close mr-3 float-right" @onclick="() => OnSetInterval()">
+            <i class="fas fa-sliders-h"></i>
         </button>
         <button style="background-color: rgb(@_red, @_green, @_blue)" class="card-text float-left btn" type="button" @onclick="e => OnAdvertisingVideoModal()">
             <h5 class="m-0">@_advertisingClient.Name</h5>
@@ -73,17 +78,29 @@
 
     private void OnAdvertisingVideoModal()
     {
-        //var parameters = new ModalParameters();
-        //parameters.Add("Client", Client);
-        //parameters.Add("Container", Container);
-        //parameters.Add("Channel", Channel);
-        //var options = new ModalOptions()
-        //{
-        //    ContentScrollable = true,
-        //    Animation = ModalAnimation.FadeIn(0.5),
-        //    Class = "blazored-modal videos-size"
-        //};
+        var parameters = new ModalParameters();
+        parameters.Add("Client", Client);
+        parameters.Add("Container", Container);
+        var options = new ModalOptions()
+        {
+            ContentScrollable = true,
+            Animation = ModalAnimation.FadeIn(0.5),
+            Class = "blazored-modal videos-size"
+        };
 
-        //Modal.Show<ClientVideoModal>(Client.Name, parameters, options);
+        Modal.Show<ClientVideoModal>(_advertisingClient.Name, parameters, options);
+    }
+
+    private void OnSetInterval()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Client", Client);
+        parameters.Add("Container", Container);
+        var options = new ModalOptions()
+        {
+            Animation = ModalAnimation.FadeIn(0.5)
+        };
+
+        Modal.Show<ClientChannelForm>(_advertisingClient.Name, parameters, options);
     }
 }

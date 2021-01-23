@@ -12,7 +12,7 @@ namespace ShowingAds.CoreLibrary.Models.Database
         [JsonProperty("id"), JsonConverter(typeof(GuidConverter))]
         public Guid Id { get; private set; }
         [JsonProperty("interval"), JsonConverter(typeof(TimeSpanConverter))]
-        public TimeSpan Interval { get; private set; }
+        public TimeSpan Interval { get; set; }
 
         [JsonProperty("channel"), JsonConverter(typeof(GuidConverter))]
         public Guid ChannelId { get; private set; }

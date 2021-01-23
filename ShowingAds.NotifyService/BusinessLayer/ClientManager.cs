@@ -22,7 +22,6 @@ namespace ShowingAds.NotifyService.BusinessLayer
         private AsyncLock _syncMutex { get; }
 
         public event Action<NotifySender> Notify;
-        private BlockingCollection<NotifySender> _senders { get; set; }
 
         private ClientManager() : base(new EmptyProvider<Guid, ClientConnections>())
         {
@@ -34,8 +33,6 @@ namespace ShowingAds.NotifyService.BusinessLayer
         protected override void UpdateOrInitializeModels()
         {
             _logger.Info("Initialize client manager...");
-            _senders = new BlockingCollection<NotifySender>();
-            Task.Run(Sender);
         }
 
         public async Task AddClient(Guid clientId, string connectionId)
@@ -84,7 +81,7 @@ namespace ShowingAds.NotifyService.BusinessLayer
             }
         }
 
-        public void AddNotifyTask(NotifySender task) => _senders.Add(task);
+        public void AddNotifyTask(NotifySender task) => Notify?.Invoke(task);
 
         public async Task<(bool, IEnumerable<string>)> TryGetConnections(Guid clientId)
         {
@@ -94,23 +91,6 @@ namespace ShowingAds.NotifyService.BusinessLayer
                 if (isExists)
                     return (true, client.Connections);
                 else return (false, default);
-            }
-        }
-
-        private async Task Sender()
-        {
-            while (_senders.IsCompleted == false)
-            {
-                try
-                {
-                    var sender = _senders.Take();
-                    Notify?.Invoke(sender);
-                }
-                catch(Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-                await Task.Delay(200);
             }
         }
     }
