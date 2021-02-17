@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ShowingAds.CoreLibrary.Converters
 {
-    class GuidConverter : JsonConverter<Guid>
+    public class GuidConverter : JsonConverter<Guid>
     {
         public override Guid ReadJson(JsonReader reader, Type objectType, [AllowNull] Guid existingValue, bool hasExistingValue, JsonSerializer serializer)
         {

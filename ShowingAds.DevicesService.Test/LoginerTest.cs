@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace ShowingAds.DevicesService.Test
 {
-    public class LoginTest
+    public class LoginerTest
     {
-        private Loginer _login { get; set; }
+        private BusinessLayer.Loginer _login { get; set; }
         
         [SetUp]
         public void SetUp()
         {
             Settings.DjangoPath = new Uri("http://localhost:3665/");
-            _login = Loginer.GetInstance();
+            _login = BusinessLayer.Loginer.GetInstance();
         }
 
         [Test]

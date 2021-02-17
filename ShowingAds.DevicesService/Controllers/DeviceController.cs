@@ -68,9 +68,9 @@ namespace ShowingAds.DevicesService.Controllers
         [HttpPost("content")]
         public async Task<ActionResult> SetContentCount([FromQuery] int count)
         {
-            var filter = RequestsFilter.GetInstance();
-            if (filter.IsBannedDevice(HttpContext.Connection.RemoteIpAddress))
-                return StatusCode(StatusCodes.Status429TooManyRequests);
+            //var filter = RequestsFilter.GetInstance();
+            //if (filter.IsBannedDevice(HttpContext.Connection.RemoteIpAddress))
+            //    return StatusCode(StatusCodes.Status429TooManyRequests);
             _logger.LogInformation($"Set content count {HttpContext.Connection.RemoteIpAddress}:{HttpContext.Connection.RemotePort}");
             var isSuccess = Guid.TryParse(HttpContext.User.Identity.Name, out var deviceId);
             if (isSuccess)

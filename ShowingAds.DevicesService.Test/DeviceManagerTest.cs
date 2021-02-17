@@ -12,7 +12,7 @@ namespace ShowingAds.DevicesService.Test
 {
     public class DeviceManagerTest
     {
-        private DeviceManager _manager { get; set; }
+        private BusinessLayer.DeviceManager _manager { get; set; }
         private List<DeviceState> _devices { get; set; }
 
         [SetUp]
@@ -23,7 +23,7 @@ namespace ShowingAds.DevicesService.Test
             for (int i = 0; i < 10; i++)
                 _devices.Add(new DeviceState(
                     GetLoginDevice(Path.GetRandomFileName(), Guid.NewGuid(), "admin", "1"), 1));
-            _manager = DeviceManager.GetInstance();
+            _manager = BusinessLayer.DeviceManager.GetInstance();
         }
 
         [Test]
