@@ -8,7 +8,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Interfaces
 {
     public interface IClient
     {
-        Task SendRequest();
+        void SendRequest();
         void StartPeriodicTimerRequest(TimeSpan interval);
         void SetDiagnosticInfo(DiagnosticInfo info);
         Task DisposeAsync();

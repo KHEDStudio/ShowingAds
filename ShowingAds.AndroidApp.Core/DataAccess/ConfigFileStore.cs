@@ -20,12 +20,12 @@ namespace ShowingAds.AndroidApp.Core.DataAccess
             _path = path ?? throw new ArgumentNullException(nameof(path));
         }
 
-        public async Task<T> Load()
+        public T Load()
         {
             try
             {
                 _resetEvent.WaitOne();
-                var json = await File.ReadAllTextAsync(_path, Encoding.UTF8);
+                var json = File.ReadAllText(_path, Encoding.UTF8);
                 _resetEvent.Set();
                 return JsonConvert.DeserializeObject<T>(json);
             }
@@ -36,13 +36,13 @@ namespace ShowingAds.AndroidApp.Core.DataAccess
             }
         }
 
-        public async Task Save(T obj)
+        public void Save(T obj)
         {
             try
             {
                 var json = JsonConvert.SerializeObject(obj);
                 _resetEvent.WaitOne();
-                await File.WriteAllTextAsync(_path, json, Encoding.UTF8);
+                File.WriteAllText(_path, json, Encoding.UTF8);
                 _resetEvent.Set();
             }
             catch

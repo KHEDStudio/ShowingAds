@@ -5,7 +5,10 @@ using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Interfaces;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -13,52 +16,62 @@ namespace ShowingAds.AndroidApp.Core.Network
 {
     public class WebClientExecutor<T> : IExecutor<T> where T : EventArgs
     {
+        private Thread _consumerThread;
         private readonly object _syncCurrent = new object();
 
         private IWebClientCommand _current;
         private BlockingCollection<IWebClientCommand> _queue;
 
+        private CancellationTokenSource _cancellationToken;
+
         public event Action<T> CommandExecuted;
+        public event Action<ProgressChangedEventArgs> ProgressChanged;
 
         public WebClientExecutor()
         {
+            _cancellationToken = new CancellationTokenSource();
             _queue = new BlockingCollection<IWebClientCommand>();
-            Task.Factory.StartNew(Run, TaskCreationOptions.LongRunning);
+            _consumerThread = new Thread(() => RunConsumer());
+            _consumerThread.Start();
         }
 
         public void AddCommandToQueue(IWebClientCommand command) => _queue.Add(command);
 
-        private async Task Run()
+        private void RunConsumer()
         {
-            while (_queue.IsAddingCompleted == false)
+            while (_cancellationToken.IsCancellationRequested == false)
             {
                 try
                 {
-                    var middle = _queue.Take();
+                    var middle = _queue.Take(_cancellationToken.Token);
                     lock (_syncCurrent)
                     {
                         _current = middle;
                         _current.Completed += CurrentCompleted;
                         _current.ProgressChanged += CurrentProgressChanged;
                     }
-                    await _current.Execute();
+                    ProgressChanged?.Invoke(new ProgressChangedEventArgs(_queue.Count, default));
+                    _current.Execute();
                 }
                 catch (Exception ex)
                 {
-                    if (_queue.IsAddingCompleted == false)
+                    if (_cancellationToken.IsCancellationRequested == false)
                     {
                         _queue.Add(_current);
-                        await ServerLog.Error("WebClientExecutor", ex.Message);
-                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        ServerLog.Error("WebClientExecutor", ex.Message);
+                        Thread.Sleep(TimeSpan.FromSeconds(1));
                     }
                 }
                 finally
                 {
                     lock (_syncCurrent)
                     {
-                        _current.Completed -= CurrentCompleted;
-                        _current.ProgressChanged -= CurrentProgressChanged;
-                        _current = null;
+                        if (_current != null)
+                        {
+                            _current.Completed -= CurrentCompleted;
+                            _current.ProgressChanged -= CurrentProgressChanged;
+                            _current = null;
+                        }
                     }
                 }
             }
@@ -66,8 +79,7 @@ namespace ShowingAds.AndroidApp.Core.Network
 
         private void CurrentCompleted(EventArgs obj) => CommandExecuted?.Invoke((T)obj);
 
-        private void CurrentProgressChanged(System.Net.DownloadProgressChangedEventArgs obj) => 
-            ServerLog.Debug("ProgressChanged", obj.ProgressPercentage.ToString());
+        private void CurrentProgressChanged(ProgressChangedEventArgs obj) => ProgressChanged?.Invoke(obj);
 
         public void Filter(BaseFilter filter)
         {
@@ -84,6 +96,7 @@ namespace ShowingAds.AndroidApp.Core.Network
 
         public void Dispose()
         {
+            _cancellationToken.Cancel();
             _queue.CompleteAdding();
             lock (_syncCurrent)
                 _current?.Undo();

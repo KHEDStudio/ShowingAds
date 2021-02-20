@@ -20,12 +20,12 @@ namespace ShowingAds.AndroidApp.Core.Test
         private JsonParser _parser;
 
         [SetUp]
-        public async Task Setup()
+        public void Setup()
         {
             Settings.DeviceId = Guid.Parse("11111111-1111-1111-1111-111111111111");
             var login = new LoginDevice(DeviceName, Settings.DeviceId, UserName, Password);
             var loginer = new NetworkLoginer();
-            var status = await loginer.TryLoginAsync(login);
+            var status = loginer.TryLogin(login);
             if (status != Network.Enums.LoginStatus.SuccessLogin)
                 Assert.Fail("Fail login request");
             _parser = new JsonParser();
@@ -40,9 +40,9 @@ namespace ShowingAds.AndroidApp.Core.Test
         }
 
         [Test]
-        public async Task GetParsedDataTest()
+        public void GetParsedDataTest()
         {
-            await _client.SendRequest();
+            _client.SendRequest();
             Assert.Pass();
         }
 

@@ -17,7 +17,7 @@ namespace ShowingAds.AndroidApp.Core
             Console.WriteLine(tag.WhitePlus(msg).WithTAG(DateTime.UtcNow.ToString()));
         }
 
-        public async static Task Error(string tag, string msg)
+        public static void Error(string tag, string msg)
         {
             var log = tag.WhitePlus(msg)
                 .WithTAG(DateTime.UtcNow.ToString());
@@ -26,13 +26,13 @@ namespace ShowingAds.AndroidApp.Core
             {
                 try
                 {
-                    await LogToServer(log);
+                    LogToServer(log);
                 }
                 catch { }
             }
         }
 
-        private async static Task LogToServer(string msg)
+        private static void LogToServer(string msg)
         {
             using (var httpClient = new HttpClient())
             {
@@ -40,7 +40,7 @@ namespace ShowingAds.AndroidApp.Core
                 values.Add(IdKey, Settings.DeviceId.ToString());
                 values.Add(LogKey, msg);
                 var content = new StringContent(JsonConvert.SerializeObject(values));
-                await httpClient.PostAsync(Settings.LogServer, content);
+                httpClient.PostAsync(Settings.LogServer, content).Wait();
             }
         }
     }

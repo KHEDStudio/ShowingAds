@@ -26,7 +26,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public override void VisitTopCollection<T>(TopLevelCollection<T> collection)
         {
-            collection.Components.AsParallel().Any(x => x.GetId() == Interval.Id)
+            collection.Components.Any(x => x.GetId() == Interval.Id)
                 .IfFalse(() => collection.Add(Interval));
         }
 

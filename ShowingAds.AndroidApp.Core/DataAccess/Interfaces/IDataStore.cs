@@ -7,7 +7,7 @@ namespace ShowingAds.AndroidApp.Core.DataAccess.Interfaces
 {
     public interface IDataStore<T> : IDisposable
     {
-        Task Save(T obj);
-        Task<T> Load();
+        void Save(T obj);
+        T Load();
     }
 }

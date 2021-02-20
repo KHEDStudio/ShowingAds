@@ -3,6 +3,7 @@ using ShowingAds.AndroidApp.Core.BusinessCollections.Visitors;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters
 {
@@ -14,27 +15,31 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters
          * bool is flag shows client order already found
          * DateTime is order field for sorting
          */
-        private readonly Dictionary<Guid, (bool, DateTime)> _orders;
+        private List<(Guid, bool, DateTime)> _orders;
 
         /* (Guid, DateTime) where Guid is advertising client id */
         public ClientOrderFilter(IEnumerable<(Guid, DateTime)> orders)
         {
-            _orders = new Dictionary<Guid, (bool, DateTime)>();
+            _orders = new List<(Guid, bool, DateTime)>();
             foreach (var (clientId, orderField) in orders)
-                _orders.Add(clientId, (false, orderField));
+                _orders.Add((clientId, false, orderField));
         }
 
         public override bool FilterClientInterval(ClientInterval interval) => throw new ArgumentException("Cannot filter client interval");
 
         public override bool FilterClientOrder(ClientOrder order)
         {
-            if (_orders.ContainsKey(order.Id)
-                && _orders[order.Id].Item2 == order.OrderField)
+            bool isFiltered = false;
+            _orders = _orders.Select(x =>
             {
-                _orders[order.Id] = (true, _orders[order.Id].Item2);
-                return true;
-            }
-            return false;
+                if (x.Item1 == order.Id && x.Item3 == order.OrderField)
+                {
+                    isFiltered = true;
+                    return (x.Item1, true, x.Item3);
+                }
+                return x;
+            }).ToList();
+            return isFiltered;
         }
 
         public override bool FilterLogoCommand(LogoDownloadCommand command) => throw new ArgumentException("Cannot filter logo download command");
@@ -49,7 +54,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters
 
         public override IEnumerable<BaseVisitor> GetVisitors()
         {
-            foreach (var (id, (isFound, orderField)) in _orders)
+            foreach (var (id, isFound, orderField) in _orders)
                 if (isFound == false)
                     yield return new AddingOrderVisitor(new ClientOrder(id, orderField));
         }

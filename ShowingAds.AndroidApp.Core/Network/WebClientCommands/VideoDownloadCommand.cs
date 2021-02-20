@@ -18,7 +18,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
         public string FilePath { get; private set; }
 
         public override event Action<EventArgs> Completed;
-        public override event Action<DownloadProgressChangedEventArgs> ProgressChanged;
+        public override event Action<ProgressChangedEventArgs> ProgressChanged;
 
         public VideoDownloadCommand(Uri address, string filePath, Guid ownerId, VideoJson video)
             : base(address, filePath)
@@ -41,7 +41,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
             }
         }
 
-        protected override void FileProgressChanged(object sender, DownloadProgressChangedEventArgs e) => ProgressChanged?.Invoke(e);
+        protected override void FileProgressChanged(object sender, ProgressChangedEventArgs e) => ProgressChanged?.Invoke(e);
 
         public override bool IsValid(BaseFilter filter) => filter.FilterVideoCommand(this);
 

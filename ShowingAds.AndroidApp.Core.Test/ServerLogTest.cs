@@ -16,10 +16,10 @@ namespace ShowingAds.AndroidApp.Core.Test
         }
 
         [Test]
-        public async Task ErrorTets()
+        public void ErrorTets()
         {
             ServerLog.Debug(Tag, Body);
-            await ServerLog.Error(Tag, Body);
+            ServerLog.Error(Tag, Body);
             Assert.Pass();
         }
     }

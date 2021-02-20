@@ -11,6 +11,7 @@ using ShowingAds.AndroidApp.Core.BusinessCollections.Visitors;
 using ShowingAds.AndroidApp.Core.BusinessCollections;
 using System.IO;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters;
+using System.Threading;
 
 namespace ShowingAds.AndroidApp.Core.Test
 {
@@ -51,7 +52,7 @@ namespace ShowingAds.AndroidApp.Core.Test
         }
 
         [Test]
-        public async Task SaveAndLoadCollectionTest()
+        public void SaveAndLoadCollectionTest()
         {
             var developer = new ContentsDeveloper();
             var contents = developer.Create();
@@ -61,9 +62,9 @@ namespace ShowingAds.AndroidApp.Core.Test
                 contents.Accept(visitor);
             }
 
-            await contents.SaveComponents();
+            contents.SaveComponents();
             var loadedContents = developer.Create();
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            Thread.Sleep(TimeSpan.FromSeconds(1));
 
             for (int i = 0; i < contents.Components.Count; i++)
             {

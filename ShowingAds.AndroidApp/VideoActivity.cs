@@ -27,18 +27,25 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Octane.Xamarin.Forms.VideoPlayer;
 
 namespace ShowingAds.AndroidApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", ScreenOrientation = ScreenOrientation.Landscape)]
     public class VideoActivity : AppCompatActivity
     {
+        private Thread _loadVideoThread;
+
         private VideoView _videoView;
         private TickerView _tickerView;
         private ImageView _leftLogo;
         private ImageView _rightLogo;
 
-        private Timer _diagnosticTimer;
+        private TextView _logInfo1;
+        private TextView _logInfo2;
+        private TextView _logInfo3;
+
+        private System.Timers.Timer _diagnosticTimer;
 
         private IClient _networkClient;
 
@@ -90,9 +97,15 @@ namespace ShowingAds.AndroidApp
             Window.AddFlags(WindowManagerFlags.Fullscreen);
             Window.DecorView.SystemUiVisibility = StatusBarVisibility.Hidden;
 
-            _videoView = FindViewById<VideoView>(Resource.Id.video_display);
+            _videoView = FindViewById<VideoView>(Resource.Id.video_display2);
             _leftLogo = FindViewById<ImageView>(Resource.Id.left_logo_image);
             _rightLogo = FindViewById<ImageView>(Resource.Id.right_logo_image);
+
+            _logInfo1 = FindViewById<TextView>(Resource.Id.log_info1);
+            _logInfo2 = FindViewById<TextView>(Resource.Id.log_info2);
+            _logInfo3 = FindViewById<TextView>(Resource.Id.log_info3);
+            _logInfo1.Visibility = _logInfo2.Visibility = _logInfo3.Visibility = ViewStates.Invisible;
+            _videoView.SetMediaController(default);
 
             var tickerView = FindViewById<WebView>(Resource.Id.ticker_display);
             _tickerView = new TickerView(tickerView, this);
@@ -102,79 +115,88 @@ namespace ShowingAds.AndroidApp
             _videoView.Completion += VideoShowed;
             _videoView.Error += VideoViewError;
 
-            _readyExecutor = new WebClientExecutor<VideoEventArgs>();
-            _readyExecutor.CommandExecuted += async (e) => await ContentVideoDownloaded(e);
-            _clientsExecutor = new WebClientExecutor<VideoEventArgs>();
-            _clientsExecutor.CommandExecuted += async (e) => await ClientVideoDownloaded(e);
-            _logotypesExecutor = new WebClientExecutor<LogoEventArgs>();
-            _logotypesExecutor.CommandExecuted += async (e) => await LogotypeDownloaded(e);
-
-            _loginStore = new ConfigFileStore<LoginDevice>(Settings.GetConfigFilePath("login.config"));
-            _logotypesStore = new ConfigFileStore<(Logotype, Logotype)>(Settings.GetConfigFilePath("logotypes.config"));
-            _tickerStore = new ConfigFileStore<(string, TimeSpan)>(Settings.GetConfigFilePath("ticker.config"));
-            _rebootTimeStore = new ConfigFileStore<AutoRebooter>(Settings.GetConfigFilePath("reload.config"));
-
-            _advertisingTimer = new System.Timers.Timer();
-            _advertisingTimer.Elapsed += async (s, e) => await AdvertisingTimerCallback(s, e);
-            _advertisingTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
-            _advertisingTimer.AutoReset = false;
-
-            var readyVideosDeveloper = new ReadyVideosDeveloper();
-            _readyVideos = readyVideosDeveloper.Create();
-            var contentsDeveloper = new ContentsDeveloper();
-            _contents = contentsDeveloper.Create();
-            var clientsDeveloper = new AdvertisingClientsDeveloper();
-            _clients = clientsDeveloper.Create();
-            var intervalsDeveloper = new AdvertisingIntervalsDeveloper();
-            _intervals = intervalsDeveloper.Create();
-            var ordersDeveloper = new AdvertisingOrdersDeveloper();
-            _orders = ordersDeveloper.Create();
-
-            Task.Factory.StartNew(async () =>
+            _loadVideoThread = new Thread(() =>
             {
+                _readyExecutor = new WebClientExecutor<VideoEventArgs>();
+                _readyExecutor.CommandExecuted += ContentVideoDownloaded;
+                _readyExecutor.ProgressChanged += e => RunOnUiThread(() => _logInfo1.Text = $"{e.ProgressPercentage}%");
+                _clientsExecutor = new WebClientExecutor<VideoEventArgs>();
+                _clientsExecutor.CommandExecuted += ClientVideoDownloaded;
+                _clientsExecutor.ProgressChanged += e => RunOnUiThread(() => _logInfo2.Text = $"{e.ProgressPercentage}%");
+                _logotypesExecutor = new WebClientExecutor<LogoEventArgs>();
+                _logotypesExecutor.CommandExecuted += LogotypeDownloaded;
+                _logotypesExecutor.ProgressChanged += e => RunOnUiThread(() => _logInfo3.Text = $"{e.ProgressPercentage}%");
+
+                _loginStore = new ConfigFileStore<LoginDevice>(Settings.GetConfigFilePath("login.config"));
+                _logotypesStore = new ConfigFileStore<(Logotype, Logotype)>(Settings.GetConfigFilePath("logotypes.config"));
+                _tickerStore = new ConfigFileStore<(string, TimeSpan)>(Settings.GetConfigFilePath("ticker.config"));
+                _rebootTimeStore = new ConfigFileStore<AutoRebooter>(Settings.GetConfigFilePath("reload.config"));
+
+                _diagnosticTimer = new System.Timers.Timer();
+                _diagnosticTimer.Elapsed += DiagnosticCallback;
+                _diagnosticTimer.Interval = TimeSpan.FromSeconds(5).TotalMilliseconds;
+                _diagnosticTimer.AutoReset = true;
+
+                _advertisingTimer = new System.Timers.Timer();
+                _advertisingTimer.Elapsed += AdvertisingTimerCallback;
+                _advertisingTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
+                _advertisingTimer.AutoReset = false;
+
+                var readyVideosDeveloper = new ReadyVideosDeveloper();
+                _readyVideos = readyVideosDeveloper.Create();
+                var contentsDeveloper = new ContentsDeveloper();
+                _contents = contentsDeveloper.Create();
+                var clientsDeveloper = new AdvertisingClientsDeveloper();
+                _clients = clientsDeveloper.Create();
+                var intervalsDeveloper = new AdvertisingIntervalsDeveloper();
+                _intervals = intervalsDeveloper.Create();
+                var ordersDeveloper = new AdvertisingOrdersDeveloper();
+                _orders = ordersDeveloper.Create();
+
                 try
                 {
                     _logotypes = (new Logotype(Guid.Empty, true, string.Empty),
                         new Logotype(Guid.Empty, false, string.Empty));
-                    _logotypes = await _logotypesStore.Load();
+                    _logotypes = _logotypesStore.Load();
                     UpdateLogotypes();
                 }
                 catch (Exception ex)
                 {
-                    await ServerLog.Error("Logotypes", ex.Message);
+                    ServerLog.Error("Logotypes", ex.Message);
                 }
                 try
                 {
                     _ticker = (string.Empty, TimeSpan.Zero);
-                    _ticker = await _tickerStore.Load();
-                    await _tickerView.SetTickerAsync(_ticker.Item1, _ticker.Item2);
+                    _ticker = _tickerStore.Load();
+                    _tickerView.SetTickerAsync(_ticker.Item1, _ticker.Item2);
                 }
                 catch (Exception ex)
                 {
-                    await ServerLog.Error("Ticker", ex.Message);
+                    ServerLog.Error("Ticker", ex.Message);
                 }
                 try
                 {
                     _rebootTime = new AutoRebooter();
-                    _rebootTime = await _rebootTimeStore.Load();
+                    _rebootTime = _rebootTimeStore.Load();
                 }
                 catch (Exception ex)
                 {
-                    await ServerLog.Error("Rebooter", ex.Message);
+                    ServerLog.Error("Rebooter", ex.Message);
                 }
                 var seconds = (5, 10).RandomNumber();
                 var interval = TimeSpan.FromSeconds(seconds);
-                await StartNetworkClient(interval);
+                StartNetworkClient(interval);
                 _advertisingTimer.Start();
-                _diagnosticTimer = new Timer(DiagnosticCallback, default, TimeSpan.Zero, TimeSpan.FromSeconds(5));
-                await LoadVideo();
+                _diagnosticTimer.Start();
+                LoadVideo();
             });
+            _loadVideoThread.Start();
         }
 
-        private void DiagnosticCallback(object state)
+        private void DiagnosticCallback(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _syncContents.WaitOne();
             var readyVisitor = new VideosCounterVisitor();
+            _syncContents.WaitOne();
             _readyVideos.Accept(readyVisitor);
             _syncContents.Set();
 
@@ -182,38 +204,38 @@ namespace ShowingAds.AndroidApp
             _networkClient.SetDiagnosticInfo(info);
         }
 
-        private async Task LogotypeDownloaded(LogoEventArgs obj)
+        private void LogotypeDownloaded(LogoEventArgs obj)
         {
             _syncLogotypes.WaitOne();
             obj.IsLeft.IfTrue(() => _logotypes.Item1 = new Logotype(obj.Id, true, obj.LogoPath));
             obj.IsLeft.IfFalse(() => _logotypes.Item2 = new Logotype(obj.Id, false, obj.LogoPath));
-            await _logotypesStore.Save(_logotypes);
+            _logotypesStore.Save(_logotypes);
             UpdateLogotypes();
             _syncLogotypes.Set();
         }
 
-        private async Task ClientVideoDownloaded(VideoEventArgs obj)
+        private void ClientVideoDownloaded(VideoEventArgs obj)
         {
             _syncClients.WaitOne();
             var visitor = new AddingVideoVisitor(obj);
             _clients.Accept(visitor);
-            await _clients.SaveComponents();
+            _clients.SaveComponents();
             _syncClients.Set();
         }
 
-        private async Task ContentVideoDownloaded(VideoEventArgs obj)
+        private void ContentVideoDownloaded(VideoEventArgs obj)
         {
             _syncContents.WaitOne();
             _readyVideos.Add(new Video(obj.Id, obj.VideoPath));
-            await _readyVideos.SaveComponents();
+            _readyVideos.SaveComponents();
             _syncContents.Set();
         }
 
-        private async Task StartNetworkClient(TimeSpan interval)
+        private void StartNetworkClient(TimeSpan interval)
         {
             var loginer = new NetworkLoginer();
-            while (await IsLogined(loginer) == false)
-                await Task.Delay(interval);
+            while (IsLogined(loginer) == false)
+                Thread.Sleep(interval);
             _networkClient = loginer.GetClient(GetJsonParser(), interval);
             _networkClient.StartPeriodicTimerRequest(interval);
         }
@@ -221,37 +243,37 @@ namespace ShowingAds.AndroidApp
         private IParser GetJsonParser()
         {
             var parser = new JsonParser();
-            parser.ContentsParsed += async e => await ContentsParsed(e);
-            parser.AdvertisingParsed += async e => await ClientsParsed(e);
-            parser.AdvertisingIntervalsParsed += async e => await ClientIntervalsParsed(e);
-            parser.AdvertisingOrdersParsed += async e => await OrdersParsed(e);
-            parser.LogotypesParsed += async e => await LogotypesParsed(e);
-            parser.TickerParsed += async (e, a) => await TickerParsed(e, a);
-            parser.RebootTimeParsed += async e => await RebootTimeParsed(e);
+            parser.ContentsParsed += ContentsParsed;
+            parser.AdvertisingParsed += ClientsParsed;
+            parser.AdvertisingIntervalsParsed += ClientIntervalsParsed;
+            parser.AdvertisingOrdersParsed += OrdersParsed;
+            parser.LogotypesParsed += LogotypesParsed;
+            parser.TickerParsed += TickerParsed;
+            parser.RebootTimeParsed += RebootTimeParsed;
             return parser;
         }
 
-        private async Task RebootTimeParsed(TimeSpan obj)
+        private void RebootTimeParsed(TimeSpan obj)
         {
             _syncRebootTime.WaitOne();
             _rebootTime.RebootTime = obj;
-            await _rebootTimeStore.Save(_rebootTime);
+            _rebootTimeStore.Save(_rebootTime);
             _syncRebootTime.Set();
         }
 
-        private async Task TickerParsed(string arg1, TimeSpan arg2)
+        private void TickerParsed(string arg1, TimeSpan arg2)
         {
             _syncTicker.WaitOne();
             if (arg1 != _ticker.Item1 || arg2 != _ticker.Item2)
             {
                 _ticker = (arg1, arg2);
-                await _tickerView.SetTickerAsync(arg1, arg2);
-                await _tickerStore.Save(_ticker);
+                _tickerView.SetTickerAsync(arg1, arg2);
+                _tickerStore.Save(_ticker);
             }
             _syncTicker.Set();
         }
 
-        private async Task LogotypesParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
+        private void LogotypesParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
             _logotypesExecutor.Filter(obj);
             _syncLogotypes.WaitOne();
@@ -265,70 +287,70 @@ namespace ShowingAds.AndroidApp
                 _logotypes.Item2 = new Logotype(Guid.Empty, false, string.Empty);
                 UpdateLogotypes();
             });
-            await _logotypesStore.Save(_logotypes);
+            _logotypesStore.Save(_logotypes);
             _syncLogotypes.Set();
             foreach (var command in obj.GetDownloadCommands())
                 _logotypesExecutor.AddCommandToQueue(command);
         }
 
-        private async Task OrdersParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
+        private void OrdersParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
             _syncOrders.WaitOne();
             _orders.IsValid(obj);
             foreach (var visitor in obj.GetVisitors())
                 _orders.Accept(visitor);
-            await _orders.SaveComponents();
+            _orders.SaveComponents();
             _syncOrders.Set();
         }
 
-        private async Task ClientIntervalsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
+        private void ClientIntervalsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
             _syncIntervals.WaitOne();
             _intervals.IsValid(obj);
             foreach (var visitor in obj.GetVisitors())
                 _intervals.Accept(visitor);
-            await _intervals.SaveComponents();
+            _intervals.SaveComponents();
             _syncIntervals.Set();
         }
 
-        private async Task ClientsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
+        private void ClientsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
             _clientsExecutor.Filter(obj);
             _syncClients.WaitOne();
             _clients.IsValid(obj);
-            await _clients.SaveComponents();
+            _clients.SaveComponents();
             _syncClients.Set();
             foreach (var command in obj.GetDownloadCommands())
                 _clientsExecutor.AddCommandToQueue(command);
         }
 
-        private async Task ContentsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
+        private void ContentsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
             _syncContents.WaitOne();
             _contents.IsValid(obj);
             foreach (var visitor in obj.GetVisitors())
                 _contents.Accept(visitor);
-            await _contents.SaveComponents();
+            _contents.SaveComponents();
 
             _readyExecutor.Filter(obj);
 
             _readyVideos.IsValid(obj);
-            await _readyVideos.SaveComponents();
+            _readyVideos.SaveComponents();
             _syncContents.Set();
         }
 
-        private async Task<bool> IsLogined(ILoginer loginer)
+        private bool IsLogined(ILoginer loginer)
         {
             try
             {
-                var loginData = await _loginStore.Load();
+                var loginData = _loginStore.Load();
                 Settings.DeviceId = loginData.UUID;
-                var status = await loginer.TryLoginAsync(loginData);
+                var status = loginer.TryLogin(loginData);
                 return status == Core.Network.Enums.LoginStatus.SuccessLogin;
             }
             catch (Exception ex)
             {
-                await ServerLog.Error("VideoActivity", ex.Message);
+                ServerLog.Error("VideoActivity", ex.Message);
                 return false;
             }
         }
@@ -346,7 +368,7 @@ namespace ShowingAds.AndroidApp
             });
         }
 
-        private async Task AdvertisingTimerCallback(object sender, System.Timers.ElapsedEventArgs e)
+        private async void AdvertisingTimerCallback(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerCounter++;
             do
@@ -402,6 +424,8 @@ namespace ShowingAds.AndroidApp
             _readyExecutor.Accept(readyVisitor);
             _readyVideos.Accept(readyVisitor);
 
+            ServerLog.Debug("TryGetReadyVideo", $"TotalVideos {visitor.TotalVideos} downloaded videos {_readyVideos.Components.Count}");
+
             while (readyVisitor.TotalVideos < Settings.MaxReadyVideos + 5
                 && visitor.TotalVideos > readyVisitor.TotalVideos
                 && _contents.TryGetNext(out var category))
@@ -432,10 +456,11 @@ namespace ShowingAds.AndroidApp
             return _readyVideos.TryGetNext(out video);
         }
 
-        private async Task LoadVideo()
+        private void LoadVideo()
         {
             while (_advertisingVideos.IsAddingCompleted == false)
             {
+                ServerLog.Debug("LoadVideo", "Start");
                 _videoShowed.WaitOne();
                 Video video;
                 int duration = 0;
@@ -443,7 +468,10 @@ namespace ShowingAds.AndroidApp
                 while (_advertisingVideos.TryTake(out video) == false
                     && (isContentVideo = TryGetReservedVideo(out video, out duration)) == false
                     && (isContentVideo = TryGetReadyVideo(out video)) == false)
-                    await Task.Delay(TimeSpan.FromSeconds(1));
+                {
+                    ServerLog.Debug("LoadVideo", "No videos");
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                }
                 lock (_syncCurrentReservedVideos)
                 {
                     _currentVideo = (isContentVideo, video);
@@ -469,9 +497,9 @@ namespace ShowingAds.AndroidApp
             return false;
         }
 
-        private async void VideoViewError(object sender, global::Android.Media.MediaPlayer.ErrorEventArgs e)
+        private void VideoViewError(object sender, global::Android.Media.MediaPlayer.ErrorEventArgs e)
         {
-            await ServerLog.Error("VideoViewError", e.What.ToString());
+            ServerLog.Error("VideoViewError", e.What.ToString());
             VideoHandler();
         }
 
@@ -508,22 +536,20 @@ namespace ShowingAds.AndroidApp
 
         private void StartVideo(string videoPath, int duration)
         {
-            RunOnUiThread(async () =>
+            ServerLog.Debug("StartVideo", "Start");
+            RunOnUiThread(() =>
             {
-                while (true)
+                try
                 {
-                    try
-                    {
-                        _videoView.SetVideoPath(videoPath);
-                        _videoView.SeekTo(duration);
-                        _videoView.Start();
-                        break;
-                    }
-                    catch (Exception ex)
-                    {
-                        Toast.MakeText(BaseContext, ex.Message, ToastLength.Long).Show();
-                        await Task.Delay(TimeSpan.FromSeconds(3));
-                    }
+                    _videoView.Suspend();
+                    _videoView.SetVideoPath(videoPath);
+                    _videoView.SeekTo(duration);
+                    _videoView.Start();
+                }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(BaseContext, ex.Message, ToastLength.Long).Show();
+                    _videoShowed.Set();
                 }
             });
         }

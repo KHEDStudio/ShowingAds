@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Interfaces
@@ -11,9 +12,9 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Interfaces
     public interface IWebClientCommand : IFilterVisitable, IVisitable
     {
         event Action<EventArgs> Completed;
-        event Action<DownloadProgressChangedEventArgs> ProgressChanged;
+        event Action<ProgressChangedEventArgs> ProgressChanged;
 
-        Task Execute();
+        void Execute();
         void Undo();
     }
 }

@@ -38,7 +38,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Models
             return isValid;
         }
 
-        private async Task DeleteVideoFile()
+        private void DeleteVideoFile()
         {
             try
             {
@@ -47,7 +47,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Models
             }
             catch (Exception ex)
             {
-                await ServerLog.Error("VideoFile", ex.Message);
+                ServerLog.Error("VideoFile", ex.Message);
             }
         }
 

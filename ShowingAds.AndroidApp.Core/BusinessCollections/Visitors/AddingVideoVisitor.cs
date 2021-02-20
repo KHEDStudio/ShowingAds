@@ -21,7 +21,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
         public override void VisitLowCollection<T>(LowLevelCollection<T> collection)
         {
             if (collection.GetId() == VideoArgs.OwnerId) 
-                collection.Components.AsParallel().Any(x => x.GetId() == VideoArgs.Id)
+                collection.Components.Any(x => x.GetId() == VideoArgs.Id)
                     .IfFalse(() =>
                     {
                         var video = GetVideo(VideoArgs);
@@ -31,7 +31,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public override void VisitTopCollection<T>(TopLevelCollection<T> collection)
         {
-            collection.Components.AsParallel().Any(x => x.GetId() == VideoArgs.OwnerId)
+            collection.Components.Any(x => x.GetId() == VideoArgs.OwnerId)
                 .IfFalse(() =>
                 {
                     var videos = new List<Video> { GetVideo(VideoArgs) };

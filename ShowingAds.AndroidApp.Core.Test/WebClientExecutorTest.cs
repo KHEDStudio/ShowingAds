@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ShowingAds.AndroidApp.Core.Test
 {
@@ -45,6 +46,7 @@ namespace ShowingAds.AndroidApp.Core.Test
                     Guid.Empty, new VideoJson(video.Key)));
             }
             await Task.Delay(TimeSpan.FromMinutes(1));
+            
             executor.Dispose();
             await Task.Delay(TimeSpan.FromSeconds(10));
             Assert.Pass();
@@ -75,6 +77,7 @@ namespace ShowingAds.AndroidApp.Core.Test
         private void VideoDownloaded(VideoEventArgs obj)
         {
             ServerLog.Debug(obj.Id.ToString(), obj.VideoPath);
+            Assert.IsTrue(File.Exists(obj.VideoPath));
         }
 
         [TearDown]

@@ -11,7 +11,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Interfaces
 {
     public interface ILoginer
     {
-        Task<LoginStatus> TryLoginAsync(LoginDevice login);
+        LoginStatus TryLogin(LoginDevice login);
         IClient GetClient(IParser parser, TimeSpan reconnetInterval);
     }
 }

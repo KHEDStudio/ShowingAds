@@ -18,7 +18,7 @@ namespace ShowingAds.AndroidApp.Core.Network
 
         public IClient GetClient(IParser parser, TimeSpan reconnetInterval) => new NetworkClient(parser, _cookieContainer, reconnetInterval);
 
-        public async Task<LoginStatus> TryLoginAsync(LoginDevice login)
+        public LoginStatus TryLogin(LoginDevice login)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace ShowingAds.AndroidApp.Core.Network
                     handler.CookieContainer = _cookieContainer;
                     using (var client = new HttpClient(handler))
                     {
-                        var responseMessage = await SendLoginDataAsync(client, login);
+                        var responseMessage = SendLoginData(client, login);
                         if (responseMessage.StatusCode == HttpStatusCode.OK)
                             return LoginStatus.SuccessLogin;
                         if (responseMessage.StatusCode == HttpStatusCode.NotFound)
@@ -38,17 +38,17 @@ namespace ShowingAds.AndroidApp.Core.Network
             }
             catch (Exception ex)
             {
-                await ServerLog.Error("NetworkLogin", ex.Message);
+                ServerLog.Error("NetworkLogin", ex.Message);
             }
 
             return LoginStatus.RequestError;
         }
 
-        private async Task<HttpResponseMessage> SendLoginDataAsync(HttpClient client, LoginDevice login)
+        private HttpResponseMessage SendLoginData(HttpClient client, LoginDevice login)
         {
             var jsonLoginData = JsonConvert.SerializeObject(login);
             var loginDataContent = new StringContent(jsonLoginData, Encoding.UTF8, "application/json");
-            return await client.PostAsync(Settings.LoginPath, loginDataContent);
+            return client.PostAsync(Settings.LoginPath, loginDataContent).Result;
         }
     }
 }

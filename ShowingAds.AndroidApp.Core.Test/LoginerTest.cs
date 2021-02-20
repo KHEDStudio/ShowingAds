@@ -29,20 +29,20 @@ namespace ShowingAds.AndroidApp.Core.Test
         }
 
         [Test]
-        public async Task SuccessLoginTest()
+        public void SuccessLoginTest()
         {
             var parser = new FakeParser();
             var loginer = new NetworkLoginer();
-            var status = await loginer.TryLoginAsync(_login);
+            var status = loginer.TryLogin(_login);
             Assert.AreEqual(LoginStatus.SuccessLogin, status);
         }
 
         [Test]
-        public async Task NotFoundLoginTest()
+        public void NotFoundLoginTest()
         {
             var parser = new FakeParser();
             var loginer = new NetworkLoginer();
-            var status = await loginer.TryLoginAsync(_fakeLogin);
+            var status = loginer.TryLogin(_fakeLogin);
             Assert.AreEqual(LoginStatus.NotCorrectLoginData, status);
         }
     }

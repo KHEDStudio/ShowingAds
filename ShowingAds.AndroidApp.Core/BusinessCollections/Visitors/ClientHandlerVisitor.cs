@@ -19,25 +19,19 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
         {
             _timerCount = timerCount;
             _hasContentVideos = hasContentVideos;
+            _intervals = new List<ClientInterval>();
+            _orders = new List<ClientOrder>();
+            _clients = new List<(LowLevelCollection<Video>, DateTime)>();
         }
 
         public override void VisitClientInterval(ClientInterval interval)
         {
-            if (_intervals == null)
-                _intervals = new List<ClientInterval>();
-
             if (interval.Interval.TotalMinutes == 0 || _timerCount % interval.Interval.TotalMinutes == 0)
                 _intervals.Add(interval);
         }
 
         public override void VisitClientOrder(ClientOrder order)
         {
-            if (_intervals == null)
-                throw new ArgumentNullException("ClientInterval is the first for visit");
-
-            if (_orders == null)
-                _orders = new List<ClientOrder>();
-
             if (_hasContentVideos == false || _intervals.Any(x => x.Id == order.Id))
                 _orders.Add(order);
         }
@@ -46,19 +40,14 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public override void VisitLowCollection<T>(LowLevelCollection<T> collection)
         {
-            if (_intervals == null)
-                throw new ArgumentNullException("ClientInterval is the first for visit");
-            if (_orders == null)
-                throw new ArgumentNullException("ClientOrder is the second for visit");
-
-            if (_clients == null)
-                _clients = new List<(LowLevelCollection<Video>, DateTime)>();
-
-            var order = _orders.FirstOrDefault(x => x.Id == collection.Id);
-            if (order != default)
+            if (collection is LowLevelCollection<Video> client)
             {
-                _clients.Add((collection as LowLevelCollection<Video>, order.OrderField));
-                _clients = _clients.OrderBy(x => x.Item2).ToList();
+                var order = _orders.FirstOrDefault(x => x.Id == client.Id);
+                if (order != default)
+                {
+                    _clients.Add((client, order.OrderField));
+                    _clients = _clients.OrderBy(x => x.Item2).ToList();
+                }
             }
         }
 

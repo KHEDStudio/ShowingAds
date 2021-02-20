@@ -16,7 +16,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
 {
     public abstract class BaseDownloadCommand : IWebClientCommand
     {
-        private WebClient _webClient;
+        private WebClient _downloader;
         private CancellationTokenSource _cancellationToken;
         protected readonly object _syncRoot = new object();
 
@@ -24,10 +24,13 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
         private readonly string _filePath;
 
         public abstract event Action<EventArgs> Completed;
-        public abstract event Action<DownloadProgressChangedEventArgs> ProgressChanged;
+        public abstract event Action<ProgressChangedEventArgs> ProgressChanged;
 
         protected BaseDownloadCommand(Uri address, string filePath)
         {
+            _downloader = new WebClient();
+            _downloader.DownloadFileCompleted += FileDownloaded;
+            _downloader.DownloadProgressChanged += FileProgressChanged;
             _cancellationToken = new CancellationTokenSource();
             _address = address ?? throw new ArgumentNullException(nameof(address));
             _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
@@ -37,42 +40,26 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
 
         public abstract void Accept(BaseVisitor visitor);
 
-        protected abstract void FileProgressChanged(object sender, DownloadProgressChangedEventArgs e);
+        protected abstract void FileProgressChanged(object sender, ProgressChangedEventArgs e);
 
         protected abstract void FileDownloaded(object sender, AsyncCompletedEventArgs e);
 
-        public async Task Execute()
+        public void Execute()
         {
             try
             {
-                Task downloading = null;
-                lock (_syncRoot)
-                {
-                    if (_cancellationToken.IsCancellationRequested == false)
-                    {
-                        _webClient = _webClient.IfNull(() => new WebClient());
-                        _webClient.DownloadFileCompleted += FileDownloaded;
-                        //_webClient.DownloadProgressChanged += FileProgressChanged;
-                        downloading = _webClient.DownloadFileTaskAsync(_address, _filePath);
-                    }
-                }
-                await downloading.IfNotNull(async () => await downloading, Task.FromResult(default(object)));
+                if (_cancellationToken.IsCancellationRequested == false)
+                    _downloader.DownloadFile(_address, _filePath);
                 lock (_syncRoot)
                     if (_cancellationToken.IsCancellationRequested && File.Exists(_filePath))
                         File.Delete(_filePath);
+                FileDownloaded(this, new AsyncCompletedEventArgs(default, _cancellationToken.Token.IsCancellationRequested, default));
             }
-            catch
+            catch (Exception ex)
             {
                 File.Delete(_filePath);
+                FileDownloaded(this, new AsyncCompletedEventArgs(ex, _cancellationToken.Token.IsCancellationRequested, default));
                 throw;
-            }
-            finally
-            {
-                lock (_syncRoot)
-                {
-                    _webClient.Dispose();
-                    _webClient = null;
-                }
             }
         }
 
@@ -81,13 +68,14 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
             lock (_syncRoot)
             {
                 _cancellationToken.Cancel();
-                _webClient.IfNotNull(() => _webClient.CancelAsync());
+                _downloader.CancelAsync();
             }
         }
 
         ~BaseDownloadCommand()
         {
             _cancellationToken.Dispose();
+            _downloader.Dispose();
         }
     }
 }

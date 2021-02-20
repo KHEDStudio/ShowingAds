@@ -33,26 +33,26 @@ namespace ShowingAds.AndroidApp.Core.Test
         }
 
         [Test]
-        public async Task GetClientResponseTest()
+        public void GetClientResponseTest()
         {
             var parser = new FakeParser();
             var loginer = new NetworkLoginer();
-            var status = await loginer.TryLoginAsync(_login);
+            var status = loginer.TryLogin(_login);
             _client = loginer.GetClient(parser, TimeSpan.Zero);
-            await _client.SendRequest();
+            _client.SendRequest();
             if (status != LoginStatus.SuccessLogin)
                 Assert.Fail();
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            Thread.Sleep(TimeSpan.FromSeconds(5));
             Assert.AreEqual(HubConnectionState.Connected,
                 (_client as NetworkClient).ConnectionState);
         }
 
         [Test]
-        public async Task TimerRequestTest()
+        public void TimerRequestTest()
         {
             var parser = new FakeParser(_lockEvent);
             var loginer = new NetworkLoginer();
-            var status = await loginer.TryLoginAsync(_login);
+            var status = loginer.TryLogin(_login);
             _client = loginer.GetClient(parser, TimeSpan.Zero);
             var watch = new Stopwatch();
             var interval = TimeSpan.FromSeconds(5);

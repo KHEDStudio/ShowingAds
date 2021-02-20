@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShowingAds.AndroidApp.Core;
+using System.Threading;
 
 namespace ShowingAds.AndroidApp
 {
@@ -42,10 +43,10 @@ namespace ShowingAds.AndroidApp
             _password = FindViewById<EditText>(Resource.Id.password);
             _loginButton = FindViewById<Button>(Resource.Id.btn_login);
 
-            _loginButton.Click += async (s, e) => await TryLoginSession(s, e);
+            _loginButton.Click += (s, e) => new Thread(() => TryLoginSession()).Start();
         }
 
-        private async Task TryLoginSession(object sender, EventArgs e)
+        private void TryLoginSession()
         {
             SetEnabledElements(false);
 #if DEBUG
@@ -53,12 +54,12 @@ namespace ShowingAds.AndroidApp
 #else
             var loginData = new LoginDevice(_deviceName.Text, Guid.NewGuid(), _login.Text, _password.Text);
 #endif
-            var status = await _loginer.TryLoginAsync(loginData);
+            var status = _loginer.TryLogin(loginData);
             switch (status)
             {
                 case Core.Network.Enums.LoginStatus.SuccessLogin:
                     var loginStore = new ConfigFileStore<LoginDevice>(Settings.GetConfigFilePath("login.config"));
-                    await loginStore.Save(loginData);
+                    loginStore.Save(loginData);
                     loginStore.Dispose();
                     StartActivity(typeof(VideoActivity));
                     break;
@@ -77,10 +78,13 @@ namespace ShowingAds.AndroidApp
 
         private void SetEnabledElements(bool isEnabled)
         {
-            _deviceName.Enabled = isEnabled;
-            _login.Enabled = isEnabled;
-            _password.Enabled = isEnabled;
-            _loginButton.Enabled = isEnabled;
+            RunOnUiThread(() =>
+            {
+                _deviceName.Enabled = isEnabled;
+                _login.Enabled = isEnabled;
+                _password.Enabled = isEnabled;
+                _loginButton.Enabled = isEnabled;
+            });
         }
     }
 }

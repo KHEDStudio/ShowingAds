@@ -8,6 +8,7 @@ using ShowingAds.AndroidApp.Core.Network.WebClientCommands.ModelEventArgs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShowingAds.AndroidApp.Core.Test
@@ -46,9 +47,9 @@ namespace ShowingAds.AndroidApp.Core.Test
         {
             public void Dispose() { }
 
-            public Task<T> Load() => throw new NotImplementedException();
+            public T Load() => throw new NotImplementedException();
 
-            public async Task Save(T obj) => await Task.Delay(1);
+            public void Save(T obj) => Thread.Sleep(1);
         }
     }
 }

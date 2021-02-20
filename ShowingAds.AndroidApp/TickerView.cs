@@ -39,16 +39,13 @@ namespace ShowingAds.AndroidApp
             _syncLoading.Set();
         }
 
-        public async Task SetTickerAsync(string ticker, TimeSpan delay)
+        public void SetTickerAsync(string ticker, TimeSpan delay)
         {
             if (ticker == null)
                 throw new ArgumentNullException(nameof(ticker));
-            await Task.Run(() =>
-            {
-                _syncLoading.WaitOne();
-                _activity.RunOnUiThread(() =>
-                       _webView.EvaluateJavascript($"javascript:initTicker('{ticker}', {delay.TotalMilliseconds});", null));
-            });
+            _syncLoading.WaitOne();
+            _activity.RunOnUiThread(() =>
+                   _webView.EvaluateJavascript($"javascript:initTicker('{ticker}', {delay.TotalMilliseconds});", null));
         }
 
         ~TickerView()

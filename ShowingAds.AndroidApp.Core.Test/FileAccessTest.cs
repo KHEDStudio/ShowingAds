@@ -27,24 +27,24 @@ namespace ShowingAds.AndroidApp.Core.Test
         }
 
         [Test]
-        public async Task DataStoreTest()
+        public void DataStoreTest()
         {
-            await _store.Save(_data);
+            _store.Save(_data);
             Task.Run(SaveData);
-            await LoadData();
+            LoadData();
         }
 
-        private async Task SaveData()
+        private void SaveData()
         {
             while (Interlocked.Decrement(ref _counter) > 0)
-                await _store.Save(_data);
+                _store.Save(_data);
         }
 
-        private async Task LoadData()
+        private void LoadData()
         {
             while (_counter > 0)
             {
-                var res = await _store.Load();
+                var res = _store.Load();
                 Assert.AreEqual(_data, res);
             }
         }

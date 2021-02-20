@@ -23,7 +23,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections
             Components = new List<T>();
             _enumerator = new RandomEnumerator<T>(Components);
             _store = store ?? throw new ArgumentNullException(nameof(store));
-            Task.Run(LoadComponents);
+            LoadComponents();
         }
 
         public override void Accept(BaseVisitor visitor)
@@ -53,19 +53,19 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections
             _enumerator.RemoveNode((T)component);
         }
 
-        public async Task SaveComponents() => await _store.Save(Components);
+        public void SaveComponents() => _store.Save(Components);
 
-        public async Task LoadComponents()
+        public void LoadComponents()
         {
             try
             {
-                Components = await _store.Load();
+                Components = _store.Load();
                 foreach (var component in Components)
                     _enumerator.AddNode(component);
             }
             catch (Exception ex)
             {
-                await ServerLog.Error("TopCollection", ex.Message);
+                ServerLog.Error("TopCollection", ex.Message);
             }
         }
 

@@ -63,11 +63,11 @@ namespace ShowingAds.AndroidApp
 
             RequestPermissions(listPermissions.ToArray(), REQUEST_CODE);
             RegisterReceiver(new BootCompletedReceiver(), new IntentFilter(Intent.ActionBootCompleted));
-            Task.Factory.StartNew(async () =>
+            new Thread(() =>
             {
-                await Task.Delay(TimeSpan.FromSeconds(10));
-                await LoadApp();
-            }, TaskCreationOptions.LongRunning);
+                //await Task.Delay(TimeSpan.FromSeconds(10));
+                LoadApp();
+            }).Start();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
@@ -77,12 +77,12 @@ namespace ShowingAds.AndroidApp
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private async Task LoadApp()
+        private void LoadApp()
         {
             var loginStore = new ConfigFileStore<LoginDevice>(Settings.GetConfigFilePath("login.config"));
             try
             {
-                await loginStore.Load();
+                loginStore.Load();
                 StartActivity(typeof(VideoActivity));
             }
             catch
