@@ -59,8 +59,6 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public IEnumerable<Video> GetSortedVideos()
         {
-            if (_clients == null)
-                _clients = new List<(LowLevelCollection<Video>, DateTime)>();
             foreach (var (client, orderField) in _clients)
                 if (client.TryGetNext(out var video))
                     yield return video;

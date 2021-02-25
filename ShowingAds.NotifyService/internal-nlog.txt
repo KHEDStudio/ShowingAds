@@ -2160,3 +2160,14 @@
 2020-12-24 11:23:15.2454 Info Adding target FileTarget(Name=ownlog)
 2020-12-24 11:23:15.2657 Info Adding target ColoredConsoleTarget(Name=ownlog)
 2020-12-24 11:23:15.3444 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=/app/bin/Debug/netcoreapp3.1/nlog.config
+2021-02-23 21:56:44.5039 Info Message Template Auto Format enabled
+2021-02-23 21:56:44.5818 Info Loading assembly: NLog.Web.AspNetCore
+2021-02-23 21:56:44.7993 Info Adding target FileTarget(Name=allfile)
+2021-02-23 21:56:44.8464 Info Adding target FileTarget(Name=ownlog)
+2021-02-23 21:56:44.8804 Info Adding target ColoredConsoleTarget(Name=ownlog)
+2021-02-23 21:56:44.9828 Info Validating config: TargetNames=allfile, ownlog, ConfigItems=41, FilePath=D:\KHEDStudio\ShowingAds\ShowingAds.NotifyService\bin\Debug\netcoreapp3.1\nlog.config
+2021-02-23 21:56:47.2523 Info Shutdown() called. Logger closing...
+2021-02-23 21:56:47.2691 Info Closing old configuration.
+2021-02-23 21:56:47.3002 Info Logger has been closed down.
+2021-02-23 21:56:47.3317 Info AppDomain Shutting down. Logger closing...
+2021-02-23 21:56:47.3317 Info Logger has been shut down.

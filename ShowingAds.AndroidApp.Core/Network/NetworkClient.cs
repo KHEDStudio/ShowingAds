@@ -38,12 +38,12 @@ namespace ShowingAds.AndroidApp.Core.Network
             _parser = parser ?? throw new ArgumentNullException(nameof(parser));
             _cookieContainer = cookieContainer ?? throw new ArgumentNullException(nameof(cookieContainer));
             _networkThread = new Thread(() => InitializeHubConnection(hubReconnectionInterval));
-            _networkThread.Start();
             _timerPeriodicRequest = new System.Timers.Timer();
             _timerPeriodicRequest.Elapsed += TimerRequestCallback;
             _timerPeriodicRequest.AutoReset = false;
             _nextRequestTime = DateTime.Now;
             _lastMessageUUID = Guid.Empty;
+            _networkThread.Start();
         }
 
         private void TimerRequestCallback(object sender, ElapsedEventArgs e)
@@ -163,7 +163,8 @@ namespace ShowingAds.AndroidApp.Core.Network
                     {
                         var jsonResponseMessage = responseMessage.Content.ReadAsStringAsync().Result;
                         lock (_syncRoot)
-                            _parser.Parse(jsonResponseMessage);
+                            if (string.IsNullOrEmpty(jsonResponseMessage) == false)
+                                _parser.Parse(jsonResponseMessage);
                     }
                     if (responseMessage.StatusCode == HttpStatusCode.NoContent)
                         lock (_syncRoot)

@@ -35,6 +35,7 @@ namespace ShowingAds.AndroidApp
     public class VideoActivity : AppCompatActivity
     {
         private Thread _loadVideoThread;
+        private Thread _downloadThread;
 
         private VideoView _videoView;
         private TickerView _tickerView;
@@ -119,13 +120,10 @@ namespace ShowingAds.AndroidApp
             {
                 _readyExecutor = new WebClientExecutor<VideoEventArgs>();
                 _readyExecutor.CommandExecuted += ContentVideoDownloaded;
-                _readyExecutor.ProgressChanged += e => RunOnUiThread(() => _logInfo1.Text = $"{e.ProgressPercentage}%");
                 _clientsExecutor = new WebClientExecutor<VideoEventArgs>();
                 _clientsExecutor.CommandExecuted += ClientVideoDownloaded;
-                _clientsExecutor.ProgressChanged += e => RunOnUiThread(() => _logInfo2.Text = $"{e.ProgressPercentage}%");
                 _logotypesExecutor = new WebClientExecutor<LogoEventArgs>();
                 _logotypesExecutor.CommandExecuted += LogotypeDownloaded;
-                _logotypesExecutor.ProgressChanged += e => RunOnUiThread(() => _logInfo3.Text = $"{e.ProgressPercentage}%");
 
                 _loginStore = new ConfigFileStore<LoginDevice>(Settings.GetConfigFilePath("login.config"));
                 _logotypesStore = new ConfigFileStore<(Logotype, Logotype)>(Settings.GetConfigFilePath("logotypes.config"));
@@ -188,8 +186,28 @@ namespace ShowingAds.AndroidApp
                 StartNetworkClient(interval);
                 _advertisingTimer.Start();
                 _diagnosticTimer.Start();
+                _downloadThread.Start();
                 LoadVideo();
             });
+
+            _downloadThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        if (_logotypesExecutor.TryExecuteCommand() == false)
+                            if (_clientsExecutor.TryExecuteCommand() == false)
+                                if (_readyExecutor.TryExecuteCommand() == false)
+                                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    }
+                    catch (Exception ex)
+                    {
+                        ServerLog.Error("DownloadThread", ex.Message);
+                    }
+                }
+            });
+
             _loadVideoThread.Start();
         }
 
@@ -368,28 +386,39 @@ namespace ShowingAds.AndroidApp
             });
         }
 
-        private async void AdvertisingTimerCallback(object sender, System.Timers.ElapsedEventArgs e)
+        private void AdvertisingTimerCallback(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerCounter++;
-            do
+            try
             {
-                _syncIntervals.WaitOne(); _syncOrders.WaitOne(); _syncClients.WaitOne();
-                var visitor = new ClientHandlerVisitor(_timerCounter, HasContentVideos());
-                _intervals.Accept(visitor);
-                _orders.Accept(visitor);
-                _clients.Accept(visitor);
-                var videos = visitor.GetSortedVideos();
-                foreach (var video in videos)
-                    _advertisingVideos.Add(video);
-                var hasAdsVideos = Convert.ToBoolean(videos.ToArray().Length);
-                _syncIntervals.Set(); _syncOrders.Set(); _syncClients.Set();
-                if (hasAdsVideos)
+                _timerCounter++;
+                do
                 {
-                    InterruptContentVideo();
-                    _lastAdsShowed.WaitOne();
-                } else await Task.Delay(TimeSpan.FromSeconds(1));
-            } while (HasContentVideos() == false);
-            _advertisingTimer.Start();
+                    _syncIntervals.WaitOne(); _syncOrders.WaitOne(); _syncClients.WaitOne();
+                    var visitor = new ClientHandlerVisitor(_timerCounter, HasContentVideos());
+                    _intervals.Accept(visitor);
+                    _orders.Accept(visitor);
+                    _clients.Accept(visitor);
+                    var videos = visitor.GetSortedVideos();
+                    foreach (var video in videos)
+                        _advertisingVideos.Add(video);
+                    var hasAdsVideos = Convert.ToBoolean(videos.ToArray().Length);
+                    _syncIntervals.Set(); _syncOrders.Set(); _syncClients.Set();
+                    if (hasAdsVideos)
+                    {
+                        InterruptContentVideo();
+                        _lastAdsShowed.WaitOne();
+                    }
+                    else Thread.Sleep(TimeSpan.FromSeconds(1));
+                } while (HasContentVideos() == false);
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("AdvertisingTimerCallback", ex.Message);
+            }
+            finally
+            {
+                _advertisingTimer.Start();
+            }
         }
 
         private void InterruptContentVideo()

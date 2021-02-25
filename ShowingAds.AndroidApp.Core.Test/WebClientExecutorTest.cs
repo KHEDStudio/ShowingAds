@@ -15,6 +15,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using ShowingAds.AndroidApp.Core.Network.Interfaces;
 
 namespace ShowingAds.AndroidApp.Core.Test
 {
@@ -39,6 +40,7 @@ namespace ShowingAds.AndroidApp.Core.Test
         {
             var executor = new WebClientExecutor<VideoEventArgs>();
             executor.CommandExecuted += VideoDownloaded;
+            RunConsumer(executor);
             foreach (var video in _videos)
             {
                 var address = Settings.GetVideoDownloadUri(video.Value);
@@ -57,6 +59,7 @@ namespace ShowingAds.AndroidApp.Core.Test
         {
             var executor = new WebClientExecutor<VideoEventArgs>();
             executor.CommandExecuted += VideoDownloaded;
+            RunConsumer(executor);
             foreach (var video in _videos)
             {
                 var address = Settings.GetVideoDownloadUri(video.Value);
@@ -72,6 +75,18 @@ namespace ShowingAds.AndroidApp.Core.Test
             executor.Dispose();
             await Task.Delay(TimeSpan.FromSeconds(10));
             Assert.Pass();
+        }
+
+        public void RunConsumer<T>(IExecutor<T> executor)
+        {
+            Task.Run(async () =>
+            {
+                while (true)
+                {
+                    executor.TryExecuteCommand();
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                }
+            });
         }
 
         private void VideoDownloaded(VideoEventArgs obj)

@@ -16,7 +16,6 @@ namespace ShowingAds.AndroidApp.Core.Network
 {
     public class WebClientExecutor<T> : IExecutor<T> where T : EventArgs
     {
-        private Thread _consumerThread;
         private readonly object _syncCurrent = new object();
 
         private IWebClientCommand _current;
@@ -31,19 +30,18 @@ namespace ShowingAds.AndroidApp.Core.Network
         {
             _cancellationToken = new CancellationTokenSource();
             _queue = new BlockingCollection<IWebClientCommand>();
-            _consumerThread = new Thread(() => RunConsumer());
-            _consumerThread.Start();
         }
 
         public void AddCommandToQueue(IWebClientCommand command) => _queue.Add(command);
 
-        private void RunConsumer()
+        public bool TryExecuteCommand()
         {
-            while (_cancellationToken.IsCancellationRequested == false)
+            var isExistsCommand = false;
+            try
             {
-                try
+                isExistsCommand = _queue.TryTake(out var middle);
+                if (isExistsCommand)
                 {
-                    var middle = _queue.Take(_cancellationToken.Token);
                     lock (_syncCurrent)
                     {
                         _current = middle;
@@ -53,28 +51,29 @@ namespace ShowingAds.AndroidApp.Core.Network
                     ProgressChanged?.Invoke(new ProgressChangedEventArgs(_queue.Count, default));
                     _current.Execute();
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                if (_cancellationToken.IsCancellationRequested == false)
                 {
-                    if (_cancellationToken.IsCancellationRequested == false)
-                    {
-                        _queue.Add(_current);
-                        ServerLog.Error("WebClientExecutor", ex.Message);
-                        Thread.Sleep(TimeSpan.FromSeconds(1));
-                    }
+                    _queue.Add(_current);
+                    ServerLog.Error("WebClientExecutor", ex.Message);
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
                 }
-                finally
+            }
+            finally
+            {
+                lock (_syncCurrent)
                 {
-                    lock (_syncCurrent)
+                    if (_current != null)
                     {
-                        if (_current != null)
-                        {
-                            _current.Completed -= CurrentCompleted;
-                            _current.ProgressChanged -= CurrentProgressChanged;
-                            _current = null;
-                        }
+                        _current.Completed -= CurrentCompleted;
+                        _current.ProgressChanged -= CurrentProgressChanged;
+                        _current = null;
                     }
                 }
             }
+            return isExistsCommand;
         }
 
         private void CurrentCompleted(EventArgs obj) => CommandExecuted?.Invoke((T)obj);

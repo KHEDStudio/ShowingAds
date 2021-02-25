@@ -15,6 +15,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Interfaces
         event Action<ProgressChangedEventArgs> ProgressChanged;
 
         void AddCommandToQueue(IWebClientCommand command);
+        bool TryExecuteCommand();
         void Filter(BaseFilter filter);
         void Accept(BaseVisitor visitor);
     }
