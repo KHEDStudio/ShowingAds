@@ -114,7 +114,7 @@
             Channel.LogoLeft = logos[0].Item2.FileGuid;
         if (logos[1].Item1)
             Channel.LogoRight = logos[1].Item2.FileGuid;
-        var isSuccess = await Container.ChannelManager.TryAddOrUpdate(Channel.Id, Channel);
+        var isSuccess = await Container.ChannelManager.TryAddOrUpdateAsync(Channel.Id, Channel);
         if (isSuccess)
             await BlazoredModal.Close(ModalResult.Ok(isSuccess));
         _isLoading = false;

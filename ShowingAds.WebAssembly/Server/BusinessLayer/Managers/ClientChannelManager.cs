@@ -18,27 +18,28 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private ClientChannelManager() : base(new WebProvider<Guid, ClientChannel>(Settings.ClientChannelsPath))
+        private ClientChannelManager() : base(new WebProvider<Guid, ClientChannel>(Settings.ClientChannelsPath), Settings.NotifyChannelPath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
-        {
-            _logger.Info("Update or initialize ClientChannels...");
-            base.UpdateOrInitializeModels();
-        }
-
-        public async Task<IEnumerable<ClientChannel>> GetPermittedModels(List<int> users)
+        public async Task<IEnumerable<ClientChannel>> GetPermittedModelsAsync(IEnumerable<int> users)
         {
             var manager = ChannelManager.GetInstance();
-            var channels = await manager.GetCollection(x => users.Contains(x.OwnerId));
-            return await GetCollection(x => channels.Any(y => y.Id == x.ChannelId));
+            var channels = await manager.GetCollectionAsync(x => users.Contains(x.OwnerId));
+            return await GetCollectionAsync(x => channels.Any(y => y.Id == x.ChannelId));
         }
 
-        public async Task<bool> TryAddOrUpdate(ClientChannel model) =>
-            await TryAddOrUpdate(model.Id, model);
+        public async Task<bool> TryAddOrUpdateAsync(ClientChannel model) =>
+            await TryAddOrUpdateAsync(model.Id, model);
+
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(ClientChannel model)
+        {
+            var channelManager = ChannelManager.GetInstance();
+            var (isSuccess, channel) = await channelManager.TryGetAsync(model.ChannelId);
+            if (isSuccess)
+                return await channelManager.GetSubscribersAsync(channel);
+            return new List<Guid>();
+        }
     }
 }

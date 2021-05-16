@@ -59,7 +59,7 @@ else
                 if (isSuccess)
                 {
                     var newValue = new ContentVideo(response.FileGuid, response.Duration, CollectionId);
-                    await Container.ContentVideoManager.TryAddOrUpdate(newValue.Id, newValue);
+                    await Container.ContentVideoManager.TryAddOrUpdateAsync(newValue.Id, newValue);
                 }
             }
         }
@@ -79,7 +79,7 @@ else
                 if (isSuccess)
                 {
                     var newValue = new AdvertisingVideo(response.FileGuid, response.Duration, CollectionId);
-                    await Container.AdvertisingVideoManager.TryAddOrUpdate(newValue.Id, newValue);
+                    await Container.AdvertisingVideoManager.TryAddOrUpdateAsync(newValue.Id, newValue);
                 }
             }
         }

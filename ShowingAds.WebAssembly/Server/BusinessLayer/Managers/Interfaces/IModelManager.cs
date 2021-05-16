@@ -9,8 +9,8 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers.Interfaces
         where TKey : struct
         where TModel : class, ICloneable
     {
-        public Task<IEnumerable<TModel>> GetPermittedModels(List<int> users);
-        public Task<bool> TryAddOrUpdate(TModel model);
-        public Task<(bool, TModel)> TryDelete(TKey id);
+        public Task<IEnumerable<TModel>> GetPermittedModelsAsync(IEnumerable<int> users);
+        public Task<bool> TryAddOrUpdateAsync(TModel model);
+        public Task<(bool, TModel)> TryDeleteAsync(TKey id);
     }
 }

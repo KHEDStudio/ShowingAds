@@ -37,8 +37,8 @@
 
     private async void OnUpdate()
     {
-        var connections = await Container.ClientChannelManager.GetCollection(x => x.ChannelId == Channel.Id);
-        _сlients = await Container.AdvertisingClientManager.GetCollection(x => connections.Any(y => y.AdvertisingClientId == x.Id) == false);
+        var connections = await Container.ClientChannelManager.GetCollectionAsync(x => x.ChannelId == Channel.Id);
+        _сlients = await Container.AdvertisingClientManager.GetCollectionAsync(x => connections.Any(y => y.AdvertisingClientId == x.Id) == false);
         _сlients = _сlients.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -51,6 +51,6 @@
     private async void AddClient(AdvertisingClient client)
     {
         var connection = new ClientChannel(Guid.NewGuid(), TimeSpan.Zero, Channel.Id, client.Id, default);
-        await Container.ClientChannelManager.TryAddOrUpdate(connection.Id, connection);
+        await Container.ClientChannelManager.TryAddOrUpdateAsync(connection.Id, connection);
     }
 }

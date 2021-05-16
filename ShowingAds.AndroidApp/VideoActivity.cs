@@ -16,18 +16,22 @@ using ShowingAds.AndroidApp.Core.DataAccess.Interfaces;
 using ShowingAds.AndroidApp.Core.Extensions;
 using ShowingAds.AndroidApp.Core.Network;
 using ShowingAds.AndroidApp.Core.Network.Interfaces;
-using ShowingAds.AndroidApp.Core.Network.Models;
 using ShowingAds.AndroidApp.Core.Network.Parsers;
 using ShowingAds.AndroidApp.Core.Network.Parsers.Interfaces;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.ModelEventArgs;
-using ShowingAds.CoreLibrary.Models.Login;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Octane.Xamarin.Forms.VideoPlayer;
+using System.Reflection;
+using System.Diagnostics;
+using System.Collections.Generic;
+using ShowingAds.Shared.Core.Models.Login;
+using ShowingAds.Shared.Core.Models.States;
+using ShowingAds.Shared.Core.Models.Json;
 
 namespace ShowingAds.AndroidApp
 {
@@ -89,6 +93,12 @@ namespace ShowingAds.AndroidApp
         private ConfigFileStore<AutoRebooter> _rebootTimeStore;
         private AutoRebooter _rebootTime;
 
+        private int _downloadType = 0;
+        private int _downloadProgress = 0;
+        private double _downloadSpeed = 0;
+        private long _lastDownloadBytes = 0;
+        private DateTime _lastDownloadUpdate;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -98,7 +108,7 @@ namespace ShowingAds.AndroidApp
             Window.AddFlags(WindowManagerFlags.Fullscreen);
             Window.DecorView.SystemUiVisibility = StatusBarVisibility.Hidden;
 
-            _videoView = FindViewById<VideoView>(Resource.Id.video_display2);
+            _videoView = FindViewById<VideoView>(Resource.Id.video_display);
             _leftLogo = FindViewById<ImageView>(Resource.Id.left_logo_image);
             _rightLogo = FindViewById<ImageView>(Resource.Id.right_logo_image);
 
@@ -116,14 +126,50 @@ namespace ShowingAds.AndroidApp
             _videoView.Completion += VideoShowed;
             _videoView.Error += VideoViewError;
 
+            _downloadThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        if (_logotypesExecutor.TryExecuteCommand() == false)
+                            if (_clientsExecutor.TryExecuteCommand() == false)
+                                if (_readyExecutor.TryExecuteCommand() == false)
+                                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    }
+                    catch (Exception ex)
+                    {
+                        ServerLog.Error("DownloadThread", ex.Message);
+                    }
+                }
+            });
+
             _loadVideoThread = new Thread(() =>
             {
                 _readyExecutor = new WebClientExecutor<VideoEventArgs>();
                 _readyExecutor.CommandExecuted += ContentVideoDownloaded;
+                _readyExecutor.ProgressChanged += e =>
+                {
+                    _downloadType = 2;
+                    _downloadProgress = e.ProgressPercentage;
+                    _downloadSpeed = GetDownloadSpeed(e.BytesReceived);
+                };
                 _clientsExecutor = new WebClientExecutor<VideoEventArgs>();
                 _clientsExecutor.CommandExecuted += ClientVideoDownloaded;
+                _clientsExecutor.ProgressChanged += e =>
+                {
+                    _downloadType = 1;
+                    _downloadProgress = e.ProgressPercentage;
+                    _downloadSpeed = GetDownloadSpeed(e.BytesReceived);
+                };
                 _logotypesExecutor = new WebClientExecutor<LogoEventArgs>();
                 _logotypesExecutor.CommandExecuted += LogotypeDownloaded;
+                _logotypesExecutor.ProgressChanged += e =>
+                {
+                    _downloadType = 0;
+                    _downloadProgress = e.ProgressPercentage;
+                    _downloadSpeed = GetDownloadSpeed(e.BytesReceived);
+                };
 
                 _loginStore = new ConfigFileStore<LoginDevice>(Settings.GetConfigFilePath("login.config"));
                 _logotypesStore = new ConfigFileStore<(Logotype, Logotype)>(Settings.GetConfigFilePath("logotypes.config"));
@@ -137,7 +183,7 @@ namespace ShowingAds.AndroidApp
 
                 _advertisingTimer = new System.Timers.Timer();
                 _advertisingTimer.Elapsed += AdvertisingTimerCallback;
-                _advertisingTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
+                _advertisingTimer.Interval = TimeSpan.FromMilliseconds(1).TotalMilliseconds;
                 _advertisingTimer.AutoReset = false;
 
                 var readyVideosDeveloper = new ReadyVideosDeveloper();
@@ -183,70 +229,138 @@ namespace ShowingAds.AndroidApp
                 }
                 var seconds = (5, 10).RandomNumber();
                 var interval = TimeSpan.FromSeconds(seconds);
-                StartNetworkClient(interval);
+                ServerLog.Debug("VideoActivity", "Start network client");
+                new Thread(() => StartNetworkClient(interval)).Start();
                 _advertisingTimer.Start();
                 _diagnosticTimer.Start();
                 _downloadThread.Start();
+                ServerLog.Debug("VideoActivity", "Start cycle video");
                 LoadVideo();
-            });
-
-            _downloadThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (_logotypesExecutor.TryExecuteCommand() == false)
-                            if (_clientsExecutor.TryExecuteCommand() == false)
-                                if (_readyExecutor.TryExecuteCommand() == false)
-                                    Thread.Sleep(TimeSpan.FromSeconds(1));
-                    }
-                    catch (Exception ex)
-                    {
-                        ServerLog.Error("DownloadThread", ex.Message);
-                    }
-                }
             });
 
             _loadVideoThread.Start();
         }
 
+        private double GetDownloadSpeed(long bytes)
+        {
+            if (_lastDownloadBytes == 0)
+            {
+                _lastDownloadUpdate = DateTime.Now;
+                _lastDownloadBytes = bytes;
+                return 0;
+            }
+
+            var now = DateTime.Now;
+            var deltaTime = now - _lastDownloadUpdate;
+            var deltaBytes = bytes - _lastDownloadBytes;
+            var downloadSpeed = deltaBytes / (deltaTime.TotalMilliseconds / 1000);
+
+            _lastDownloadBytes = bytes;
+            _lastDownloadUpdate = now;
+
+            return downloadSpeed;
+        }
+
+        private string GetAppVersionName()
+        {
+            try
+            {
+                var appContext = Application.Context;
+                var packageManager = appContext.PackageManager;
+                var versionName = packageManager.GetPackageInfo(
+                    appContext.PackageName, 0).VersionName;
+                return versionName;
+            }
+            catch
+            {
+                return "1.0";
+            }
+        }
+
         private void DiagnosticCallback(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var readyVisitor = new VideosCounterVisitor();
-            _syncContents.WaitOne();
-            _readyVideos.Accept(readyVisitor);
-            _syncContents.Set();
+            try
+            {
+                _syncContents.WaitOne();
+                var readyVisitor = new VideosCounterVisitor();
+                _readyVideos.Accept(readyVisitor);
 
-            var info = new DiagnosticInfo(readyVisitor.TotalVideos);
-            _networkClient.SetDiagnosticInfo(info);
+                var logs = new List<string>();
+                while (ServerLog.ErrorLogs.TryTake(out var log))
+                    logs.Add(log);
+
+                var info = new DiagnosticInfo(GetAppVersionName(), readyVisitor.TotalVideos, _downloadType, _downloadProgress, _downloadSpeed);
+                if (_networkClient != null)
+                    _networkClient.SetDiagnosticInfo(info);
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("DiagnosticCallback", ex.Message);
+            }
+            finally
+            {
+                _syncContents.Set();
+            }
         }
 
         private void LogotypeDownloaded(LogoEventArgs obj)
         {
-            _syncLogotypes.WaitOne();
-            obj.IsLeft.IfTrue(() => _logotypes.Item1 = new Logotype(obj.Id, true, obj.LogoPath));
-            obj.IsLeft.IfFalse(() => _logotypes.Item2 = new Logotype(obj.Id, false, obj.LogoPath));
-            _logotypesStore.Save(_logotypes);
-            UpdateLogotypes();
-            _syncLogotypes.Set();
+            try
+            {
+                _syncLogotypes.WaitOne();
+                _lastDownloadBytes = 0;
+                obj.IsLeft.IfTrue(() => _logotypes.Item1 = new Logotype(obj.Id, true, obj.LogoPath));
+                obj.IsLeft.IfFalse(() => _logotypes.Item2 = new Logotype(obj.Id, false, obj.LogoPath));
+                _logotypesStore.Save(_logotypes);
+                UpdateLogotypes();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("LogotypeDownloaded", ex.Message);
+            }
+            finally
+            {
+                _syncLogotypes.Set();
+            }
         }
 
         private void ClientVideoDownloaded(VideoEventArgs obj)
         {
-            _syncClients.WaitOne();
-            var visitor = new AddingVideoVisitor(obj);
-            _clients.Accept(visitor);
-            _clients.SaveComponents();
-            _syncClients.Set();
+            try
+            {
+                _syncClients.WaitOne();
+                _lastDownloadBytes = 0;
+                var visitor = new AddingVideoVisitor(obj);
+                _clients.Accept(visitor);
+                _clients.SaveComponents();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("ClientVideoDownloaded", ex.Message);
+            }
+            finally
+            {
+                _syncClients.Set();
+            }
         }
 
         private void ContentVideoDownloaded(VideoEventArgs obj)
         {
-            _syncContents.WaitOne();
-            _readyVideos.Add(new Video(obj.Id, obj.VideoPath));
-            _readyVideos.SaveComponents();
-            _syncContents.Set();
+            try
+            {
+                _syncContents.WaitOne();
+                _lastDownloadBytes = 0;
+                _readyVideos.Add(new Video(obj.Id, obj.VideoPath));
+                _readyVideos.SaveComponents();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("ContentVideoDownloaded", ex.Message);
+            }
+            finally
+            {
+                _syncContents.Set();
+            }
         }
 
         private void StartNetworkClient(TimeSpan interval)
@@ -273,88 +387,158 @@ namespace ShowingAds.AndroidApp
 
         private void RebootTimeParsed(TimeSpan obj)
         {
-            _syncRebootTime.WaitOne();
-            _rebootTime.RebootTime = obj;
-            _rebootTimeStore.Save(_rebootTime);
-            _syncRebootTime.Set();
+            try
+            {
+                _syncRebootTime.WaitOne();
+                _rebootTime.RebootTime = obj;
+                _rebootTimeStore.Save(_rebootTime);
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("RebootTimeParsed", ex.Message);
+            }
+            finally
+            {
+                _syncRebootTime.Set();
+            }
         }
 
         private void TickerParsed(string arg1, TimeSpan arg2)
         {
-            _syncTicker.WaitOne();
-            if (arg1 != _ticker.Item1 || arg2 != _ticker.Item2)
+            try
             {
-                _ticker = (arg1, arg2);
-                _tickerView.SetTickerAsync(arg1, arg2);
-                _tickerStore.Save(_ticker);
+                _syncTicker.WaitOne();
+                if (arg1 != _ticker.Item1 || arg2 != _ticker.Item2)
+                {
+                    _ticker = (arg1, arg2);
+                    _tickerView.SetTickerAsync(arg1, arg2);
+                    _tickerStore.Save(_ticker);
+                }
             }
-            _syncTicker.Set();
+            catch (Exception ex)
+            {
+                ServerLog.Error("TickerParsed", ex.Message);
+            }
+            finally
+            {
+                _syncTicker.Set();
+            }
         }
 
         private void LogotypesParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
-            _logotypesExecutor.Filter(obj);
-            _syncLogotypes.WaitOne();
-            _logotypes.Item1.IsValid(obj).IfFalse(() =>
+            try
             {
-                _logotypes.Item1 = new Logotype(Guid.Empty, true, string.Empty);
-                UpdateLogotypes();
-            });
-            _logotypes.Item2.IsValid(obj).IfFalse(() =>
+                _syncLogotypes.WaitOne();
+                _logotypesExecutor.Filter(obj);
+                _logotypes.Item1.IsValid(obj).IfFalse(() =>
+                {
+                    _logotypes.Item1 = new Logotype(Guid.Empty, true, string.Empty);
+                    UpdateLogotypes();
+                });
+                _logotypes.Item2.IsValid(obj).IfFalse(() =>
+                {
+                    _logotypes.Item2 = new Logotype(Guid.Empty, false, string.Empty);
+                    UpdateLogotypes();
+                });
+                _logotypesStore.Save(_logotypes);
+                foreach (var command in obj.GetDownloadCommands())
+                    _logotypesExecutor.AddCommandToQueue(command);
+            }
+            catch (Exception ex)
             {
-                _logotypes.Item2 = new Logotype(Guid.Empty, false, string.Empty);
-                UpdateLogotypes();
-            });
-            _logotypesStore.Save(_logotypes);
-            _syncLogotypes.Set();
-            foreach (var command in obj.GetDownloadCommands())
-                _logotypesExecutor.AddCommandToQueue(command);
+                ServerLog.Error("LogotypesParsed", ex.Message);
+            }
+            finally
+            {
+                _syncLogotypes.Set();
+            }
         }
 
         private void OrdersParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
-            _syncOrders.WaitOne();
-            _orders.IsValid(obj);
-            foreach (var visitor in obj.GetVisitors())
-                _orders.Accept(visitor);
-            _orders.SaveComponents();
-            _syncOrders.Set();
+            try
+            {
+                _syncOrders.WaitOne();
+                _orders.IsValid(obj);
+                foreach (var visitor in obj.GetVisitors())
+                    _orders.Accept(visitor);
+                _orders.SaveComponents();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("OrdersParsed", ex.Message);
+            }
+            finally
+            {
+                _syncOrders.Set();
+            }
         }
 
         private void ClientIntervalsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
-            _syncIntervals.WaitOne();
-            _intervals.IsValid(obj);
-            foreach (var visitor in obj.GetVisitors())
-                _intervals.Accept(visitor);
-            _intervals.SaveComponents();
-            _syncIntervals.Set();
+            try
+            {
+                _syncIntervals.WaitOne();
+                _intervals.IsValid(obj);
+                foreach (var visitor in obj.GetVisitors())
+                    _intervals.Accept(visitor);
+                _intervals.SaveComponents();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("ClientIntervalsParsed", ex.Message);
+            }
+            finally
+            {
+                _syncIntervals.Set();
+            }
         }
 
         private void ClientsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
-            _clientsExecutor.Filter(obj);
-            _syncClients.WaitOne();
-            _clients.IsValid(obj);
-            _clients.SaveComponents();
-            _syncClients.Set();
-            foreach (var command in obj.GetDownloadCommands())
-                _clientsExecutor.AddCommandToQueue(command);
+            try
+            {
+                _syncClients.WaitOne();
+                _clientsExecutor.Filter(obj);
+                _clients.IsValid(obj);
+                _clients.SaveComponents();
+                foreach (var command in obj.GetDownloadCommands())
+                    _clientsExecutor.AddCommandToQueue(command);
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("ClientsParsed", ex.Message);
+            }
+            finally
+            {
+                _syncClients.Set();
+            }
         }
 
         private void ContentsParsed(Core.Network.WebClientCommands.Filters.BaseFilter obj)
         {
-            _syncContents.WaitOne();
-            _contents.IsValid(obj);
-            foreach (var visitor in obj.GetVisitors())
-                _contents.Accept(visitor);
-            _contents.SaveComponents();
+            try
+            {
+                _syncContents.WaitOne();
+                _contents.IsValid(obj);
+                foreach (var visitor in obj.GetVisitors())
+                    _contents.Accept(visitor);
+                _contents.SaveComponents();
 
-            _readyExecutor.Filter(obj);
+                _readyExecutor.Filter(obj);
 
-            _readyVideos.IsValid(obj);
-            _readyVideos.SaveComponents();
-            _syncContents.Set();
+                _readyVideos.IsValid(obj);
+                _readyVideos.SaveComponents();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("ContentsParsed", ex.Message);
+            }
+            finally
+            {
+                _syncContents.Set();
+            }
         }
 
         private bool IsLogined(ILoginer loginer)
@@ -393,16 +577,29 @@ namespace ShowingAds.AndroidApp
                 _timerCounter++;
                 do
                 {
-                    _syncIntervals.WaitOne(); _syncOrders.WaitOne(); _syncClients.WaitOne();
-                    var visitor = new ClientHandlerVisitor(_timerCounter, HasContentVideos());
-                    _intervals.Accept(visitor);
-                    _orders.Accept(visitor);
-                    _clients.Accept(visitor);
-                    var videos = visitor.GetSortedVideos();
-                    foreach (var video in videos)
-                        _advertisingVideos.Add(video);
-                    var hasAdsVideos = Convert.ToBoolean(videos.ToArray().Length);
-                    _syncIntervals.Set(); _syncOrders.Set(); _syncClients.Set();
+                    bool hasAdsVideos = false;
+                    try
+                    {
+                        ServerLog.Debug("VideoActivity", "Client cycle!");
+                        _syncIntervals.WaitOne(); _syncOrders.WaitOne(); _syncClients.WaitOne();
+                        var visitor = new ClientHandlerVisitor(_timerCounter, HasContentVideos());
+                        _intervals.Accept(visitor);
+                        _orders.Accept(visitor);
+                        _clients.Accept(visitor);
+                        var videos = visitor.GetSortedVideos();
+                        foreach (var video in videos)
+                            _advertisingVideos.Add(video);
+                        hasAdsVideos = Convert.ToBoolean(videos.ToArray().Length);
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        _syncIntervals.Set(); _syncOrders.Set(); _syncClients.Set();
+                    }
+                    
                     if (hasAdsVideos)
                     {
                         InterruptContentVideo();
@@ -417,94 +614,128 @@ namespace ShowingAds.AndroidApp
             }
             finally
             {
+                _advertisingTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
                 _advertisingTimer.Start();
             }
         }
 
         private void InterruptContentVideo()
         {
-            lock (_syncCurrentReservedVideos)
+            RunOnUiThread(() =>
             {
-                if (_currentVideo.Item2 != null && _currentVideo.Item1)
+                lock (_syncCurrentReservedVideos)
                 {
-                    RunOnUiThread(_videoView.StopPlayback);
-                    _reservedVideo = (_currentVideo.Item1, _currentVideo.Item2, _videoView.CurrentPosition);
-                    _currentVideo = (false, null);
+                    if (_currentVideo.Item2 != null && _currentVideo.Item1)
+                    {
+                        _reservedVideo = (_currentVideo.Item1, _currentVideo.Item2, _videoView.CurrentPosition);
+                        _videoView.StopPlayback();
+                        _currentVideo = (false, null);
+                    }
                     _videoShowed.Set();
                 }
-            }
+            });
         }
 
         private bool HasContentVideos()
         {
-            _syncContents.WaitOne();
-            var hasContentVideos = Convert.ToBoolean(_contents.Components.Count);
-            _syncContents.Set();
-            return hasContentVideos;
+            try
+            {
+                _syncContents.WaitOne();
+                var hasContentVideos = Convert.ToBoolean(_contents.Components.Count);
+                return hasContentVideos;
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("HasContentVideos", ex.Message);
+            }
+            finally
+            {
+                _syncContents.Set();
+            }
+            return false;
         }
 
         private bool TryGetReadyVideo(out Video video)
         {
-            _syncContents.WaitOne();
-            var visitor = new VideosCounterVisitor();
-            _contents.Accept(visitor);
-
-            var readyVisitor = new VideosCounterVisitor();
-            _readyExecutor.Accept(readyVisitor);
-            _readyVideos.Accept(readyVisitor);
-
-            ServerLog.Debug("TryGetReadyVideo", $"TotalVideos {visitor.TotalVideos} downloaded videos {_readyVideos.Components.Count}");
-
-            while (readyVisitor.TotalVideos < Settings.MaxReadyVideos + 5
-                && visitor.TotalVideos > readyVisitor.TotalVideos
-                && _contents.TryGetNext(out var category))
+            try
             {
-                var isSuccess = category.TryGetRandom(out var firstVideo);
-                if (isSuccess)
-                {
-                    var secondVideo = firstVideo;
-                    do
-                    {
-                        var finderVisitor = new VideoFinder(secondVideo.Id);
-                        _readyExecutor.Accept(finderVisitor);
-                        _readyVideos.Accept(finderVisitor);
-                        if (finderVisitor.IsFound == false)
-                        {
-                            _readyExecutor.AddCommandToQueue(new VideoDownloadCommand(Settings.GetVideoDownloadUri(secondVideo.Id),
-                                Settings.GetVideoFilesPath(secondVideo.Id), category.Id, new CoreLibrary.Models.Json.VideoJson(secondVideo.Id)));
-                            break;
-                        }
-                    } while (category.TryGetNext(out secondVideo) && firstVideo.Id != secondVideo.Id);
-                }
+                _syncContents.WaitOne();
+                var visitor = new VideosCounterVisitor();
+                _contents.Accept(visitor);
 
-                readyVisitor = new VideosCounterVisitor();
+                var readyVisitor = new VideosCounterVisitor();
                 _readyExecutor.Accept(readyVisitor);
                 _readyVideos.Accept(readyVisitor);
+
+                ServerLog.Debug("TryGetReadyVideo", $"TotalVideos {visitor.TotalVideos} downloaded videos {_readyVideos.Components.Count}");
+
+                while (readyVisitor.TotalVideos < Settings.MaxReadyVideos
+                    && visitor.TotalVideos > readyVisitor.TotalVideos
+                    && _contents.TryGetNext(out var category))
+                {
+                    var isSuccess = category.TryGetRandom(out var firstVideo);
+                    if (isSuccess)
+                    {
+                        var secondVideo = firstVideo;
+                        do
+                        {
+                            var finderVisitor = new VideoFinder(secondVideo.Id);
+                            _readyExecutor.Accept(finderVisitor);
+                            _readyVideos.Accept(finderVisitor);
+                            if (finderVisitor.IsFound == false)
+                            {
+                                _readyExecutor.AddCommandToQueue(new VideoDownloadCommand(Settings.GetVideoDownloadUri(secondVideo.Id),
+                                    Settings.GetVideoFilesPath(secondVideo.Id), category.Id, new VideoJson(secondVideo.Id)));
+                                break;
+                            }
+                        } while (category.TryGetNext(out secondVideo) && firstVideo.Id != secondVideo.Id);
+                    }
+
+                    readyVisitor = new VideosCounterVisitor();
+                    _readyExecutor.Accept(readyVisitor);
+                    _readyVideos.Accept(readyVisitor);
+                }
+                return _readyVideos.TryGetNext(out video);
             }
-            _syncContents.Set();
-            return _readyVideos.TryGetNext(out video);
+            catch (Exception ex)
+            {
+                ServerLog.Error("TryGetReadyVideo", ex.Message);
+            }
+            finally
+            {
+                _syncContents.Set();
+            }
+            video = null;
+            return false;
         }
 
         private void LoadVideo()
         {
             while (_advertisingVideos.IsAddingCompleted == false)
             {
-                ServerLog.Debug("LoadVideo", "Start");
-                _videoShowed.WaitOne();
-                Video video;
-                int duration = 0;
-                bool isContentVideo = false;
-                while (_advertisingVideos.TryTake(out video) == false
-                    && (isContentVideo = TryGetReservedVideo(out video, out duration)) == false
-                    && (isContentVideo = TryGetReadyVideo(out video)) == false)
+                try
                 {
-                    ServerLog.Debug("LoadVideo", "No videos");
-                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    ServerLog.Debug("LoadVideo", "Start");
+                    _videoShowed.WaitOne();
+                    Video video;
+                    int duration = 0;
+                    bool isContentVideo = false;
+                    while (_advertisingVideos.TryTake(out video) == false
+                        && (isContentVideo = TryGetReservedVideo(out video, out duration)) == false
+                        && (isContentVideo = TryGetReadyVideo(out video)) == false)
+                    {
+                        ServerLog.Debug("LoadVideo", "No videos");
+                        Thread.Sleep(TimeSpan.FromSeconds(1));
+                    }
+                    lock (_syncCurrentReservedVideos)
+                    {
+                        _currentVideo = (isContentVideo, video);
+                        StartVideo(video.VideoPath, duration);
+                    }
                 }
-                lock (_syncCurrentReservedVideos)
+                catch (Exception ex)
                 {
-                    _currentVideo = (isContentVideo, video);
-                    StartVideo(video.VideoPath, duration);
+                    ServerLog.Error("LoadVideo", ex.Message);
                 }
             }
         }
@@ -541,23 +772,51 @@ namespace ShowingAds.AndroidApp
         {
             lock (_syncCurrentReservedVideos)
             {
-                if (_currentVideo.Item2 != null)
+                try
                 {
-                    if (_currentVideo.Item1)
+                    if (_currentVideo.Item2 != null)
                     {
-                        _syncContents.WaitOne();
-                        var readyVisitor = new VideosCounterVisitor();
-                        _readyVideos.Accept(readyVisitor);
-                        if (readyVisitor.TotalVideos >= Settings.MaxReadyVideos)
-                            _readyVideos.Remove(_readyVideos.Components.First());
-                        _syncContents.Set();
+                        if (_currentVideo.Item1)
+                        {
+                            try
+                            {
+                                _syncContents.WaitOne();
+                                var readyVisitor = new VideosCounterVisitor();
+                                _readyVideos.Accept(readyVisitor);
+                                while (readyVisitor.TotalVideos >= Settings.MaxReadyVideos)
+                                {
+                                    var video = _readyVideos.Components.First();
+                                    video.DeleteVideoFile();
+                                    _readyVideos.Remove(video);
+                                    _readyVideos.SaveComponents();
+
+                                    readyVisitor = new VideosCounterVisitor();
+                                    _readyVideos.Accept(readyVisitor);
+                                }
+                            }
+                            catch
+                            {
+                                throw;
+                            }
+                            finally
+                            {
+                                _syncContents.Set();
+                            }
+                        }
+                        else
+                        {
+                            if (_advertisingVideos.Count == 0)
+                                _lastAdsShowed.Set();
+                        }
+                        _currentVideo = (false, null);
                     }
-                    else
-                    {
-                        if (_advertisingVideos.Count == 0)
-                            _lastAdsShowed.Set();
-                    }
-                    _currentVideo = (false, null);
+                }
+                catch (Exception ex)
+                {
+                    ServerLog.Error("VideoHandler", ex.Message);
+                }
+                finally
+                {
                     _videoShowed.Set();
                 }
             }

@@ -11,12 +11,12 @@ namespace ShowingAds.DevicesService.BusinessLayer.Interfaces
 {
     public interface IDeviceManager
     {
-        public Task<ChannelJson> GetChannelJson(Guid channelId);
-        public Task<bool> SetDeviceStatus(Guid deviceId, DeviceStatus status);
-        public Task<bool> SetTotalContentVideos(Guid deviceId, int count);
-        public Task<bool> TryChoosePriorityClient(Guid deviceId, Guid clientId);
-        public Task<bool> TryUpdateDevice(Device device);
-        public Task<(bool, DeviceState)> TryGet(Guid deviceId);
-        public Task NotifyServer(DeviceState device);
+        public Task<ChannelJson> GetChannelJsonAsync(Guid channelId);
+        public Task<bool> SetDeviceStatusAsync(Guid deviceId, DeviceStatus status);
+        public Task<bool> SetDiagnosticInfoAsync(Guid deviceId, DiagnosticInfo info);
+        public Task<bool> TryChoosePriorityClientAsync(Guid deviceId, Guid clientId);
+        public Task<bool> TryUpdateDeviceAsync(Device device);
+        public Task<(bool, DeviceState)> TryGetAsync(Guid deviceId);
+        public Task NotifyClientsServiceAsync(DeviceState device);
     }
 }

@@ -11,65 +11,59 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
 namespace ShowingAds.NotifyService.BusinessLayer
 {
-    public sealed class ClientManager : ModelManager<Guid, ClientConnections, ClientManager>, IClientManager, INotifier
+    public sealed class ClientManager : SaveModelManager<Guid, ClientConnections, ClientManager>, IClientManager, INotifier
     {
         private Logger _logger { get; }
-        private AsyncLock _syncMutex { get; }
 
         public event Action<NotifySender> Notify;
 
         private ClientManager() : base(new EmptyProvider<Guid, ClientConnections>())
         {
             _logger = LogManager.GetCurrentClassLogger();
-            _syncMutex = new AsyncLock();
-            UpdateOrInitializeModels();
+            UpdateOrInitializeModelsAsync().Wait();
         }
 
-        protected override void UpdateOrInitializeModels()
+        protected async override Task UpdateOrInitializeModelsAsync()
         {
+            await Task.Yield();
             _logger.Info("Initialize client manager...");
         }
 
         public async Task AddClient(Guid clientId, string connectionId)
         {
-            using (await _syncMutex.LockAsync())
+            (var isExists, var client) = await TryGetAsync(clientId);
+            if (isExists)
             {
-                (var isExists, var client) = await TryGet(clientId);
-                if (isExists)
-                {
-                    client.Connections.Add(connectionId);
-                    await TryAddOrUpdate(clientId, client);
-                }
-                else
-                {
-                    var connections = new List<string>();
-                    connections.Add(connectionId);
-                    client = new ClientConnections(clientId, connections);
-                    await TryAddOrUpdate(clientId, client);
-                }
-                NotifyConnectionStatus(clientId, DeviceStatus.Online);
+                client.Connections.Add(connectionId);
+                await TryAddOrUpdateAsync(clientId, client);
             }
+            else
+            {
+                var connections = new List<string>();
+                connections.Add(connectionId);
+                client = new ClientConnections(clientId, connections);
+                await TryAddOrUpdateAsync(clientId, client);
+            }
+            await NotifyConnectionStatus(clientId, DeviceStatus.Online);
         }
 
         public async Task RemoveClient(string connectionId)
         {
-            using (await _syncMutex.LockAsync())
+            (var isExists, var client) = await TryGetAsync(x => x.Connections.Contains(connectionId));
+            if (isExists)
             {
-                (var isExists, var client) = await TryGet(x => x.Connections.Contains(connectionId));
-                if (isExists)
-                {
-                    client.Connections.Remove(connectionId);
-                    if (client.Connections.Count > 0)
-                        await TryAddOrUpdate(client.Client, client);
-                    else await TryDelete(client.Client);
-                }
-                NotifyConnectionStatus(client.Client, DeviceStatus.Offline);
+                client.Connections.Remove(connectionId);
+                if (client.Connections.Count > 0)
+                    await TryAddOrUpdateAsync(client.Client, client);
+                else await TryDeleteAsync(client.Client);
             }
+            await NotifyConnectionStatus(client.Client, DeviceStatus.Offline);
         }
 
         private async Task NotifyConnectionStatus(Guid deviceId, DeviceStatus status)
@@ -83,15 +77,12 @@ namespace ShowingAds.NotifyService.BusinessLayer
 
         public void AddNotifyTask(NotifySender task) => Notify?.Invoke(task);
 
-        public async Task<(bool, IEnumerable<string>)> TryGetConnections(Guid clientId)
+        public async Task<(bool, IEnumerable<string>)> TryGetConnectionsAsync(Guid clientId)
         {
-            using (await _syncMutex.LockAsync())
-            {
-                (var isExists, var client) = await TryGet(clientId);
-                if (isExists)
-                    return (true, client.Connections);
-                else return (false, default);
-            }
+            (var isExists, var client) = await TryGetAsync(clientId);
+            if (isExists)
+                return (true, client.Connections);
+            else return (false, default);
         }
     }
 }

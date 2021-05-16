@@ -153,9 +153,9 @@
       <Project>{6be8aa8d-0f40-42be-a745-2d42d931e9e7}</Project>
       <Name>ShowingAds.AndroidApp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.CoreLibrary.csproj">
+    <ProjectReference Include="..\ShowingAds.Shared.Core\ShowingAds.Shared.Core.csproj">
       <Project>{ed934be1-24cc-46fb-ac62-2090077ae4b0}</Project>
-      <Name>ShowingAds.CoreLibrary</Name>
+      <Name>ShowingAds.Shared.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -59,9 +59,13 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections
         {
             try
             {
-                Components = _store.Load();
-                foreach (var component in Components)
+                var loadedComponents = _store.Load() ?? new List<T>();
+
+                foreach (var component in loadedComponents)
+                {
+                    Components.Add(component);
                     _enumerator.AddNode(component);
+                }
             }
             catch (Exception ex)
             {

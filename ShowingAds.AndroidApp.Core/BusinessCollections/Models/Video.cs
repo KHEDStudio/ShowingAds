@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using ShowingAds.AndroidApp.Core.BusinessCollections.Visitors;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters;
-using ShowingAds.CoreLibrary.Converters;
+using ShowingAds.Shared.Core.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,15 +33,14 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Models
         public override bool IsValid(BaseFilter filter)
         {
             var isValid = filter.FilterVideo(this);
-            if (isValid == false)
-                Task.Run(DeleteVideoFile);
             return isValid;
         }
 
-        private void DeleteVideoFile()
+        public void DeleteVideoFile()
         {
             try
             {
+                ServerLog.Debug("Next request", "video file delete");
                 if (VideoPath != string.Empty)
                     File.Delete(VideoPath);
             }
@@ -52,5 +51,10 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Models
         }
 
         public override Guid GetId() => Id;
+
+        ~Video()
+        {
+            DeleteVideoFile();
+        }
     }
 }

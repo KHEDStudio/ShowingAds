@@ -19,7 +19,7 @@ using System.Timers;
 
 namespace ShowingAds.DevicesService.BusinessLayer
 {
-    public sealed class DeviceManager : ModelManager<Guid, DeviceState, DeviceManager>, IDeviceManager
+    public sealed class DeviceManager : SaveModelManager<Guid, DeviceState, DeviceManager>, IDeviceManager
     {
         private Logger _logger { get; }
         private AsyncLock _syncLock { get; set; }
@@ -28,24 +28,33 @@ namespace ShowingAds.DevicesService.BusinessLayer
         {
             _logger = LogManager.GetCurrentClassLogger();
             _syncLock = new AsyncLock();
-            UpdateOrInitializeModels();
+            UpdateOrInitializeModelsAsync().Wait();
         }
 
-        protected async override void UpdateOrInitializeModels()
+        protected async override Task UpdateOrInitializeModelsAsync()
         {
             _logger.Info("Initialize devices...");
-            using (await _mutex.LockAsync())
+            try
             {
-                var devices = await _provider.GetModels();
+                _mutex.WaitOne();
+                var devices = await _provider.GetModelsAsync();
                 foreach (var model in devices)
                 {
                     model.DeviceStatus = DeviceStatus.Offline;
                     _models.Add(model.GetKey(), model);
                 }
             }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                _mutex.Set();
+            }
         }
 
-        public async Task<ChannelJson> GetChannelJson(Guid channelId)
+        public async Task<ChannelJson> GetChannelJsonAsync(Guid channelId)
         {
             try
             {
@@ -67,19 +76,19 @@ namespace ShowingAds.DevicesService.BusinessLayer
             return default;
         }
 
-        public async Task<bool> SetDeviceStatus(Guid deviceId, DeviceStatus status)
+        public async Task<bool> SetDeviceStatusAsync(Guid deviceId, DeviceStatus status)
         {
             using (await _syncLock.LockAsync())
             {
-                var (isExists, deviceState) = await TryGet(deviceId);
+                var (isExists, deviceState) = await TryGetAsync(deviceId);
                 if (isExists)
                 {
                     deviceState.DeviceStatus = status;
                     deviceState.LastOnline = DateTime.Now;
-                    var isSuccess = await TryAddOrUpdate(deviceState.Id, deviceState);
+                    var isSuccess = await TryAddOrUpdateAsync(deviceState.Id, deviceState);
                     if (isSuccess)
                     {
-                        NotifyServer(deviceState);
+                        await NotifyClientsServiceAsync(deviceState);
                         return isSuccess;
                     }
                 }
@@ -87,18 +96,18 @@ namespace ShowingAds.DevicesService.BusinessLayer
             }
         }
 
-        public async Task<bool> SetTotalContentVideos(Guid deviceId, int count)
+        public async Task<bool> SetDiagnosticInfoAsync(Guid deviceId, DiagnosticInfo info)
         {
             using (await _syncLock.LockAsync())
             {
-                var (isExists, deviceState) = await TryGet(deviceId);
+                var (isExists, deviceState) = await TryGetAsync(deviceId);
                 if (isExists)
                 {
-                    deviceState.TotalContents = count;
-                    var isSuccess = await TryAddOrUpdate(deviceState.Id, deviceState);
+                    deviceState.DiagnosticInfo = info;
+                    var isSuccess = await TryAddOrUpdateAsync(deviceState.Id, deviceState);
                     if (isSuccess)
                     {
-                        NotifyServer(deviceState);
+                        await NotifyClientsServiceAsync(deviceState);
                         return isSuccess;
                     }
                 }
@@ -106,35 +115,35 @@ namespace ShowingAds.DevicesService.BusinessLayer
             }
         }
 
-        public async Task<bool> TryUpdateDevice(Device device)
+        public async Task<bool> TryUpdateDeviceAsync(Device device)
         {
             using (await _syncLock.LockAsync())
             {
-                (var isExists, var deviceState) = await TryGet(device.Id);
+                (var isExists, var deviceState) = await TryGetAsync(device.Id);
                 if (isExists)
                 {
                     var newDeviceState = new DeviceState(device, deviceState);
-                    return await TryAddOrUpdate(newDeviceState.Id, newDeviceState);
+                    return await TryAddOrUpdateAsync(newDeviceState.Id, newDeviceState);
                 }
                 return false;
             }
         }
 
-        public async Task<bool> TryChoosePriorityClient(Guid deviceId, Guid clientId)
+        public async Task<bool> TryChoosePriorityClientAsync(Guid deviceId, Guid clientId)
         {
             using (await _syncLock.LockAsync())
             {
-                (var isExists, var deviceState) = await TryGet(deviceId);
+                (var isExists, var deviceState) = await TryGetAsync(deviceId);
                 if (isExists)
                 {
                     deviceState.PriorityAdvertisingClient = clientId;
-                    return await TryAddOrUpdate(deviceState.Id, deviceState);
+                    return await TryAddOrUpdateAsync(deviceState.Id, deviceState);
                 }
                 return false;
             }
         }
 
-        public async Task NotifyServer(DeviceState device)
+        public async Task NotifyClientsServiceAsync(DeviceState device)
         {
             try
             {

@@ -1,4 +1,4 @@
-﻿using ShowingAds.AndroidApp.Core.Network.Models;
+﻿using ShowingAds.Shared.Core.Models.States;
 using System;
 using System.Collections.Generic;
 using System.Text;

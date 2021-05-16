@@ -41,14 +41,14 @@
 
     private async void OnUpdate()
     {
-        var (isSuccess, user) = await Container.UserManager.TryGet(Content.OwnerId);
+        var (isSuccess, user) = await Container.UserManager.TryGetAsync(Content.OwnerId);
         if (isSuccess)
         {
             _red = user.Red;
             _green = user.Green;
             _blue = user.Blue;
         }
-        var videos = await Container.ContentVideoManager.GetCollection(x => x.ContentId == Content.Id);
+        var videos = await Container.ContentVideoManager.GetCollectionAsync(x => x.ContentId == Content.Id);
         _duration = new TimeSpan(videos.Sum(video => video.Duration.Ticks));
         _count = videos.Count();
         await InvokeAsync(() => StateHasChanged());

@@ -68,7 +68,7 @@ else
     private async void OnUpdate()
     {
         //await JSRuntime.InvokeVoidAsync("CollapseHide");
-        _channels = await Container.ChannelManager.GetCollection(x => true);
+        _channels = await Container.ChannelManager.GetCollectionAsync(x => true);
         _channels = _channels.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
         await JSRuntime.InvokeVoidAsync("ImageLinkInit");
@@ -106,6 +106,6 @@ else
         var formModel = Modal.Show<ConfirmationModal>("Вы уверены?", options: options);
         var result = await formModel.Result;
         if (result.Cancelled == false)
-            await Container.ChannelManager.TryDelete(channel);
+            await Container.ChannelManager.TryDeleteAsync(channel);
     }
 }

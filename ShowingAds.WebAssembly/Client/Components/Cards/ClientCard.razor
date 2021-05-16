@@ -53,11 +53,11 @@
     private async void OnUpdate()
     {
         bool isSuccess;
-        (isSuccess, _advertisingClient) = await Container.AdvertisingClientManager.TryGet(Client.AdvertisingClientId);
+        (isSuccess, _advertisingClient) = await Container.AdvertisingClientManager.TryGetAsync(Client.AdvertisingClientId);
         if (isSuccess)
         {
             User user;
-            (isSuccess, user) = await Container.UserManager.TryGet(_advertisingClient.OwnerId);
+            (isSuccess, user) = await Container.UserManager.TryGetAsync(_advertisingClient.OwnerId);
             if (isSuccess)
             {
                 _red = user.Red;
@@ -65,7 +65,7 @@
                 _blue = user.Blue;
             }
         }
-        var videos = await Container.AdvertisingVideoManager.GetCollection(x => Client.AdvertisingVideosId.Contains(x.Id));
+        var videos = await Container.AdvertisingVideoManager.GetCollectionAsync(x => Client.AdvertisingVideosId.Contains(x.Id));
         _duration = new TimeSpan(videos.Sum(video => video.Duration.Ticks));
         _count = videos.Count();
         await InvokeAsync(() => StateHasChanged());

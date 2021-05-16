@@ -33,18 +33,19 @@
 
     private async void OnUpdate()
     {
-        var subscribedTasks = (await Container.DeviceManager.GetCollection(x => x.ChannelId != Guid.Empty))
-            .Select(async x => (await GetChannelName(x.ChannelId), x));
+        Console.WriteLine("onupdate");
+        var subscribedTasks = (await Container.DeviceManager.GetCollectionAsync(x => x.ChannelId != Guid.Empty))
+        .Select(async x => (await GetChannelName(x.ChannelId), x));
         _subscribedDevices = (await Task.WhenAll(subscribedTasks));
         _subscribedDevices = _subscribedDevices.OrderBy(x => x.Item1).ThenBy(x => x.Item2.Name);
-        _unsubscribedDevices = (await Container.DeviceManager.GetCollection(x => x.ChannelId == Guid.Empty));
+        _unsubscribedDevices = (await Container.DeviceManager.GetCollectionAsync(x => x.ChannelId == Guid.Empty));
         _unsubscribedDevices = _unsubscribedDevices.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
 
     private async Task<string> GetChannelName(Guid channelId)
     {
-        var (isSuccess, channel) = await Container.ChannelManager.TryGet(channelId);
+        var (isSuccess, channel) = await Container.ChannelManager.TryGetAsync(channelId);
         if (isSuccess)
             return channel?.Name;
         return string.Empty;

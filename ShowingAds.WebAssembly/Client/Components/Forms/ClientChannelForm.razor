@@ -35,11 +35,11 @@
     private async Task OnSubmit()
     {
         _isLoading = true;
-        var (isSuccess, client) = await Container.ClientChannelManager.TryGet(Client.Id);
+        var (isSuccess, client) = await Container.ClientChannelManager.TryGetAsync(Client.Id);
         if (isSuccess)
         {
             client.Interval = _interval.TimeOfDay;
-            isSuccess = await Container.ClientChannelManager.TryAddOrUpdate(client.Id, client);
+            isSuccess = await Container.ClientChannelManager.TryAddOrUpdateAsync(client.Id, client);
             if (isSuccess)
                 await BlazoredModal.Close(ModalResult.Ok(isSuccess));
         }

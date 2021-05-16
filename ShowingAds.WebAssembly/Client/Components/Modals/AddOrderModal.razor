@@ -37,7 +37,7 @@
 
     private async void OnUpdate()
     {
-        _clients = await Container.ClientChannelManager.GetCollection(x => x.ChannelId == Channel.Id);
+        _clients = await Container.ClientChannelManager.GetCollectionAsync(x => x.ChannelId == Channel.Id);
         _clients = _clients.OrderBy(x => x.Id);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -50,6 +50,6 @@
     private async void AddClient(ClientChannel client)
     {
         var order = new Order(Guid.NewGuid(), DateTime.Now, Channel.Id, client.Id);
-        await Container.OrderManager.TryAddOrUpdate(order.Id, order);
+        await Container.OrderManager.TryAddOrUpdateAsync(order.Id, order);
     }
 }

@@ -31,7 +31,7 @@ namespace ShowingAds.WebAssembly.Client
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddFileReaderService(o => o.UseWasmSharedBuffer = true);
 
-#if DEBUG
+#if DEBUG1
             Settings.ServerPath = new Uri("http://192.168.1.66:63880/");
             Settings.NotifyPath = new Uri("http://192.168.1.66:3669/notify/");
             Settings.FileServicePath = new Uri("http://192.168.1.66:3666/");

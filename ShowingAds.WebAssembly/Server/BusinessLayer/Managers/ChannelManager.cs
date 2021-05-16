@@ -18,23 +18,22 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private ChannelManager() : base(new WebProvider<Guid, Channel>(Settings.ChannelsPath))
+        private ChannelManager() : base(new WebProvider<Guid, Channel>(Settings.ChannelsPath), Settings.NotifyChannelPath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
+        public async Task<IEnumerable<Channel>> GetPermittedModelsAsync(IEnumerable<int> users) =>
+            await GetCollectionAsync(x => users.Contains(x.OwnerId));
+
+        public async Task<bool> TryAddOrUpdateAsync(Channel model) =>
+            await TryAddOrUpdateAsync(model.Id, model);
+
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(Channel model)
         {
-            _logger.Info("Update or initialize channels...");
-            base.UpdateOrInitializeModels();
+            var userManager = UserManager.GetInstance();
+            var employerUsers = await userManager.GetEmployerUsers(model.OwnerId);
+            return employerUsers.Select(x => x.ToGuid());
         }
-
-        public async Task<IEnumerable<Channel>> GetPermittedModels(List<int> users) =>
-            await GetCollection(x => users.Contains(x.OwnerId));
-
-        public async Task<bool> TryAddOrUpdate(Channel model) =>
-            await TryAddOrUpdate(model.Id, model);
     }
 }

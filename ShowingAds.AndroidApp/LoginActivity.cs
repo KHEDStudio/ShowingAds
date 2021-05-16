@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Widget;
 using ShowingAds.AndroidApp.Core.DataAccess;
 using ShowingAds.AndroidApp.Core.Network;
-using ShowingAds.CoreLibrary.Models.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ShowingAds.AndroidApp.Core;
 using System.Threading;
+using ShowingAds.Shared.Core.Models.Login;
 
 namespace ShowingAds.AndroidApp
 {

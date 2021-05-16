@@ -39,7 +39,7 @@
 
     private async void OnUpdate()
     {
-        _contents = await Container.ContentManager.GetCollection(x => true);
+        _contents = await Container.ContentManager.GetCollectionAsync(x => true);
         _contents = _contents.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -77,7 +77,7 @@
         var result = await formModel.Result;
         if (result.Cancelled == false)
         {
-            await Container.ContentManager.TryDelete(content);
+            await Container.ContentManager.TryDeleteAsync(content);
         }
     }
 }

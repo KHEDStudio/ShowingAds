@@ -17,6 +17,7 @@ namespace ShowingAds.NotifyService
         public Startup(IConfiguration configuration)
         {
             Settings.DevicesService = configuration.GetValue<Uri>("DevicesService");
+            ClientManager.GetInstance();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,6 +28,7 @@ namespace ShowingAds.NotifyService
             services.AddHealthChecks();
             services.AddSignalR();
             services.AddSingleton<NotifyHub>();
+            services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddCors(options => options.AddDefaultPolicy(
                 builder => builder.AllowAnyOrigin()
                     .AllowAnyHeader()

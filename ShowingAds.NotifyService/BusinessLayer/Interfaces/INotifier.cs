@@ -9,6 +9,6 @@ namespace ShowingAds.NotifyService.BusinessLayer.Interfaces
     public interface INotifier
     {
         public void AddNotifyTask(NotifySender task);
-        public Task<(bool, IEnumerable<string>)> TryGetConnections(Guid clientId);
+        public Task<(bool, IEnumerable<string>)> TryGetConnectionsAsync(Guid clientId);
     }
 }

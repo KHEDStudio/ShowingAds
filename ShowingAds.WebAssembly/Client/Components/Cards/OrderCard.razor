@@ -35,9 +35,9 @@
 
     private async void OnUpdate()
     {
-        var (isSuccess, clientChannel) = await Container.ClientChannelManager.TryGet(Order.ClientChannelConnectionId);
+        var (isSuccess, clientChannel) = await Container.ClientChannelManager.TryGetAsync(Order.ClientChannelConnectionId);
         if (isSuccess)
-            (isSuccess, _advertisingClient) = await Container.AdvertisingClientManager.TryGet(clientChannel.AdvertisingClientId);
+            (isSuccess, _advertisingClient) = await Container.AdvertisingClientManager.TryGetAsync(clientChannel.AdvertisingClientId);
         await InvokeAsync(() => StateHasChanged());
     }
 

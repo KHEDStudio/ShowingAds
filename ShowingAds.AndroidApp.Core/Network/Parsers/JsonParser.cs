@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using ShowingAds.AndroidApp.Core.Network.Parsers.Interfaces;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters;
-using ShowingAds.CoreLibrary.Models.Json;
+using ShowingAds.Shared.Core.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +23,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Parsers
         {
             if (json == string.Empty)
             {
+                ServerLog.Debug("Next request", "string empty");
                 LogotypesParsed?.Invoke(new LogotypeFilter(Guid.Empty, Guid.Empty));
                 TickerParsed?.Invoke(string.Empty, TimeSpan.Zero);
                 RebootTimeParsed?.Invoke(TimeSpan.Zero);
@@ -33,16 +34,18 @@ namespace ShowingAds.AndroidApp.Core.Network.Parsers
             else
             {
                 var response = JsonConvert.DeserializeObject<ChannelJson>(json);
+                ServerLog.Debug("Next request", JsonConvert.SerializeObject(response.Clients));
+                ServerLog.Debug("Next request", Convert.ToString(JsonConvert.SerializeObject(response) == json));
                 LogotypesParsed?.Invoke(new LogotypeFilter(response.LogoLeft, response.LogoRight));
                 TickerParsed?.Invoke(response.Ticker, response.TickerInterval);
                 RebootTimeParsed?.Invoke(response.ReloadTime);
-                ContentsParse(response.Contents.OrderBy(x => x.Id).ToList());
+                ContentsParse(response.Contents.OrderBy(x => x.Id));
                 AdvertisingParse(response.Clients);
                 AdvertisingOrdersParse(response.Orders);
             }
         }
 
-        private void ContentsParse(List<ContentJson> contents)
+        private void ContentsParse(IEnumerable<ContentJson> contents)
         {
             var validVideos = new List<(Guid, VideoJson)>();
             foreach (var content in contents)
@@ -51,7 +54,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Parsers
             ContentsParsed?.Invoke(new VideoFilter(validVideos));
         }
 
-        private void AdvertisingParse(List<ClientChannelJson> clients)
+        private void AdvertisingParse(IEnumerable<ClientChannelJson> clients)
         {
             var validVideos = new List<(Guid, VideoJson)>();
             var validIntervals = new List<(Guid, TimeSpan)>();
@@ -65,7 +68,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Parsers
             AdvertisingIntervalsParsed?.Invoke(new ClientIntervalFilter(validIntervals));
         }
 
-        private void AdvertisingOrdersParse(List<OrderJson> orders)
+        private void AdvertisingOrdersParse(IEnumerable<OrderJson> orders)
         {
             var validOrders = new List<(Guid, DateTime)>();
             foreach (var order in orders)

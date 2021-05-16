@@ -18,41 +18,24 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private DeviceManager() : base(new WebProvider<Guid, DeviceState>(Settings.DevicesPath))
+        private DeviceManager() : base(new WebProvider<Guid, DeviceState>(Settings.DevicesPath), Settings.NotifyDevicePath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
+        public async Task<IEnumerable<DeviceState>> GetPermittedModelsAsync(IEnumerable<int> users) =>
+            await GetCollectionAsync(x => users.Contains(x.OwnerId));
+
+        public async Task<bool> TryAddOrUpdateAsync(DeviceState model) =>
+            await TryAddOrUpdateAsync(model.Id, model);
+
+        public async Task UpdateModelAsync(DeviceState device) => await NotifySubscribersAsync(device);
+
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(DeviceState model)
         {
-            _logger.Info("Update or initialize Devices...");
-            base.UpdateOrInitializeModels();
-        }
-
-        public async Task<IEnumerable<DeviceState>> GetPermittedModels(List<int> users) =>
-            await GetCollection(x => users.Contains(x.OwnerId));
-
-        public async Task<bool> TryAddOrUpdate(DeviceState model) =>
-            await TryAddOrUpdate(model.Id, model);
-
-        public async Task UpdateModel(DeviceState device)
-        {
-            using (await _mutex.LockAsync())
-            {
-                var newDevice = (DeviceState)device.Clone();
-                if (_models.ContainsKey(device.Id))
-                {
-                    _models.Remove(device.Id);
-                    _models.Add(newDevice.Id, newDevice);
-                }
-                else
-                {
-                    _models.Add(newDevice.Id, newDevice);
-                }
-                NotifyUsers(device);
-            }
+            var userManager = UserManager.GetInstance();
+            var employerUsers = await userManager.GetEmployerUsers(model.OwnerId);
+            return employerUsers.Select(x => x.ToGuid());
         }
     }
 }

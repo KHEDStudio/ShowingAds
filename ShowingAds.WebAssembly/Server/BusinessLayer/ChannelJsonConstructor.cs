@@ -20,52 +20,52 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer
 
         public async Task<ChannelJson> Construct(Guid key)
         {
-            var (isExists, channel) = await _channelManager.TryGet(key);
+            var (isExists, channel) = await _channelManager.TryGetAsync(key);
             if (isExists)
             {
-                var contents = await GetContents(channel.ContentsId);
-                var clients = await GetClients(channel.Id);
-                var orders = await GetOrders(channel.Id);
+                var contents = GetContents(channel.ContentsId);
+                var clients = GetClients(channel.Id);
+                var orders = GetOrders(channel.Id);
                 return new ChannelJson(channel, contents, clients, orders);
             }
             return default;
         }
 
-        private async Task<List<OrderJson>> GetOrders(Guid channelId)
+        private List<OrderJson> GetOrders(Guid channelId)
         {
             var orders = new List<OrderJson>();
-            (await _orderManager.GetCollection(x => x.ChannelId == channelId))
-                .AsParallel().ForAll(x => orders.Add(new OrderJson(x.ClientChannelConnectionId, x.OrderField)));
+            _orderManager.GetCollectionAsync(x => x.ChannelId == channelId).Result
+                .ToList().ForEach(x => orders.Add(new OrderJson(x.ClientChannelConnectionId, x.OrderField)));
             return orders;
         }
 
-        private async Task<List<ClientChannelJson>> GetClients(Guid channelId)
+        private List<ClientChannelJson> GetClients(Guid channelId)
         {
             var clients = new List<ClientChannelJson>();
-            (await _clientManager.GetCollection(x => x.ChannelId == channelId))
-                .AsParallel().ForAll(async x =>
+            var clientsCollection = _clientManager.GetCollectionAsync(x => x.ChannelId == channelId).Result.ToList();
+            clientsCollection.ForEach(x =>
                 {
-                    var videos = (await _adsManager.GetCollection(y => x.AdvertisingVideosId.Contains(y.Id)))
+                    var videos = _adsManager.GetCollectionAsync(y => x.AdvertisingVideosId.Contains(y.Id)).Result
                         .Select(x => new VideoJson(x.Id)).ToList();
                     clients.Add(new ClientChannelJson(x.Id, x.Interval, videos));
                 });
             return clients;
         }
 
-        private Task<List<ContentJson>> GetContents(List<Guid> contentsId)
+        private List<ContentJson> GetContents(List<Guid> contentsId)
         {
             var contents = new List<ContentJson>();
-            contentsId.AsParallel().ForAll(async x =>
+            contentsId.ForEach(x =>
             {
-                var (isExists, content) = await _contentManager.TryGet(x);
+                var (isExists, content) = _contentManager.TryGetAsync(x).Result;
                 if (isExists)
                 {
-                    var videos = (await _videoManager.GetCollection(x => x.ContentId == content.Id))
+                    var videos = _videoManager.GetCollectionAsync(x => x.ContentId == content.Id).Result
                         .Select(x => new VideoJson(x.Id)).ToList();
                     contents.Add(new ContentJson(x, videos));
                 }
             });
-            return Task.FromResult(contents);
+            return contents;
         }
 
         public async Task<string> ConstructAsJson(Guid key)

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.CoreLibrary.csproj" />
+    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.Shared.Core.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

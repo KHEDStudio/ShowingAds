@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.CoreLibrary.csproj" />
+    <ProjectReference Include="..\ShowingAds.Shared.Core\ShowingAds.Shared.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Interfaces
     public interface IWebClientCommand : IFilterVisitable, IVisitable
     {
         event Action<EventArgs> Completed;
-        event Action<ProgressChangedEventArgs> ProgressChanged;
+        event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         void Execute();
         void Undo();

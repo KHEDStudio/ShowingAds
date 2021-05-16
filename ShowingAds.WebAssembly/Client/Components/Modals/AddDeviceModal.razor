@@ -40,7 +40,7 @@
 
     private async void OnUpdate()
     {
-        _devices = await Container.DeviceManager.GetCollection(x => x.ChannelId == Guid.Empty);
+        _devices = await Container.DeviceManager.GetCollectionAsync(x => x.ChannelId == Guid.Empty);
         _devices = _devices.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -53,6 +53,6 @@
     private async void AddDevice(DeviceState device)
     {
         device.ChannelId = Channel.Id;
-        await Container.DeviceManager.TryAddOrUpdate(device.Id, device);
+        await Container.DeviceManager.TryAddOrUpdateAsync(device.Id, device);
     }
 }

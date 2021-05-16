@@ -21,15 +21,15 @@ namespace ShowingAds.DevicesService.BusinessLayer
 
         public async Task<bool> TryLogin(LoginDevice login)
         {
-            var loginResult = await _provider.PostModel(login);
+            var loginResult = await _provider.PostModelAsync(login);
             if (loginResult.Item1)
             {
-                (var isExists, var device) = await _manager.TryGet(login.UUID);
+                (var isExists, var device) = await _manager.TryGetAsync(login.UUID);
                 if (isExists == false)
                 {
                     var user = JsonConvert.DeserializeObject<User>(loginResult.Item2);
                     device = new DeviceState(login, user.Id);
-                    return await _manager.TryAddOrUpdate(device.Id, device);
+                    return await _manager.TryAddOrUpdateAsync(device.Id, device);
                 } else return true;
             }
             return false;

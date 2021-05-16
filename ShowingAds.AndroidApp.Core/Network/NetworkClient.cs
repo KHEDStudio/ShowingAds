@@ -2,12 +2,14 @@
 using Newtonsoft.Json;
 using ShowingAds.AndroidApp.Core.Extensions;
 using ShowingAds.AndroidApp.Core.Network.Interfaces;
-using ShowingAds.AndroidApp.Core.Network.Models;
 using ShowingAds.AndroidApp.Core.Network.Parsers.Interfaces;
+using ShowingAds.Shared.Core.Models.States;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,9 +20,10 @@ namespace ShowingAds.AndroidApp.Core.Network
     public class NetworkClient : IClient
     {
         private Thread _networkThread;
+        private TaskFactory _taskFactory;
 
         private readonly object _syncDiagnosticInfo = new object();
-        private DiagnosticInfo _info = new DiagnosticInfo(0);
+        private DiagnosticInfo _info = new DiagnosticInfo("1.0", 0, 0, 0, 0);
 
         private readonly object _syncRoot = new object();
         private CookieContainer _cookieContainer;
@@ -37,7 +40,12 @@ namespace ShowingAds.AndroidApp.Core.Network
         {
             _parser = parser ?? throw new ArgumentNullException(nameof(parser));
             _cookieContainer = cookieContainer ?? throw new ArgumentNullException(nameof(cookieContainer));
-            _networkThread = new Thread(() => InitializeHubConnection(hubReconnectionInterval));
+            _networkThread = new Thread(() =>
+            {
+                _taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
+                    TaskContinuationOptions.None, TaskScheduler.Current);
+                HubConnectionCheckLoop(hubReconnectionInterval);
+            });
             _timerPeriodicRequest = new System.Timers.Timer();
             _timerPeriodicRequest.Elapsed += TimerRequestCallback;
             _timerPeriodicRequest.AutoReset = false;
@@ -48,20 +56,23 @@ namespace ShowingAds.AndroidApp.Core.Network
 
         private void TimerRequestCallback(object sender, ElapsedEventArgs e)
         {
-            try
+            _taskFactory.StartNew(() =>
             {
-                SendDiagnosticInfo();
-                if (_nextRequestTime.CompareTo(DateTime.Now) < 0)
-                    SendRequest();
-            }
-            catch (Exception ex)
-            {
-                ServerLog.Error("ChannelUpdated", ex.Message);
-            }
-            finally
-            {
-                _timerPeriodicRequest.Start();
-            }
+                try
+                {
+                    SendDiagnosticInfo();
+                    if (_nextRequestTime.CompareTo(DateTime.Now) < 0)
+                        SendRequest();
+                }
+                catch (Exception ex)
+                {
+                    ServerLog.Error("ChannelUpdated", ex.Message);
+                }
+                finally
+                {
+                    _timerPeriodicRequest.Start();
+                }
+            }).ConfigureAwait(false);
         }
 
         private void SendDiagnosticInfo()
@@ -75,12 +86,27 @@ namespace ShowingAds.AndroidApp.Core.Network
                 {
                     handler.CookieContainer = _cookieContainer;
                     using (var client = new HttpClient(handler))
-                        client.PostAsync(new Uri(Settings.DeviceControllerPath, $"content?count={info.ReadyVideosCount}"), default).Wait();
+                    {
+                        var json = JsonConvert.SerializeObject(info);
+                        var content = new StringContent(json, Encoding.UTF8, "application/json");
+                        _taskFactory.StartNew(() => client.PostAsync(new Uri(Settings.DeviceControllerPath, $"info"), content))
+                            .Unwrap().Wait();
+                    }
                 }
             }
             catch (Exception ex)
             {
                 ServerLog.Error("SendDiagnosticInfo", ex.Message);
+            }
+        }
+
+        private void HubConnectionCheckLoop(TimeSpan hubReconnectionInterval)
+        {
+            while (true)
+            {
+                if (ConnectionState != HubConnectionState.Connected)
+                    InitializeHubConnection(hubReconnectionInterval);
+                Thread.Sleep(hubReconnectionInterval);
             }
         }
         
@@ -93,15 +119,9 @@ namespace ShowingAds.AndroidApp.Core.Network
                     _notifyHub = new HubConnectionBuilder()
                     .WithUrl(Settings.NotifyPath)
                     .Build();
-                    _notifyHub.Closed += (error) =>
-                    {
-                        ServerLog.Error("NotifyHubClosed", error.Message);
-                        StartNotifyConnection(hubReconnectionInterval);
-                        return Task.CompletedTask;
-                    };
                     _notifyHub.On<Guid>("ChannelUpdated", async (messageUUID) =>
                     {
-                        await _notifyHub.InvokeAsync("MessageUUID", messageUUID);
+                        await _notifyHub.InvokeAsync("MessageUUID", messageUUID).ConfigureAwait(false);
                         if (_lastMessageUUID != messageUUID)
                         {
                             _lastMessageUUID = messageUUID;
@@ -119,7 +139,7 @@ namespace ShowingAds.AndroidApp.Core.Network
                 }
                 catch (Exception ex)
                 {
-                    _notifyHub.IfNotNull(() => _notifyHub.DisposeAsync());
+                    _notifyHub.IfNotNull(() => _notifyHub.DisposeAsync().ConfigureAwait(false));
                     _notifyHub = null;
                     ServerLog.Error("NotifyConnection", ex.Message);
                 }
@@ -136,9 +156,9 @@ namespace ShowingAds.AndroidApp.Core.Network
             {
                 try
                 {
-                    _notifyHub.StartAsync().Wait();
+                    _notifyHub.StartAsync().ConfigureAwait(false);
                     if (Settings.DeviceId != Guid.Empty)
-                        _notifyHub.SendAsync("ClientConnectedAsync", Settings.DeviceId).Wait();
+                        _notifyHub.SendAsync("ClientConnectedAsync", Settings.DeviceId).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
@@ -158,10 +178,12 @@ namespace ShowingAds.AndroidApp.Core.Network
                 handler.CookieContainer = _cookieContainer;
                 using (var client = new HttpClient(handler))
                 {
-                    var responseMessage = client.GetAsync(Settings.ChannelPath).Result;
+                    var responseMessage = _taskFactory.StartNew(() => client.GetAsync(Settings.ChannelPath))
+                        .Unwrap().Result;
                     if (responseMessage.StatusCode == HttpStatusCode.OK)
                     {
-                        var jsonResponseMessage = responseMessage.Content.ReadAsStringAsync().Result;
+                        var jsonResponseMessage = _taskFactory.StartNew(() => responseMessage.Content.ReadAsStringAsync())
+                            .Unwrap().Result;
                         lock (_syncRoot)
                             if (string.IsNullOrEmpty(jsonResponseMessage) == false)
                                 _parser.Parse(jsonResponseMessage);

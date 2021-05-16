@@ -62,9 +62,9 @@ else
     private async void OnUpdate()
     {
         if (IsContentVideos)
-            Videos = await Container.ContentVideoManager.GetCollection(x => x.ContentId == CollectionId);
+            Videos = await Container.ContentVideoManager.GetCollectionAsync(x => x.ContentId == CollectionId);
         else
-            Videos = await Container.AdvertisingVideoManager.GetCollection(x => x.AdvertisingClientId == CollectionId);
+            Videos = await Container.AdvertisingVideoManager.GetCollectionAsync(x => x.AdvertisingClientId == CollectionId);
         Videos = Videos.OrderBy(x => x.GetKey());
         await InvokeAsync(() => StateHasChanged());
     }
@@ -83,9 +83,9 @@ else
         if (result.Cancelled == false)
         {
             if (IsContentVideos)
-                await Container.ContentVideoManager.TryDelete(video);
+                await Container.ContentVideoManager.TryDeleteAsync(video);
             else
-                await Container.AdvertisingVideoManager.TryDelete(video);
+                await Container.AdvertisingVideoManager.TryDeleteAsync(video);
         }
     }
 }

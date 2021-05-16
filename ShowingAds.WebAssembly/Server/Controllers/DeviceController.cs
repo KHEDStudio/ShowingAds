@@ -24,7 +24,7 @@ namespace ShowingAds.WebAssembly.Server.Controllers
         {
             _logger.LogInformation($"Get channel {channel} from device");
             var manager = ChannelManager.GetInstance();
-            var (isExists, _channel) = await manager.TryGet(channel);
+            var (isExists, _channel) = await manager.TryGetAsync(channel);
             if (isExists)
             {
                 var constructor = new ChannelJsonConstructor();
@@ -37,9 +37,9 @@ namespace ShowingAds.WebAssembly.Server.Controllers
         [HttpPost("update")]
         public async Task<ActionResult> UpdateDevice([FromBody] DeviceState device)
         {
-            _logger.LogInformation($"Update device {device}");
+            _logger.LogInformation($"Update device {device.Name}");
             var manager = DeviceManager.GetInstance();
-            await manager.UpdateModel(device);
+            await manager.UpdateModelAsync(device);
             return StatusCode(StatusCodes.Status200OK);
         }
     }

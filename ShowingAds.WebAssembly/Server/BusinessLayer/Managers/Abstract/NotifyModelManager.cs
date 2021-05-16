@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.Abstract;
 using ShowingAds.CoreLibrary.DataProviders;
@@ -11,66 +13,55 @@ using ShowingAds.CoreLibrary.Managers;
 
 namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers.Abstract
 {
-    public abstract class NotifyModelManager<TKey, TValue, TManager> : ModelManager<TKey, TValue, TManager>
+    public abstract class NotifyModelManager<TKey, TValue, TManager> : NoSaveModelManager<TKey, TValue, TManager>
         where TKey : struct
         where TValue : class, IModel<TKey>, ICloneable
         where TManager : Singleton<TManager>
     {
-        protected ModelOwnerParser _parser { get; set; }
+        protected Uri _notifyPath { get; }
 
-        protected NotifyModelManager(IDataProvider<TKey, TValue> provider) : base(provider) =>
-            _parser = ModelOwnerParser.GetInstance();
-
-        public async override Task<bool> TryAddOrUpdate(TKey key, TValue newValue)
+        protected NotifyModelManager(IDataProvider<TKey, TValue> provider, Uri notifyPath) : base(provider)
         {
-            var isSuccess = await base.TryAddOrUpdate(key, newValue);
+            _notifyPath = notifyPath;
+        }
+
+        public async override Task<bool> TryAddOrUpdateAsync(TKey key, TValue newValue)
+        {
+            var isSuccess = await base.TryAddOrUpdateAsync(key, newValue);
             if (isSuccess)
-                NotifySubscribers(newValue);
+                await NotifySubscribersAsync(newValue);
             return isSuccess;
         }
 
-        public async override Task<(bool, TValue)> TryDelete(TKey key)
+        public async override Task<(bool, TValue)> TryDeleteAsync(TKey key)
         {
-            var (isSuccess, model) = await base.TryDelete(key);
+            var (isSuccess, model) = await base.TryDeleteAsync(key);
             if (isSuccess)
-                NotifySubscribers(model);
+                await NotifySubscribersAsync(model);
             return (isSuccess, model);
         }
 
-        public async override Task<(bool, TValue)> TryDelete(Func<TValue, bool> filter)
+        public async override Task<IEnumerable<TValue>> TryDeleteAsync(Func<TValue, bool> filter)
         {
-            var (isSuccess, model) = await base.TryDelete(filter);
-            if (isSuccess)
-                NotifySubscribers(model);
-            return (isSuccess, model);
+            var models = await base.TryDeleteAsync(filter);
+            foreach (var model in models)
+                await NotifySubscribersAsync(model);
+            return models;
         }
 
-        protected async Task NotifySubscribers(TValue model)
-        {
-            var subscribers = await _parser.GetSubscribers(model);
-            await Notify(subscribers);
-        }
+        public abstract Task<IEnumerable<Guid>> GetSubscribersAsync(TValue model);
 
-        protected async Task NotifyUsers(TValue model)
+        protected async Task NotifySubscribersAsync(TValue model)
         {
-            var users = await _parser.GetUsers(model);
-            await Notify(users);
-        }
-
-        public async void NotifyAll()
-        {
-            var subscribers = await _parser.GetSubscribers();
-            await Notify(subscribers);
-        }
-
-        private async Task Notify(IEnumerable<Guid> subscribers)
-        {
+            var subscribers = await GetSubscribersAsync(model);
             foreach (var subscriber in subscribers)
             {
                 using (var httpClient = new HttpClient())
                 {
-                    var requestUri = new Uri(Settings.NotifyChannelPath, $"?client={subscriber}");
-                    await httpClient.PostAsync(requestUri, default);
+                    var json = JsonConvert.SerializeObject(model);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var requestUri = new Uri(_notifyPath, $"?client={subscriber}");
+                    await httpClient.PostAsync(requestUri, content);
                 }
             }
         }

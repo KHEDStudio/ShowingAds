@@ -1,7 +1,7 @@
 ﻿using ShowingAds.AndroidApp.Core.BusinessCollections.Models;
 using ShowingAds.AndroidApp.Core.BusinessCollections.Visitors;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.ModelEventArgs;
-using ShowingAds.CoreLibrary.Models.Json;
+using ShowingAds.Shared.Core.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;

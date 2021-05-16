@@ -16,16 +16,10 @@ namespace ShowingAds.NotifyService.BusinessLayer.Models
 
         protected override string Json { get; }
 
-        public ChannelUpdated(Guid client, string connectionId)
+        public ChannelUpdated(Guid client, string connectionId, string json = "")
         {
             MessageUUID = Guid.NewGuid();
             ClientUUID = client;
-            ConnectionId = connectionId;
-            Json = string.Empty;
-        }
-
-        public ChannelUpdated(string connectionId, string json)
-        {
             ConnectionId = connectionId;
             Json = json;
         }

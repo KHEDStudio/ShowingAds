@@ -3,7 +3,7 @@ using ShowingAds.AndroidApp.Core.BusinessCollections.Interfaces;
 using ShowingAds.AndroidApp.Core.BusinessCollections.Visitors;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Interfaces;
-using ShowingAds.CoreLibrary.Converters;
+using ShowingAds.Shared.Core.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;

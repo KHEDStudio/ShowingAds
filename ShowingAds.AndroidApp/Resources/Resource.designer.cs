@@ -7237,22 +7237,19 @@ namespace ShowingAds.AndroidApp
 			public const int video_display = 2131230979;
 			
 			// aapt resource value: 0x7F080104
-			public const int video_display2 = 2131230980;
+			public const int view_offset_helper = 2131230980;
 			
 			// aapt resource value: 0x7F080105
-			public const int view_offset_helper = 2131230981;
+			public const int visible = 2131230981;
 			
 			// aapt resource value: 0x7F080106
-			public const int visible = 2131230982;
+			public const int volume_item_container = 2131230982;
 			
 			// aapt resource value: 0x7F080107
-			public const int volume_item_container = 2131230983;
+			public const int withText = 2131230983;
 			
 			// aapt resource value: 0x7F080108
-			public const int withText = 2131230984;
-			
-			// aapt resource value: 0x7F080109
-			public const int wrap_content = 2131230985;
+			public const int wrap_content = 2131230984;
 			
 			static Id()
 			{

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://192.168.1.66:63880/",
+      "applicationUrl": "http://127.0.0.1:63880/",
       "sslPort": 0
     }
   },
@@ -11,10 +11,11 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://192.168.1.66:63880/",
+      "launchUrl": "http://127.0.0.1:63880/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
+      "jsWebView2Debugging": false,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
     },
     "ShowingAds.WebAssembly.Server": {

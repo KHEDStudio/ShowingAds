@@ -11,12 +11,12 @@ using ShowingAds.AndroidApp.BroadcastReceivers;
 using Android.Content;
 using Android.Views;
 using System.Threading.Tasks;
-using ShowingAds.CoreLibrary.Models.Login;
 using ShowingAds.AndroidApp.Core.DataAccess;
 using ShowingAds.AndroidApp.Core.Network;
 using ShowingAds.AndroidApp.Core.Network.Interfaces;
 using ShowingAds.AndroidApp.Core;
 using System;
+using ShowingAds.Shared.Core.Models.Login;
 
 namespace ShowingAds.AndroidApp
 {

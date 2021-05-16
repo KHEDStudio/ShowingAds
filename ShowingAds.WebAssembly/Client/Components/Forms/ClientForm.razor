@@ -39,7 +39,7 @@
 
     private async Task OnSubmit()
     {
-        await Container.AdvertisingClientManager.TryAddOrUpdate(Client.Id, Client);
+        await Container.AdvertisingClientManager.TryAddOrUpdateAsync(Client.Id, Client);
         await BlazoredModal.Close();
     }
 }

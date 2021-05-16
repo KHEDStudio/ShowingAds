@@ -22,20 +22,13 @@ namespace ShowingAds.WebAssembly.Server
             Settings.DjangoPath = configuration.GetValue<Uri>("DjangoPath");
             Settings.DevicesServicePath = configuration.GetValue<Uri>("DevicesServicePath");
             Settings.NotifyPath = configuration.GetValue<Uri>("NotifyPath");
-            Task.Run(InitEventBus);
-        }
-
-        private void InitEventBus()
-        {
-            var eventBus = EventBus.GetInstance();
-            var manager = UserManager.GetInstance();
-            eventBus.ManagersUpdated += manager.NotifyAll;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddRazorPages();
             services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
@@ -47,10 +40,6 @@ namespace ShowingAds.WebAssembly.Server
                     return Task.CompletedTask;
                 };
             });
-            services.AddCors(options => options.AddDefaultPolicy(
-                builder => builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,8 +60,10 @@ namespace ShowingAds.WebAssembly.Server
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
-            app.UseCors();
             app.UseRouting();
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:8080", "http://31.184.219.123:63880")
+                .AllowAnyMethod().WithHeaders("content-type").AllowCredentials());
 
             app.UseAuthorization();
             app.UseAuthentication();

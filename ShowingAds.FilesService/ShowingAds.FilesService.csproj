@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.CoreLibrary.csproj">
+    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.Shared.Core.csproj">
       <Aliases></Aliases>
     </ProjectReference>
   </ItemGroup>

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using ShowingAds.CoreLibrary;
 using ShowingAds.CoreLibrary.Abstract;
 using ShowingAds.CoreLibrary.Models.Database;
+using ShowingAds.CoreLibrary.Models.States;
 using ShowingAds.WebAssembly.Client.BusinessLayer.Managers;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,10 @@ namespace ShowingAds.WebAssembly.Client
     public class AppContainer : Singleton<AppContainer>
     {
         public event Action ChannelUpdated;
+        public event Action<DeviceState> DeviceUpdated;
 
         public User User { get; set; }
         private HubConnection _notifyHub { get; }
-        private Guid _lastMessageUUID { get; set; }
 
         public ChannelManager ChannelManager { get; private set; }
         public UserManager UserManager { get; private set; }
@@ -34,16 +36,8 @@ namespace ShowingAds.WebAssembly.Client
                 .WithUrl(Settings.NotifyPath)
                 .Build();
             _notifyHub.Closed += HubConnectionStartAsync;
-            _notifyHub.On<Guid>("ChannelUpdated", async (messageUUID) =>
-            {
-                await _notifyHub.InvokeAsync("MessageUUID", messageUUID);
-                if (_lastMessageUUID != messageUUID)
-                {
-                    _lastMessageUUID = messageUUID;
-                    await ChannelUpdate();
-                }
-            });
             ChannelManager = ChannelManager.GetInstance();
+            _notifyHub.On<Guid>("ChannelUpdated", async (messageUUID) => await ChannelUpdate());
             UserManager = UserManager.GetInstance();
             ContentManager = ContentManager.GetInstance();
             ContentVideoManager = ContentVideoManager.GetInstance();
@@ -52,20 +46,40 @@ namespace ShowingAds.WebAssembly.Client
             AdvertisingVideoManager = AdvertisingVideoManager.GetInstance();
             OrderManager = OrderManager.GetInstance();
             DeviceManager = DeviceManager.GetInstance();
+            _notifyHub.On<Guid, string>("DeviceUpdated", (messageUUID, json) =>
+            {
+                Console.WriteLine("Device updated!");
+                _notifyHub.SendAsync("MessageUUID", messageUUID);
+                if (json.Contains("VSTest"))
+                    Console.WriteLine(json);
+                var device = JsonConvert.DeserializeObject<DeviceState>(json);
+                DeviceManager.UpdateModel(device.Id, device);
+                DeviceUpdated?.Invoke(device);
+            });
             Task.Run(ChannelUpdate);
         }
 
         private async Task ChannelUpdate()
         {
+            Console.WriteLine("1");
             await ChannelManager.UpdateOrInitializeModels();
+            Console.WriteLine("2");
             await UserManager.UpdateOrInitializeModels();
+            Console.WriteLine("3");
             await ContentManager.UpdateOrInitializeModels();
+            Console.WriteLine("4");
             await ContentVideoManager.UpdateOrInitializeModels();
+            Console.WriteLine("5");
             await AdvertisingClientManager.UpdateOrInitializeModels();
+            Console.WriteLine("6");
             await ClientChannelManager.UpdateOrInitializeModels();
+            Console.WriteLine("7");
             await AdvertisingVideoManager.UpdateOrInitializeModels();
+            Console.WriteLine("8");
             await OrderManager.UpdateOrInitializeModels();
+            Console.WriteLine("9");
             await DeviceManager.UpdateOrInitializeModels();
+            Console.WriteLine("10");
             ChannelUpdated?.Invoke();
         }
 

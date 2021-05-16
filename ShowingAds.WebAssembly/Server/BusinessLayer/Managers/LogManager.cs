@@ -18,17 +18,18 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private LogManager() : base(new WebProvider<Guid, Log>(Settings.LogsPath))
+        private LogManager() : base(new WebProvider<Guid, Log>(Settings.LogsPath), Settings.NotifyChannelPath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(Log model)
         {
-            _logger.Info("Update or initialize Logs...");
-            base.UpdateOrInitializeModels();
+            var deviceManager = DeviceManager.GetInstance();
+            var (isSuccess, device) = await deviceManager.TryGetAsync(model.DeviceId);
+            if (isSuccess)
+                return await deviceManager.GetSubscribersAsync(device);
+            return new List<Guid>();
         }
     }
 }

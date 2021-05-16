@@ -26,13 +26,15 @@ namespace ShowingAds.AndroidApp.Core.DataAccess
             {
                 _resetEvent.WaitOne();
                 var json = File.ReadAllText(_path, Encoding.UTF8);
-                _resetEvent.Set();
                 return JsonConvert.DeserializeObject<T>(json);
             }
             catch
             {
-                _resetEvent.Set();
                 throw;
+            }
+            finally
+            {
+                _resetEvent.Set();
             }
         }
 
@@ -43,12 +45,14 @@ namespace ShowingAds.AndroidApp.Core.DataAccess
                 var json = JsonConvert.SerializeObject(obj);
                 _resetEvent.WaitOne();
                 File.WriteAllText(_path, json, Encoding.UTF8);
-                _resetEvent.Set();
             }
             catch
             {
-                _resetEvent.Set();
                 throw;
+            }
+            finally
+            {
+                _resetEvent.Set();
             }
         }
 

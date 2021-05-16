@@ -24,7 +24,7 @@ namespace ShowingAds.AndroidApp.Core.Network
         private CancellationTokenSource _cancellationToken;
 
         public event Action<T> CommandExecuted;
-        public event Action<ProgressChangedEventArgs> ProgressChanged;
+        public event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         public WebClientExecutor()
         {
@@ -48,7 +48,6 @@ namespace ShowingAds.AndroidApp.Core.Network
                         _current.Completed += CurrentCompleted;
                         _current.ProgressChanged += CurrentProgressChanged;
                     }
-                    ProgressChanged?.Invoke(new ProgressChangedEventArgs(_queue.Count, default));
                     _current.Execute();
                 }
             }
@@ -78,7 +77,7 @@ namespace ShowingAds.AndroidApp.Core.Network
 
         private void CurrentCompleted(EventArgs obj) => CommandExecuted?.Invoke((T)obj);
 
-        private void CurrentProgressChanged(ProgressChangedEventArgs obj) => ProgressChanged?.Invoke(obj);
+        private void CurrentProgressChanged(DownloadProgressChangedEventArgs obj) => ProgressChanged?.Invoke(obj);
 
         public void Filter(BaseFilter filter)
         {

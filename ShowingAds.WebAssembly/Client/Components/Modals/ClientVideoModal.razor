@@ -42,9 +42,9 @@
 
     private async void OnUpdate()
     {
-        var enabledVideos = (await Container.AdvertisingVideoManager.GetCollection(
+        var enabledVideos = (await Container.AdvertisingVideoManager.GetCollectionAsync(
             x => Client.AdvertisingVideosId.Contains(x.Id))).Select(x => (true, x));
-        var videos = (await Container.AdvertisingVideoManager.GetCollection(
+        var videos = (await Container.AdvertisingVideoManager.GetCollectionAsync(
             x => x.AdvertisingClientId == Client.AdvertisingClientId)).Select(x => (false, x));
         videos = videos.Where(x => enabledVideos.Any(y => y.x.Id == x.x.Id) == false);
         _videos = enabledVideos.Union(videos).OrderBy(x => x.x.Id);
@@ -56,6 +56,6 @@
         if (pair.Item1)
             Client.AdvertisingVideosId.Add(pair.Item2);
         else Client.AdvertisingVideosId.Remove(pair.Item2);
-        await Container.ClientChannelManager.TryAddOrUpdate(Client.Id, Client);
+        await Container.ClientChannelManager.TryAddOrUpdateAsync(Client.Id, Client);
     }
 }

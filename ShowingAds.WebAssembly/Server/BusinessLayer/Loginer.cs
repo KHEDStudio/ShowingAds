@@ -22,7 +22,7 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer
 
         public async Task<(bool, string)> TryLogin(LoginUser login)
         {
-            var loginResult = await _provider.PostModel(login);
+            var loginResult = await _provider.PostModelAsync(login);
             return loginResult;
         }
     }

@@ -18,27 +18,28 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private AdvertisingVideoManager() : base(new WebProvider<Guid, AdvertisingVideo>(Settings.AdvertisingVideosPath))
+        private AdvertisingVideoManager() : base(new WebProvider<Guid, AdvertisingVideo>(Settings.AdvertisingVideosPath), Settings.NotifyChannelPath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
-        {
-            _logger.Info("Update or initialize AdvertisingVideos...");
-            base.UpdateOrInitializeModels();
-        }
-
-        public async Task<IEnumerable<AdvertisingVideo>> GetPermittedModels(List<int> users)
+        public async Task<IEnumerable<AdvertisingVideo>> GetPermittedModelsAsync(IEnumerable<int> users)
         {
             var manager = AdvertisingClientManager.GetInstance();
-            var clients = await manager.GetCollection(x => users.Contains(x.OwnerId));
-            return await GetCollection(x => clients.Any(y => y.Id == x.AdvertisingClientId));
+            var clients = await manager.GetCollectionAsync(x => users.Contains(x.OwnerId));
+            return await GetCollectionAsync(x => clients.Any(y => y.Id == x.AdvertisingClientId));
         }
 
-        public async Task<bool> TryAddOrUpdate(AdvertisingVideo model) =>
-            await TryAddOrUpdate(model.Id, model);
+        public async Task<bool> TryAddOrUpdateAsync(AdvertisingVideo model) =>
+            await TryAddOrUpdateAsync(model.Id, model);
+
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(AdvertisingVideo model)
+        {
+            var advertisingClientManager = AdvertisingClientManager.GetInstance();
+            var (isSuccess, advertisingClient) = await advertisingClientManager.TryGetAsync(model.AdvertisingClientId);
+            if (isSuccess)
+                return await advertisingClientManager.GetSubscribersAsync(advertisingClient);
+            return new List<Guid>();
+        }
     }
 }

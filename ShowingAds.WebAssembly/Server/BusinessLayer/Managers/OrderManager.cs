@@ -18,27 +18,28 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private OrderManager() : base(new WebProvider<Guid, Order>(Settings.OrdersPath))
+        private OrderManager() : base(new WebProvider<Guid, Order>(Settings.OrdersPath), Settings.NotifyChannelPath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
-        {
-            _logger.Info("Update or initialize Orders...");
-            base.UpdateOrInitializeModels();
-        }
-
-        public async Task<IEnumerable<Order>> GetPermittedModels(List<int> users)
+        public async Task<IEnumerable<Order>> GetPermittedModelsAsync(IEnumerable<int> users)
         {
             var manager = ChannelManager.GetInstance();
-            var channels = await manager.GetCollection(x => users.Contains(x.OwnerId));
-            return await GetCollection(x => channels.Any(y => y.Id == x.ChannelId));
+            var channels = await manager.GetCollectionAsync(x => users.Contains(x.OwnerId));
+            return await GetCollectionAsync(x => channels.Any(y => y.Id == x.ChannelId));
         }
 
-        public async Task<bool> TryAddOrUpdate(Order model) =>
-            await TryAddOrUpdate(model.Id, model);
+        public async Task<bool> TryAddOrUpdateAsync(Order model) =>
+            await TryAddOrUpdateAsync(model.Id, model);
+
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(Order model)
+        {
+            var channelManager = ChannelManager.GetInstance();
+            var (isSuccess, channel) = await channelManager.TryGetAsync(model.ChannelId);
+            if (isSuccess)
+                return await channelManager.GetSubscribersAsync(channel);
+            return new List<Guid>();
+        }
     }
 }

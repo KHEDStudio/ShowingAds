@@ -17,7 +17,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
         public bool IsLeft { get; private set; }
 
         public override event Action<EventArgs> Completed;
-        public override event Action<ProgressChangedEventArgs> ProgressChanged;
+        public override event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         public LogoDownloadCommand(Uri address, string filePath, Guid id, bool isLeft)
             : base(address, filePath)
@@ -40,7 +40,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
             }
         }
 
-        protected override void FileProgressChanged(object sender, ProgressChangedEventArgs e) => ProgressChanged?.Invoke(e);
+        protected override void FileProgressChanged(object sender, DownloadProgressChangedEventArgs e) => ProgressChanged?.Invoke(e);
 
         public override bool IsValid(BaseFilter filter) => filter.FilterLogoCommand(this);
 

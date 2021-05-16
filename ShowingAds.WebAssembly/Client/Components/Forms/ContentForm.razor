@@ -39,7 +39,7 @@
 
     private async Task OnSubmit()
     {
-        await Container.ContentManager.TryAddOrUpdate(Content.Id, Content);
+        await Container.ContentManager.TryAddOrUpdateAsync(Content.Id, Content);
         await BlazoredModal.Close();
     }
 }

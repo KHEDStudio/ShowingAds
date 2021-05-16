@@ -59,7 +59,7 @@
 
     private async void OnUpdate()
     {
-        _clients = await Container.AdvertisingClientManager.GetCollection(x => true);
+        _clients = await Container.AdvertisingClientManager.GetCollectionAsync(x => true);
         _clients = _clients.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -77,7 +77,7 @@
         var result = await formModel.Result;
         if (result.Cancelled == false)
         {
-            await Container.AdvertisingClientManager.TryDelete(client);
+            await Container.AdvertisingClientManager.TryDeleteAsync(client);
         }
     }
 }

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="NLog" Version="4.7.5" />
@@ -14,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.CoreLibrary.csproj" />
+    <ProjectReference Include="..\ShowingAds.CoreLibrary\ShowingAds.Shared.Core.csproj" />
   </ItemGroup>
 
 </Project>

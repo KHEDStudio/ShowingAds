@@ -35,7 +35,7 @@
 
     private async void OnUpdate()
     {
-        _devices = await Container.DeviceManager.GetCollection(x => true);
+        _devices = await Container.DeviceManager.GetCollectionAsync(x => true);
         _devices = _devices.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -58,7 +58,7 @@
         var result = await formModel.Result;
         if (result.Cancelled == false)
         {
-            await Container.DeviceManager.TryDelete(device.Id);
+            await Container.DeviceManager.TryDeleteAsync(device.Id);
         }
     }
 }

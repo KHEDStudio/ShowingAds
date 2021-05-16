@@ -129,28 +129,39 @@
     protected async override Task OnInitializedAsync()
     {
         Container.ChannelUpdated += OnUpdate;
+        Container.DeviceUpdated += OnUpdateDevice;
         OnUpdate();
         await base.OnInitializedAsync();
     }
 
     private async void OnUpdate()
     {
-        var (isSuccess, user) = await Container.UserManager.TryGet(Channel.OwnerId);
+        var (isSuccess, user) = await Container.UserManager.TryGetAsync(Channel.OwnerId);
         if (isSuccess)
         {
             _red = user.Red;
             _green = user.Green;
             _blue = user.Blue;
         }
-        _contents = (await Container.ContentManager.GetCollection(
+        _contents = (await Container.ContentManager.GetCollectionAsync(
             x => Channel.ContentsId.Contains(x.Id))).OrderBy(x => x.Id).ToList();
-        _clients = (await Container.ClientChannelManager.GetCollection(
+        _clients = (await Container.ClientChannelManager.GetCollectionAsync(
             x => Channel.Id == x.ChannelId)).OrderBy(x => x.Id).ToList();
-        _orders = (await Container.OrderManager.GetCollection(
+        _orders = (await Container.OrderManager.GetCollectionAsync(
             x => Channel.Id == x.ChannelId)).OrderBy(x => x.OrderField).ToList();
-        _devices = (await Container.DeviceManager.GetCollection(
+        _devices = (await Container.DeviceManager.GetCollectionAsync(
             x => Channel.Id == x.ChannelId)).OrderBy(x => x.Name).ToList();
         await InvokeAsync(() => StateHasChanged());
+    }
+
+    private async void OnUpdateDevice(DeviceState device)
+    {
+        int index = _devices.FindIndex(x => x.Id == device.Id);
+        if (index != -1)
+        {
+            _devices[index] = device;
+            await InvokeAsync(() => StateHasChanged());
+        }
     }
 
     public void Dispose()
@@ -187,7 +198,7 @@
         if (result.Cancelled == false)
         {
             Channel.ContentsId.Remove(content);
-            await Container.ChannelManager.TryAddOrUpdate(Channel.Id, Channel);
+            await Container.ChannelManager.TryAddOrUpdateAsync(Channel.Id, Channel);
         }
     }
 
@@ -219,7 +230,7 @@
         var result = await formModel.Result;
         if (result.Cancelled == false)
         {
-            await Container.ClientChannelManager.TryDelete(client);
+            await Container.ClientChannelManager.TryDeleteAsync(client);
         }
     }
 
@@ -251,7 +262,7 @@
         var result = await formModel.Result;
         if (result.Cancelled == false)
         {
-            await Container.OrderManager.TryDelete(order);
+            await Container.OrderManager.TryDeleteAsync(order);
         }
     }
 
@@ -299,7 +310,7 @@
         if (result.Cancelled == false)
         {
             device.ChannelId = Guid.Empty;
-            await Container.DeviceManager.TryAddOrUpdate(device.Id, device);
+            await Container.DeviceManager.TryAddOrUpdateAsync(device.Id, device);
         }
     }
 }

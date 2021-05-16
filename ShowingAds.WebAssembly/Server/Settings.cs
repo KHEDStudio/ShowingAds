@@ -20,9 +20,10 @@ namespace ShowingAds.WebAssembly.Server
         public static Uri ShowedsPath => new Uri(DjangoPath, "showeds/");
         public static Uri AdvertisingVideosPath => new Uri(DjangoPath, "ads_videos/");
         public static Uri NotifyPath { get; set; }
-        public static Uri NotifyChannelPath => new Uri(NotifyPath, "channel");
+        public static Uri NotifyChannelPath => new Uri(NotifyPath, "channel/");
+        public static Uri NotifyDevicePath => new Uri(NotifyPath, "device/");
         public static Uri DevicesServicePath { get; set; }
-        public static Uri DevicesPath => new Uri(DevicesServicePath, "/device");
+        public static Uri DevicesPath => new Uri(DevicesServicePath, "device/");
         public static Uri ChannelPath => new Uri(DevicesPath, "channel/");
     }
 }

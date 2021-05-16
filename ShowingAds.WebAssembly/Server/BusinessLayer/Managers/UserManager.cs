@@ -18,50 +18,52 @@ namespace ShowingAds.WebAssembly.Server.BusinessLayer.Managers
     {
         private Logger _logger { get; }
 
-        private UserManager() : base(new WebProvider<int, User>(Settings.UsersPath))
+        private UserManager() : base(new WebProvider<int, User>(Settings.UsersPath), Settings.NotifyChannelPath)
         {
             _logger = NLog.LogManager.GetCurrentClassLogger();
-            EventBus.GetInstance().StartManagersUpdate += UpdateOrInitializeModels;
-            UpdateOrInitializeModels();
         }
 
-        protected override void UpdateOrInitializeModels()
+        public async Task<IEnumerable<User>> GetPermittedModelsAsync(IEnumerable<int> users) =>
+            await GetCollectionAsync(x => users.Contains(x.Id));
+
+        public async Task<bool> TryAddOrUpdateAsync(User model) =>
+            await TryAddOrUpdateAsync(model.Id, model);
+
+        public async Task<IEnumerable<int>> GetEmployerUsers(int user)
         {
-            _logger.Info("Update or initialize Users...");
-            base.UpdateOrInitializeModels();
-        }
-
-        public async Task<IEnumerable<User>> GetPermittedModels(List<int> users) =>
-            await GetCollection(x => users.Contains(x.Id));
-
-        public async Task<bool> TryAddOrUpdate(User model) =>
-            await TryAddOrUpdate(model.Id, model);
-
-        public async IAsyncEnumerable<int> GetEmployerUsers(int user)
-        {
+            var employerUsers = new List<int>();
             int lastUser;
             do
             {
                 lastUser = user;
-                yield return user;
-                var (isSuccess, _user) = await TryGet(user);
+                employerUsers.Add(user);
+                var (isSuccess, _user) = await TryGetAsync(user);
                 if (isSuccess)
                     user = _user.OwnerId;
             } while (lastUser != user);
+            return employerUsers;
         }
 
-        public async IAsyncEnumerable<int> GetEmployeeUsers(int user)
+        public async Task<IEnumerable<int>> GetEmployeeUsers(int user)
         {
+            var employeeUsers = new List<int>();
             var queue = new Queue<int>();
             queue.Enqueue(user);
             while (queue.Count > 0)
             {
                 var current = queue.Dequeue();
-                var users = (await GetCollection(x => x.OwnerId == current && x.Id != current))
+                var users = (await GetCollectionAsync(x => x.OwnerId == current && x.Id != current))
                     .Select(x => x.Id).ToList();
                 users.ForEach(x => queue.Enqueue(x));
-                yield return current;
+                employeeUsers.Add(current);
             }
+            return employeeUsers;
+        }
+
+        public override async Task<IEnumerable<Guid>> GetSubscribersAsync(User model)
+        {
+            var employerUsers = await GetEmployerUsers(model.Id);
+            return employerUsers.Select(x => x.ToGuid());
         }
     }
 }

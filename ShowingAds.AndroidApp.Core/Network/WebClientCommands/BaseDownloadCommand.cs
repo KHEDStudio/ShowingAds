@@ -24,12 +24,11 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
         private readonly string _filePath;
 
         public abstract event Action<EventArgs> Completed;
-        public abstract event Action<ProgressChangedEventArgs> ProgressChanged;
+        public abstract event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         protected BaseDownloadCommand(Uri address, string filePath)
         {
             _downloader = new WebClient();
-            _downloader.DownloadFileCompleted += FileDownloaded;
             _downloader.DownloadProgressChanged += FileProgressChanged;
             _cancellationToken = new CancellationTokenSource();
             _address = address ?? throw new ArgumentNullException(nameof(address));
@@ -40,7 +39,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
 
         public abstract void Accept(BaseVisitor visitor);
 
-        protected abstract void FileProgressChanged(object sender, ProgressChangedEventArgs e);
+        protected abstract void FileProgressChanged(object sender, DownloadProgressChangedEventArgs e);
 
         protected abstract void FileDownloaded(object sender, AsyncCompletedEventArgs e);
 
@@ -49,7 +48,11 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
             try
             {
                 if (_cancellationToken.IsCancellationRequested == false)
-                    _downloader.DownloadFile(_address, _filePath);
+                {
+                    var taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
+                        TaskContinuationOptions.None, TaskScheduler.Current);
+                    taskFactory.StartNew(() => _downloader.DownloadFileTaskAsync(_address, _filePath)).Unwrap().Wait();
+                }
                 lock (_syncRoot)
                     if (_cancellationToken.IsCancellationRequested && File.Exists(_filePath))
                         File.Delete(_filePath);

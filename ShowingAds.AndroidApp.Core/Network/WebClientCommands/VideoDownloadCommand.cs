@@ -1,7 +1,7 @@
 ﻿using ShowingAds.AndroidApp.Core.BusinessCollections.Visitors;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.Filters;
 using ShowingAds.AndroidApp.Core.Network.WebClientCommands.ModelEventArgs;
-using ShowingAds.CoreLibrary.Models.Json;
+using ShowingAds.Shared.Core.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +18,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
         public string FilePath { get; private set; }
 
         public override event Action<EventArgs> Completed;
-        public override event Action<ProgressChangedEventArgs> ProgressChanged;
+        public override event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         public VideoDownloadCommand(Uri address, string filePath, Guid ownerId, VideoJson video)
             : base(address, filePath)
@@ -41,7 +41,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
             }
         }
 
-        protected override void FileProgressChanged(object sender, ProgressChangedEventArgs e) => ProgressChanged?.Invoke(e);
+        protected override void FileProgressChanged(object sender, DownloadProgressChangedEventArgs e) => ProgressChanged?.Invoke(e);
 
         public override bool IsValid(BaseFilter filter) => filter.FilterVideoCommand(this);
 

@@ -12,7 +12,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Interfaces
     public interface IExecutor<T> : IDisposable
     {
         event Action<T> CommandExecuted;
-        event Action<ProgressChangedEventArgs> ProgressChanged;
+        event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         void AddCommandToQueue(IWebClientCommand command);
         bool TryExecuteCommand();

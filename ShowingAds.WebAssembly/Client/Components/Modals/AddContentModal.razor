@@ -37,7 +37,7 @@
 
     private async void OnUpdate()
     {
-        _contents = await Container.ContentManager.GetCollection(x => Channel.ContentsId.Contains(x.Id) == false);
+        _contents = await Container.ContentManager.GetCollectionAsync(x => Channel.ContentsId.Contains(x.Id) == false);
         _contents = _contents.OrderBy(x => x.Name);
         await InvokeAsync(() => StateHasChanged());
     }
@@ -50,6 +50,6 @@
     private async void AddContent(Content content)
     {
         Channel.ContentsId.Add(content.Id);
-        await Container.ChannelManager.TryAddOrUpdate(Channel.Id, Channel);
+        await Container.ChannelManager.TryAddOrUpdateAsync(Channel.Id, Channel);
     }
 }

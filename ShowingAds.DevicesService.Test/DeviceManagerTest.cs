@@ -29,13 +29,13 @@ namespace ShowingAds.DevicesService.Test
         [Test]
         public async void AddUpdateDeleteDeviceTest()
         {
-            var tasks = _devices.Select(async x => await _manager.TryAddOrUpdate(x.Id, x)).ToList();
+            var tasks = _devices.Select(async x => await _manager.TryAddOrUpdateAsync(x.Id, x)).ToList();
             var result = await Task.WhenAll(tasks);
             Assert.IsTrue(result.All(x => x));
-            tasks = _devices.Select(async x => await _manager.TryAddOrUpdate(x.Id, x)).ToList();
+            tasks = _devices.Select(async x => await _manager.TryAddOrUpdateAsync(x.Id, x)).ToList();
             result = await Task.WhenAll(tasks);
             Assert.IsTrue(result.All(x => x));
-            tasks = _devices.Select(async x => (await _manager.TryDelete(x.Id)).Item1).ToList();
+            tasks = _devices.Select(async x => (await _manager.TryDeleteAsync(x.Id)).Item1).ToList();
             result = await Task.WhenAll(tasks);
             Assert.IsTrue(result.All(x => x));
         }
