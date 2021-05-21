@@ -27,7 +27,7 @@ namespace ShowingAds.Backend.UserService.ChannelJsonHandlers
                 var contents = await GetContentsAsync(channel.ContentIds);
                 var clients = await GetClientsAsync(channel.Id);
                 var orders = await GetOrdersAsync(channel.Id);
-                return new ChannelJson(channel.LogoLeft, channel.LogoRight, channel.Ticker, channel.TickerInterval,
+                return new ChannelJson(channel.Id, channel.LogoLeft, channel.LogoRight, channel.Ticker, channel.TickerInterval,
                     channel.ReloadTime, channel.DisplayOrientation, contents, clients, orders);
             }
             return default;

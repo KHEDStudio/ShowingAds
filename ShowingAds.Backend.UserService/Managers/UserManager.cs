@@ -55,7 +55,7 @@ namespace ShowingAds.Backend.UserService.Managers
 
         public override async Task<IEnumerable<Guid>> GetSubscribersAsync(User model)
         {
-            var employerUsers = new List<int>() { 1, 2, 3 }; //await GetEmployerUsers(model.Id);
+            var employerUsers = await GetEmployerUsers(model.Id);
             return employerUsers.Select(x => x.ToGuid());
         }
     }

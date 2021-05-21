@@ -21,6 +21,7 @@
 
 <script>
     import ContentsModal from '../modals/ContentsModal.vue'
+    import ClientsModal from '../modals/ClientsModal.vue'
 
     export default {
         name: 'account-panel',
@@ -56,6 +57,14 @@
                 )
             },
             showClients: function() {
+                this.$modal.show(
+                    ClientsModal, {},
+                    {
+                        height: "auto",
+                        width: "80%",
+                        scrollable: true
+                    }
+                )
             },
             showDevices: function() {
             },

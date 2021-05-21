@@ -17,6 +17,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using ShowingAds.Shared.Backend;
+using ShowingAds.Backend.UserService.Consumers;
+using ShowingAds.Backend.UserService.Services;
 
 namespace ShowingAds.Backend.UserService
 {
@@ -65,9 +67,11 @@ namespace ShowingAds.Backend.UserService
                     });
                     cfg.Publish<NotifyPacket>(x => x.BindQueue("notify", "notify"));
                     cfg.Publish<NotifyChannelJson>(x => x.BindQueue("channel_json", "channel_json"));
+                    cfg.ReceiveEndpoint("update_channels", op => op.Consumer<ChannelJsonUpdaterConsumer>());
                 }));
             });
-            services.AddMassTransitHostedService();
+            services.AddMassTransitHostedService(true);
+            services.AddHostedService<RabbitMqService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

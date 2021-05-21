@@ -5,6 +5,7 @@
             <div class="row mt-3">
                 <div class="col-md">
                     <AccountPanel />
+                    <InformationPanel />
                 </div>
                 <div class="col-md">
                     <b-icon-plus font-scale="5" class="card plus mb-1" @click="addChannel" />
@@ -20,6 +21,8 @@
 
     import ControlPanel from '../components/panels/ControlPanel.vue'
     import AccountPanel from '../components/panels/AccountPanel.vue'
+    import InformationPanel from '../components/panels/InformationPanel.vue'
+
     import ChannelCard from '../components/cards/ChannelCard.vue'
 
     import ChannelForm from '../components/forms/ChannelForm.vue'
@@ -29,6 +32,7 @@
         components: {
             ControlPanel,
             AccountPanel,
+            InformationPanel,
             ChannelCard
         },
         computed: {
@@ -120,9 +124,10 @@
             this.getModels('ContentVideo')
             this.getModels('Order')
             this.getModels('User')
+            this.getModels('DeviceState')
             this.connectToNotifyService()
             setTimeout(() => {
-                console.log(this.$store.state.manager.channels)
+                console.log(this.$store.state.manager.devices)
             }, 5000)
         },
         async beforeDestroy() {

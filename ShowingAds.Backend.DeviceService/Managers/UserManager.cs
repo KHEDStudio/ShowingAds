@@ -1,0 +1,53 @@
+﻿using ShowingAds.Shared.Backend.DataProviders;
+using ShowingAds.Shared.Backend.Managers;
+using ShowingAds.Shared.Backend.Models.Database;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ShowingAds.Backend.DeviceService.Managers
+{
+    public class UserManager : NoCachedModelManager<int, User, UserManager>
+    {
+        private UserManager() : base(new WebProvider<int, User>(Settings.UsersPath)) { }
+
+        public async Task<IEnumerable<User>> GetPermittedModelsAsync(IEnumerable<int> users) =>
+            await GetCollectionOrNullAsync(x => users.Contains(x.Id));
+
+        public Task<bool> TryAddOrUpdateAsync(User model) => Task.FromResult(false);
+
+        public Task<bool> TryDeleteAsync(User model) => Task.FromResult(false);
+
+        public async Task<IEnumerable<int>> GetEmployerUsers(int userId)
+        {
+            var employerUsers = new List<int>();
+            int lastUser;
+            do
+            {
+                lastUser = userId;
+                employerUsers.Add(userId);
+                var user = await GetOrDefaultAsync(userId);
+                if (user != default)
+                    userId = user.OwnerId;
+            } while (lastUser != userId);
+            return employerUsers;
+        }
+
+        public async Task<IEnumerable<int>> GetEmployeeUsers(int user)
+        {
+            var employeeUsers = new List<int>();
+            var queue = new Queue<int>();
+            queue.Enqueue(user);
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+                var users = (await GetCollectionOrNullAsync(x => x.OwnerId == current && x.Id != current))
+                    .Select(x => x.Id).ToList();
+                users.ForEach(x => queue.Enqueue(x));
+                employeeUsers.Add(current);
+            }
+            return employeeUsers;
+        }
+    }
+}

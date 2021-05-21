@@ -8,10 +8,10 @@
                 <b-icon-sliders @click="editCallback(clientChannel)" />
             </button>
             <button :style="`background-color: rgb(${red}, ${green}, ${blue})`" class="card-text float-left btn" type="button" @click="clickCallback(clientChannel)">
-                <h5 class="m-0">{{ client.name }}</h5>
+                <h5 class="m-0">{{ client ? client.name : '?' }}</h5>
             </button>
         </div>
-        <p v-if="client.description != ''" class="card-text ml-2 mb-0">Описание: {{ client.description }}</p>
+        <p v-if="client ? client.description != '' : false" class="card-text ml-2 mb-0">Описание: {{ client.description }}</p>
         <p class="card-text ml-2 mb-0">Интервал показа: {{ interval }} мин</p>
         <p class="card-text ml-2 mb-0">Количество видеороликов: {{ countVideos }}</p>
         <p class="card-text ml-2 mb-0">Общая продолжительность: {{ durationVideos }}</p>

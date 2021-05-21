@@ -1,78 +1,97 @@
 <template>
-    <div class="row pt-2 pb-2 pr-4 pl-4">
-        <div class="col-md-4 p-1" v-for="video in videos" :key="video.src.id">
-            <ClientVideoCard :video="video.src" :selected="video.selected" :callback="changeSelect" />
-        </div>
+    <div class="pt-2 pb-2 pr-4 pl-4">
+        <b-icon-plus font-scale="5" class="card plus mb-1" @click="addClientVideo" />
+        <VideoCard v-for="clientVideo in clientVideos" :key="clientVideo.id" :video="clientVideo" :deleteCallback="deleteVideo" />
     </div>
 </template>
 
 <script>
     import { mapActions } from "vuex"
-    import ClientVideoCard from '../cards/ClientVideoCard.vue'
+
+    import VideoCard from '../cards/VideoCard.vue'
+    import VideoForm from '../forms/VideoForm.vue'
 
     export default {
         name: 'ClientVideosModal',
-        components: {
-            ClientVideoCard
-        },
         props: {
-            clientChannel: Object
+            client: Object
+        },
+        components: {
+            VideoCard
         },
         computed: {
-            client: function() {
-                return this.$store.state.manager.clients ? this.$store.state.manager.clients.find(x => x.id == this.clientChannel.ads_client) : null
-            },
-            selectedVideos: function() {
-                return this.$store.state.manager.clientVideos ? this.$store.state.manager.clientVideos.filter(x => this.clientChannel.ads_videos.includes(x.id)) : []
-            },
-            allVideos: function() {
-                return this.$store.state.manager.clientVideos ? this.$store.state.manager.clientVideos.filter(x => this.client.id == x.ads_client) : []
-            },
-            videos: function() {
-                let videos = []
-                let selectedVideos = this.selectedVideos
-                let allVideos = this.allVideos
-                allVideos.forEach(x => {
-                    let video = {}
-                    video.src = x
-                    video.selected = selectedVideos.includes(x)
-                    videos.push(video)
-                })
-                return videos
+            clientVideos: function() {
+                return this.$store.state.manager.clientVideos ? this.$store.state.manager.clientVideos.filter(x => x.ads_client == this.client.id) : []
             }
         },
         methods: {
-            ...mapActions(['postModel']),
-            changeSelect: async function(video, selected) {
-                if (selected) {
-                    if (this.clientChannel.ads_videos.includes(video.id) == false) {
-                        this.clientChannel.ads_videos.push(video.id)
+            ...mapActions(['deleteModel', 'postModel']),
+            addClientVideo: function() {
+                let that = this
+                this.$modal.show(
+                    VideoForm,
+                    {
+                        collection: this.client,
+                        uploaded: async function(id, duration) {
+                            let saved = null
+                            let clientVideo = {
+                                id: id,
+                                duration: duration,
+                                ads_client: that.client.id
+                            }
+                            let params = {
+                                model: clientVideo,
+                                modelName: 'AdvertisingVideo',
+                                callback: function(response) {
+                                    saved = response.status == 200
+                                }
+                            }
+                            await that.postModel(params)
+                            return saved
+                        }
+                    },
+                    {
+                        height: "auto",
+                        width: "80%",
+                        scrollable: true
                     }
-                } else {
-                    this.clientChannel.ads_videos = this.clientChannel.ads_videos.filter(x => x != video.id)
-                }
+                )
+            },
+            deleteVideo: function(video) {
                 let notify = this.notify
                 let client = this.client
-                let channel = this.$store.state.manager.channels.find(x => x.id == this.clientChannel.channel)
-                let params = {
-                    model: this.clientChannel,
-                    modelName: 'ClientChannel',
-                    callback: function(response) {
-                        if (response.status != 200) {
-                            params.model.ads_videos = params.model.ads_videos.filter(x => x != video.id)
-                            if (selected)
-                                notify('Уведомление!', `Видеоролик клиента «${client.name}» не удалось добавить в канал «${channel.name}»!`, 'danger')
-                            else
-                                notify('Уведомление!', `Видеоролик клиента «${client.name}» не удалось исключить из канала «${channel.name}»!`, 'danger')
-                        } else {
-                            if (selected)
-                                notify('Уведомление!', `Видеоролик клиента «${client.name}» добавлен в канал «${channel.name}»!`, 'success')
-                            else
-                                notify('Уведомление!', `Видеоролик клиента «${client.name}» исключен из канала «${channel.name}»!`, 'success')
+                this.$modal.show('dialog', {
+                    title: 'Подтвердите действие',
+                    text: `Удалить видеоролик из клиента «${this.client.name}»?`,
+                    buttons: [
+                        {
+                            title: 'Да',
+                            handler: async () => {
+                                this.$modal.hide('dialog')
+                                this.$store.state.manager.clientVideos = this.$store.state.manager.clientVideos.filter(x => x.id != video.id)
+                                let params = {
+                                    model: video,
+                                    modelName: 'AdvertisingVideo',
+                                    callback: function(response) {
+                                        if (response.status != 200) {
+                                            this.$store.state.manager.clientVideos.push(video)
+                                            notify('Уведомление!', `Видеоролик клиента «${client.name}» не удалось удалить!`, 'danger')
+                                        } else {
+                                            notify('Уведомление!', `Видеоролик клиента «${client.name}» успешно удален!`, 'success')
+                                        }
+                                    }
+                                }
+                                await this.deleteModel(params)
+                            }
+                        },
+                        {
+                            title: 'Нет',
+                            handler: () => {
+                                this.$modal.hide('dialog')
+                            }
                         }
-                    }
-                }
-                await this.postModel(params)
+                    ]
+                })
             },
             notify: function(title, text, variant) {
                 this.$bvToast.toast(text, {

@@ -9,6 +9,7 @@
     import { mapActions } from "vuex"
     
     import ContentCard from '../cards/ContentCard.vue'
+    
     import ContentVideosModal from '../modals/ContentVideosModal.vue'
 
     import ContentForm from '../forms/ContentForm.vue'
@@ -16,8 +17,7 @@
     export default {
         name: 'ContentsCard',
         components: {
-            ContentCard,
-            ContentVideosModal
+            ContentCard
         },
         computed: {
             contents: function() {

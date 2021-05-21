@@ -9,7 +9,8 @@ namespace ShowingAds.AndroidApp.Core
     {
         public static Guid DeviceId = Guid.Empty;
         public static readonly int MaxReadyVideos = 50;
-        public static readonly Uri ServerPath = new Uri("http://84.38.188.128:3667/");
+        public static readonly Uri ServerPath = new Uri("http://84.38.188.128:3700/");
+        //public static readonly Uri ServerPath = new Uri("http://192.168.0.5:49160/");
         public static readonly Uri LoginPath = new Uri(ServerPath, "session/");
         public static readonly Uri DeviceControllerPath = new Uri(ServerPath, "device/");
         public static readonly Uri ChannelPath = new Uri(DeviceControllerPath, "channel/");

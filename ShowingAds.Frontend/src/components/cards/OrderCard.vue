@@ -5,10 +5,10 @@
                 <b-icon-x variant="danger" @click="deleteCallback(order)" />
             </button>
             <div class="card-text float-left">
-                <h5 class="m-0">{{ client.name }}</h5>
+                <h5 class="m-0">{{ client ? client.name : '?' }}</h5>
             </div>
         </div>
-        <p v-if="client.description != ''" class="card-text ml-2 mb-0">Описание: {{ client.description }}</p>
+        <p v-if="client ? client.description != '' : false" class="card-text ml-2 mb-0">Описание: {{ client.description }}</p>
     </div>
 </template>
 

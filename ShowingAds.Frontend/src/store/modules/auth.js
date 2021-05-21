@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
-const loginURL = 'http://localhost:49153/'
+const loginURL = 'http://84.38.188.128:3670/'
 
 const state = {
     token: null,

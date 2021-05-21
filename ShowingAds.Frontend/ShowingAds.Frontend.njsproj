@@ -58,7 +58,13 @@
     <Content Include="src\components\cards\ContentCard.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\cards\InfoDeviceCard.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\cards\OrderCard.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\cards\UploadCard.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\cards\VideoCard.vue">
@@ -68,7 +74,13 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\forms\ClientChannelForm.vue" />
+    <Content Include="src\components\forms\ClientForm.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\forms\ContentForm.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\forms\VideoForm.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\modals\AddClientModal.vue">
@@ -77,7 +89,16 @@
     <Content Include="src\components\modals\AddContentModal.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\modals\AddDeviceModal.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\modals\AddOrderModal.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\modals\ClientsModal.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\modals\ClientChannelVideosModal.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\modals\ClientVideosModal.vue">

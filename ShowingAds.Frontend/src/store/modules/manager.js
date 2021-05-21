@@ -1,48 +1,54 @@
 import axios from 'axios'
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
 
-const baseURL = 'http://localhost:49158/' //'http://31.184.219.123:63880/'
+const baseURL = 'http://84.38.188.128:3690/' //'http://31.184.219.123:63880/'
 
 const models = {
     AdvertisingClient: {
         stateName: 'clients',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'advertisingclient'
     },
     AdvertisingVideo: {
         stateName: 'clientVideos',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'advertisingvideo'
     },
     Channel: {
         stateName: 'channels',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'channel'
     },
     ClientChannel: {
         stateName: 'clientChannels',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'clientchannel'
     },
     Content: {
         stateName: 'contents',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'content'
     },
     ContentVideo: {
         stateName: 'contentVideos',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'contentvideo'
     },
     Order: {
         stateName: 'orders',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'order'
     },
     User: {
         stateName: 'users',
-        baseURL: 'http://localhost:49158/',
+        baseURL: 'http://84.38.188.128:3690/',
         path: 'user'
+    },
+    DeviceState: {
+        stateName: 'devices',
+        baseURL: 'http://84.38.188.128:3700/',
+        //baseURL: 'http://localhost:49160/',
+        path: 'device'
     }
 }
 
@@ -54,11 +60,10 @@ const state = {
     contents: null,
     contentVideos: null,
     orders: null,
-    users: null
-}
+    users: null,
+    devices: null,
 
-const getters = {
-
+    uploads: []
 }
 
 const actions = {
@@ -69,6 +74,11 @@ const actions = {
                 models: null
             })
         }
+
+        commit('setModels', {
+            stateName: 'uploads',
+            models: []
+        })
     },
     async getModels({ commit }, modelName) {
         let modelInfo = models[modelName]
@@ -139,14 +149,16 @@ const actions = {
             }
         }
         const userHubConnection = new HubConnectionBuilder()
-            .withUrl('http://localhost:49155/user')
+            .withUrl('http://84.38.188.128:3680/user')
             .configureLogging(LogLevel.Information)
             .build()
         let isReady = true
+        let lastNotify = new Date()
         userHubConnection.on('Notify', async () => {
-            if (isReady) {
+            if (isReady && (new Date().getTime() - lastNotify.getTime()) / 1000 > 5) {
                 isReady = false
                 await getNotifications(that, commit, models, connectionId)
+                lastNotify = new Date()
                 isReady = true
             }
         })
@@ -170,12 +182,30 @@ const actions = {
             }
             callback(response)
         })
+    },
+    async uploadVideo({ commit }, { video, callback }) {
+        let formData = new FormData()
+        formData.append('file', video)
+
+        await axios.post('video', formData, {
+            baseURL: 'http://31.184.219.123:3666'
+        })
+        .then(response => {
+            callback(response)
+        })
+        .catch(error => {
+            let response = {
+                status: 12002,
+                error: error
+            }
+            callback(response)
+        })
     }
 }
 
 async function getNotifications(that, commit, models, connectioId) {
     await axios.get(`notifications?connection=${connectioId}`, {
-        baseURL: 'http://localhost:49155',
+        baseURL: 'http://84.38.188.128:3680',
         headers: {
             'Authorization': `Bearer ${that.getters.StateToken}`,
             'Content-Type': 'application/json'
@@ -191,15 +221,27 @@ function parseNotification(that, notification, commit, models) {
     let modelInfo = models[notification.type]
     let newModels = that.state.manager[modelInfo.stateName].filter(x => x.id != notification.model.id)
     if (notification.operation == 1 && notification.type == 'ClientChannel')
+        deleteOrders(that, commit, notification.model)
+    if (notification.operation == 1 && notification.type == 'AdvertisingClient') {
+        let clientChannels = that.state.manager['clientChannels'].filter(x => x.ads_client == notification.model.id)
+        clientChannels.forEach(x => deleteOrders(that, commit, x))
         commit('setModels', {
-            stateName: 'orders',
-            models: that.state.manager['orders'].filter(x => x.ads_client_channel != notification.model.id)
+            stateName: 'clientChannels',
+            models: that.state.manager['clientChannels'].filter(x => x.ads_client != notification.model.id)
         })
+    }
     if (notification.operation == 0)
         newModels.push(notification.model)
     commit('setModels', {
         stateName: modelInfo.stateName,
         models: newModels
+    })
+}
+
+function deleteOrders(that, commit, clientChannel) {
+    commit('setModels', {
+        stateName: 'orders',
+        models: that.state.manager['orders'].filter(x => x.ads_client_channel != clientChannel.id)
     })
 }
 

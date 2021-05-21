@@ -82,7 +82,7 @@ namespace ShowingAds.Backend.NotifyService
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(options => options.WithOrigins("http://localhost:8080")
+            app.UseCors(options => options.WithOrigins("http://localhost:8080", "http://84.38.188.128")
                 .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             //app.UseCors(options => options.AllowAnyOrigin()

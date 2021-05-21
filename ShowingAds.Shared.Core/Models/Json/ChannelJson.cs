@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 namespace ShowingAds.Shared.Core.Models.Json
 {
-    public class ChannelJson
+    public class ChannelJson : ICloneable, IModel<Guid>
     {
+        [JsonProperty("id"), JsonConverter(typeof(GuidConverter))]
+        public Guid Id { get; private set; }
         [JsonProperty("logo_left"), JsonConverter(typeof(GuidConverter))]
         public Guid LogoLeft { get; private set; }
         [JsonProperty("logo_right"), JsonConverter(typeof(GuidConverter))]
@@ -28,8 +30,9 @@ namespace ShowingAds.Shared.Core.Models.Json
         public IEnumerable<OrderJson> Orders { get; private set; }
 
         [JsonConstructor]
-        public ChannelJson(Guid logo_left, Guid logo_right, string ticker, TimeSpan ticker_interval, TimeSpan reload_time, DisplayOrientation orientation, IEnumerable<ContentJson> contents, IEnumerable<ClientChannelJson> clients, IEnumerable<OrderJson> orders)
+        public ChannelJson(Guid id, Guid logo_left, Guid logo_right, string ticker, TimeSpan ticker_interval, TimeSpan reload_time, DisplayOrientation orientation, IEnumerable<ContentJson> contents, IEnumerable<ClientChannelJson> clients, IEnumerable<OrderJson> orders)
         {
+            Id = id;
             LogoLeft = logo_left;
             LogoRight = logo_right;
             Ticker = ticker ?? string.Empty;
@@ -40,5 +43,13 @@ namespace ShowingAds.Shared.Core.Models.Json
             Clients = clients ?? new List<ClientChannelJson>();
             Orders = orders ?? new List<OrderJson>();
         }
+
+        public object Clone()
+        {
+            var json = JsonConvert.SerializeObject(this);
+            return JsonConvert.DeserializeObject<ChannelJson>(json);
+        }
+
+        public Guid GetKey() => Id;
     }
 }

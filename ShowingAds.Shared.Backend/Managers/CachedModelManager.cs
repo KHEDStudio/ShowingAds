@@ -83,6 +83,34 @@ namespace ShowingAds.Shared.Backend.Managers
             }
         }
 
+        public bool TryAddOrUpdateWithoutProvider(TKey key, TModel newValue)
+        {
+            try
+            {
+                _mutex.WaitOne();
+                newValue = (TModel)newValue.Clone();
+                if (_models.ContainsKey(key))
+                {
+                    _models.Remove(key);
+                    _models.Add(key, newValue);
+                    return true;
+                }
+                else
+                {
+                    _models.Add(key, newValue);
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                _mutex.Set();
+            }
+        }
+
         private async Task<bool> TryDeleteRecord(KeyValuePair<TKey, TModel> record)
         {
             if (record.Equals(default(KeyValuePair<TKey, TModel>)))
@@ -103,6 +131,27 @@ namespace ShowingAds.Shared.Backend.Managers
                 _mutex.WaitOne();
                 var _model = _models.AsParallel().FirstOrDefault(x => x.Key.Equals(key));
                 return await TryDeleteRecord(_model);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                _mutex.Set();
+            }
+        }
+
+        public bool TryDeleteWithoutProvider(TKey key, TModel model)
+        {
+            try
+            {
+                _mutex.WaitOne();
+                var _model = _models.AsParallel().FirstOrDefault(x => x.Key.Equals(key));
+                if (_model.Equals(default(KeyValuePair<TKey, TModel>)))
+                    return true;
+                _models.Remove(_model.Key);
+                return true;
             }
             catch
             {

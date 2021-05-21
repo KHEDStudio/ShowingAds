@@ -5,11 +5,11 @@
 }
 
 .offline-card {
-    animation: offline 2s infinite ease-in-out;
+    background-color: rgba(220, 20, 60, 0.5) !important;
 }
 
 .error-card {
-    animation: error 2s infinite ease-in-out;
+    background-color: rgba(220, 20, 60, 0.5) !important;
 }
 
 .confirm-size {
@@ -29,20 +29,6 @@
     scale: 1.01;
     background-color: rgba(30, 144, 255, 0.6) !important;
     color: #ffffff;
-}
-
-@keyframes offline {
-    0% {
-        background-color: #ffffff;
-    }
-
-    50% {
-        background-color: rgba(220, 20, 60, 0.5);
-    }
-
-    100% {
-        background-color: #ffffff;
-    }
 }
 
 @keyframes error {

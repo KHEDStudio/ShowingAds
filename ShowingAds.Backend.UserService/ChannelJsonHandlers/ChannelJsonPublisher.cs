@@ -100,7 +100,7 @@ namespace ShowingAds.Backend.UserService.ChannelJsonHandlers
         {
             ChannelJson channel;
             if (operation == Operation.Delete)
-                channel = new ChannelJson(Guid.Empty, Guid.Empty, string.Empty, TimeSpan.Zero, TimeSpan.Zero,
+                channel = new ChannelJson(channelId, Guid.Empty, Guid.Empty, string.Empty, TimeSpan.Zero, TimeSpan.Zero,
                     DisplayOrientation.Horizontal, new List<ContentJson>(), new List<ClientChannelJson>(), new List<OrderJson>());
             else
                 channel = await GetChannelJsonAsync(channelId);

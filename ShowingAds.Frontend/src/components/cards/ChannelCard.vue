@@ -47,15 +47,15 @@
                 </b-collapse>
                 <b-collapse :id="`clients-${channel.id}`" class="border rounded m-1 p-1" :accordion="`accordion-${channel.id}`">
                     <b-icon-plus font-scale="5" class="card plus mb-1" @click="showAddClientModal" />
-                    <ClientChannelCard v-for="clientChannel in clientChannels" :key="channel.id + clientChannel.id" :clientChannel="clientChannel" :clickCallback="showClientVideosModal" :editCallback="editClientChannel" :deleteCallback="deleteClientChannel" />
+                    <ClientChannelCard v-for="clientChannel in clientChannels" :key="channel.id + clientChannel.id" :clientChannel="clientChannel" :clickCallback="showClientChannelVideosModal" :editCallback="editClientChannel" :deleteCallback="deleteClientChannel" />
                 </b-collapse>
                 <b-collapse :id="`orders-${channel.id}`" class="border rounded m-1 p-1" :accordion="`accordion-${channel.id}`">
                     <b-icon-plus font-scale="5" class="card plus mb-1" @click="showAddOrderModal" />
                     <OrderCard v-for="order in orders" :key="channel.id + order.id" :order="order" :deleteCallback="deleteOrder" />
                 </b-collapse>
                 <b-collapse :id="`devices-${channel.id}`" class="border rounded m-1 p-1" :accordion="`accordion-${channel.id}`">
-                    <b-icon-plus font-scale="5" class="card plus mb-1" />
-                    <!--<DeviceCard @key="Channel.Id.ToString() + device.Id" Device="device" OnClose="RemoveDevice" />-->
+                    <b-icon-plus font-scale="5" class="card plus mb-1" @click="showAddDeviceModal" />
+                    <DeviceCard v-for="device in devices" :key="channel.id + device.id" :device="device" :deleteCallback="removeDevice" />
                 </b-collapse>
             </div>
         </b-collapse>
@@ -64,17 +64,20 @@
 
 <script>
     import { mapActions } from "vuex"
+
     import ContentCard from '../cards/ContentCard.vue'
     import ClientChannelCard from '../cards/ClientChannelCard.vue'
     import OrderCard from '../cards/OrderCard.vue'
+    import DeviceCard from '../cards/DeviceCard.vue'
 
     import ClientChannelForm from '../forms/ClientChannelForm.vue'
 
+    import ContentVideosModal from '../modals/ContentVideosModal.vue'
     import AddContentModal from '../modals/AddContentModal.vue'
     import AddClientModal from '../modals/AddClientModal.vue'
     import AddOrderModal from '../modals/AddOrderModal.vue'
-    
-    import ClientVideosModal from '../modals/ClientVideosModal.vue'
+    import AddDeviceModal from '../modals/AddDeviceModal.vue'
+    import ClientChannelVideosModal from '../modals/ClientChannelVideosModal.vue'
 
     export default {
         name: 'Channel',
@@ -82,6 +85,7 @@
             ContentCard,
             ClientChannelCard,
             OrderCard,
+            DeviceCard
         },
         props: {
             channel: Object,
@@ -119,6 +123,10 @@
             orders: function() {
                 let orders = this.$store.state.manager.orders ? this.$store.state.manager.orders.filter(x => x.channel == this.channel.id) : []
                 return orders.sort((a, b) => (a.order_field > b.order_field) ? 1 : ((b.order_field > a.order_field) ? -1 : 0))
+            },
+            devices: function() {
+                let devices = this.$store.state.manager.devices ? this.$store.state.manager.devices.filter(x => x.channel == this.channel.id) : []
+                return devices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))
             }
         },
         methods: {
@@ -181,12 +189,35 @@
                     }
                 )
             },
-            contentClicked: function(content) {
-                console.log(content)
-            },
-            showClientVideosModal: function(clientChannel) {
+            showAddDeviceModal: function() {
                 this.$modal.show(
-                    ClientVideosModal,
+                    AddDeviceModal,
+                    {
+                        channel: this.channel
+                    },
+                    {
+                        height: "auto",
+                        width: "80%",
+                        scrollable: true
+                    }
+                )
+            },
+            contentClicked: function(content) {
+                this.$modal.show(
+                    ContentVideosModal, 
+                    {
+                        content: content
+                    },
+                    {
+                        height: "auto",
+                        width: "80%",
+                        scrollable: true
+                    }
+                )
+            },
+            showClientChannelVideosModal: function(clientChannel) {
+                this.$modal.show(
+                    ClientChannelVideosModal,
                     {
                         clientChannel: clientChannel
                     },
@@ -328,6 +359,42 @@
                                     }
                                 }
                                 await this.deleteModel(params)
+                            }
+                        },
+                        {
+                            title: 'Нет',
+                            handler: () => {
+                                this.$modal.hide('dialog')
+                            }
+                        }
+                    ]
+                })
+            },
+            removeDevice: async function(device) {
+                let channel = this.channel
+                let notify = this.notify
+                this.$modal.show('dialog', {
+                    title: 'Подтвердите действие',
+                    text: `Отписать приставку «${device.name}» от канала «${channel.name}»?`,
+                    buttons: [
+                        {
+                            title: 'Да',
+                            handler: async () => {
+                                this.$modal.hide('dialog')
+                                device.channel = '00000000-0000-0000-0000-000000000000'
+                                let params = {
+                                    model: device,
+                                    modelName: 'DeviceState',
+                                    callback: function(response) {
+                                        if (response.status != 200) {
+                                            device.channel = channel.id
+                                            notify('Уведомление!', `Приставку «${device.name}» не удалось отписать от канала «${channel.name}»!`, 'danger')
+                                        } else {
+                                            notify('Уведомление!', `Приставка «${device.name}» отписана от канала «${channel.name}»!`, 'success')
+                                        }
+                                    }
+                                }
+                                await this.postModel(params)
                             }
                         },
                         {
