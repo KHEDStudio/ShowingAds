@@ -32,15 +32,19 @@ using System.Collections.Generic;
 using ShowingAds.Shared.Core.Models.Login;
 using ShowingAds.Shared.Core.Models.States;
 using ShowingAds.Shared.Core.Models.Json;
+using Xamarin.Essentials;
+using System.Drawing;
+using Android.Graphics;
+using System.Net.Http;
+using System.Text;
+using Android.Media;
+using ShowingAds.Shared.Core.Enums;
 
 namespace ShowingAds.AndroidApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", ScreenOrientation = ScreenOrientation.Landscape)]
     public class VideoActivity : AppCompatActivity
     {
-        private Thread _loadVideoThread;
-        private Thread _downloadThread;
-
         private VideoView _videoView;
         private TickerView _tickerView;
         private ImageView _leftLogo;
@@ -66,6 +70,9 @@ namespace ShowingAds.AndroidApp
         private uint _timerCounter = 0;
         private System.Timers.Timer _advertisingTimer;
         private BlockingCollection<Video> _advertisingVideos = new BlockingCollection<Video>();
+
+        private readonly object _syncClientVideosShowed = new object();
+        private Dictionary<string, int> _clientVideosShowed = new Dictionary<string, int>();
 
         private readonly object _syncCurrentReservedVideos = new object();
         private (bool, Video) _currentVideo = (false, null);
@@ -93,7 +100,10 @@ namespace ShowingAds.AndroidApp
         private ConfigFileStore<AutoRebooter> _rebootTimeStore;
         private AutoRebooter _rebootTime;
 
-        private int _downloadType = 0;
+        private Guid _priorityClient = Guid.Empty;
+        private string _screenshot = Guid.Empty.ToString();
+
+        private int _downloadType = -1;
         private int _downloadProgress = 0;
         private double _downloadSpeed = 0;
         private long _lastDownloadBytes = 0;
@@ -116,6 +126,7 @@ namespace ShowingAds.AndroidApp
             _logInfo2 = FindViewById<TextView>(Resource.Id.log_info2);
             _logInfo3 = FindViewById<TextView>(Resource.Id.log_info3);
             _logInfo1.Visibility = _logInfo2.Visibility = _logInfo3.Visibility = ViewStates.Invisible;
+
             _videoView.SetMediaController(default);
 
             var tickerView = FindViewById<WebView>(Resource.Id.ticker_display);
@@ -126,25 +137,10 @@ namespace ShowingAds.AndroidApp
             _videoView.Completion += VideoShowed;
             _videoView.Error += VideoViewError;
 
-            _downloadThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (_logotypesExecutor.TryExecuteCommand() == false)
-                            if (_clientsExecutor.TryExecuteCommand() == false)
-                                if (_readyExecutor.TryExecuteCommand() == false)
-                                    Thread.Sleep(TimeSpan.FromSeconds(1));
-                    }
-                    catch (Exception ex)
-                    {
-                        ServerLog.Error("DownloadThread", ex.Message);
-                    }
-                }
-            });
+            var taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
+                    TaskContinuationOptions.None, TaskScheduler.Current);
 
-            _loadVideoThread = new Thread(() =>
+            taskFactory.StartNew(() =>
             {
                 _readyExecutor = new WebClientExecutor<VideoEventArgs>();
                 _readyExecutor.CommandExecuted += ContentVideoDownloaded;
@@ -179,7 +175,7 @@ namespace ShowingAds.AndroidApp
                 _diagnosticTimer = new System.Timers.Timer();
                 _diagnosticTimer.Elapsed += DiagnosticCallback;
                 _diagnosticTimer.Interval = TimeSpan.FromSeconds(5).TotalMilliseconds;
-                _diagnosticTimer.AutoReset = true;
+                _diagnosticTimer.AutoReset = false;
 
                 _advertisingTimer = new System.Timers.Timer();
                 _advertisingTimer.Elapsed += AdvertisingTimerCallback;
@@ -227,18 +223,32 @@ namespace ShowingAds.AndroidApp
                 {
                     ServerLog.Error("Rebooter", ex.Message);
                 }
-                var seconds = (5, 10).RandomNumber();
+                var seconds = (1, 6).RandomNumber();
                 var interval = TimeSpan.FromSeconds(seconds);
                 ServerLog.Debug("VideoActivity", "Start network client");
                 new Thread(() => StartNetworkClient(interval)).Start();
                 _advertisingTimer.Start();
                 _diagnosticTimer.Start();
-                _downloadThread.Start();
+                taskFactory.StartNew(async () =>
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            if (_logotypesExecutor.TryExecuteCommand() == false)
+                                if (_clientsExecutor.TryExecuteCommand() == false)
+                                    if (_readyExecutor.TryExecuteCommand() == false)
+                                        await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+                        }
+                        catch (Exception ex)
+                        {
+                            ServerLog.Error("DownloadThread", ex.Message);
+                        }
+                    }
+                });
                 ServerLog.Debug("VideoActivity", "Start cycle video");
                 LoadVideo();
             });
-
-            _loadVideoThread.Start();
         }
 
         private double GetDownloadSpeed(long bytes)
@@ -277,19 +287,51 @@ namespace ShowingAds.AndroidApp
             }
         }
 
-        private void DiagnosticCallback(object sender, System.Timers.ElapsedEventArgs e)
+        private async void DiagnosticCallback(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
+                var currentVideo = string.Empty;
+                lock (_syncCurrentReservedVideos)
+                    currentVideo = _currentVideo.Item2?.Id.ToString() ?? string.Empty;
+
+                _syncClients.WaitOne();
                 _syncContents.WaitOne();
+
                 var readyVisitor = new VideosCounterVisitor();
                 _readyVideos.Accept(readyVisitor);
+
+                var clients = new Dictionary<string, int>();
+                foreach (var client in _clients.Components)
+                    clients.Add(client.Id.ToString(), client.Components.Count);
 
                 var logs = new List<string>();
                 while (ServerLog.ErrorLogs.TryTake(out var log))
                     logs.Add(log);
 
-                var info = new DiagnosticInfo(GetAppVersionName(), readyVisitor.TotalVideos, _downloadType, _downloadProgress, _downloadSpeed);
+                var showeds = new Dictionary<string, int>();
+                lock (_syncClientVideosShowed)
+                {
+                    foreach (var showed in _clientVideosShowed)
+                        showeds.Add(showed.Key, showed.Value);
+                    _clientVideosShowed.Clear();
+                }
+
+                bool isHdmiConnected = false;
+                var proccess = Java.Lang.Runtime.GetRuntime().Exec(new[] { "su", "-c", "cat", "/sys/class/switch/hdmi/state" });
+                await proccess.WaitForAsync().ConfigureAwait(false);
+                using (var reader = new System.IO.BinaryReader(proccess.InputStream))
+                    isHdmiConnected = reader.ReadChar() == '1';
+
+                var driveInfo = Settings.GetDownloadDriveInfo();
+                var freeSpaceDisk = driveInfo.AvailableFreeSpace;
+
+                var status = DeviceStatus.Online;
+                if (isHdmiConnected == false)
+                    status |= DeviceStatus.HDMICableUnplagged;
+
+                var info = new DiagnosticInfo(Settings.DeviceId, status, GetAppVersionName(), readyVisitor.TotalVideos, clients, showeds,
+                    new Dictionary<string, DateTime>(), _downloadType, _downloadProgress, _downloadSpeed, currentVideo, _screenshot, freeSpaceDisk, logs);
                 if (_networkClient != null)
                     _networkClient.SetDiagnosticInfo(info);
             }
@@ -299,7 +341,9 @@ namespace ShowingAds.AndroidApp
             }
             finally
             {
+                _syncClients.Set();
                 _syncContents.Set();
+                _diagnosticTimer.Start();
             }
         }
 
@@ -308,11 +352,13 @@ namespace ShowingAds.AndroidApp
             try
             {
                 _syncLogotypes.WaitOne();
+                _downloadType = -1;
+                _downloadProgress = 0;
+                _downloadSpeed = 0;
                 _lastDownloadBytes = 0;
                 obj.IsLeft.IfTrue(() => _logotypes.Item1 = new Logotype(obj.Id, true, obj.LogoPath));
                 obj.IsLeft.IfFalse(() => _logotypes.Item2 = new Logotype(obj.Id, false, obj.LogoPath));
                 _logotypesStore.Save(_logotypes);
-                UpdateLogotypes();
             }
             catch (Exception ex)
             {
@@ -329,6 +375,9 @@ namespace ShowingAds.AndroidApp
             try
             {
                 _syncClients.WaitOne();
+                _downloadType = -1;
+                _downloadProgress = 0;
+                _downloadSpeed = 0;
                 _lastDownloadBytes = 0;
                 var visitor = new AddingVideoVisitor(obj);
                 _clients.Accept(visitor);
@@ -349,6 +398,9 @@ namespace ShowingAds.AndroidApp
             try
             {
                 _syncContents.WaitOne();
+                _downloadType = -1;
+                _downloadProgress = 0;
+                _downloadSpeed = 0;
                 _lastDownloadBytes = 0;
                 _readyVideos.Add(new Video(obj.Id, obj.VideoPath));
                 _readyVideos.SaveComponents();
@@ -369,7 +421,39 @@ namespace ShowingAds.AndroidApp
             while (IsLogined(loginer) == false)
                 Thread.Sleep(interval);
             _networkClient = loginer.GetClient(GetJsonParser(), interval);
+            _networkClient.PriorityClientChanged += PriorityClientChanged;
+            _networkClient.TakeScreenshotChanged += TakeScreenshot;
             _networkClient.StartPeriodicTimerRequest(interval);
+        }
+
+        private void PriorityClientChanged(Guid client)
+        {
+            try
+            {
+                //var oldValue = _priorityClient;
+                //_priorityClient = client;
+                //if (oldValue != _priorityClient)
+                //    InterruptContentVideo();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("PriorityClientChanged", ex.Message);
+            }
+        }
+
+        private void TakeScreenshot()
+        {
+            try
+            {
+                Java.Lang.Runtime.GetRuntime().Exec(new[] { "su", "-c", "screencap", "-p", Settings.GetLogotypeFilesPath("screenshot.png") })
+                    .WaitForAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                Java.Lang.Runtime.GetRuntime().Exec(new[] { "su", "-c", "chmod", "777", Settings.GetLogotypeFilesPath("screenshot.png") })
+                    .WaitForAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("TakeScreenshot", ex.Message);
+            }
         }
 
         private IParser GetJsonParser()
@@ -582,7 +666,7 @@ namespace ShowingAds.AndroidApp
                     {
                         ServerLog.Debug("VideoActivity", "Client cycle!");
                         _syncIntervals.WaitOne(); _syncOrders.WaitOne(); _syncClients.WaitOne();
-                        var visitor = new ClientHandlerVisitor(_timerCounter, HasContentVideos());
+                        var visitor = new ClientHandlerVisitor(_timerCounter, _priorityClient, HasContentVideos());
                         _intervals.Accept(visitor);
                         _orders.Accept(visitor);
                         _clients.Accept(visitor);
@@ -606,7 +690,7 @@ namespace ShowingAds.AndroidApp
                         _lastAdsShowed.WaitOne();
                     }
                     else Thread.Sleep(TimeSpan.FromSeconds(1));
-                } while (HasContentVideos() == false);
+                } while (HasContentVideos() == false || _priorityClient != Guid.Empty);
             }
             catch (Exception ex)
             {
@@ -729,8 +813,35 @@ namespace ShowingAds.AndroidApp
                     }
                     lock (_syncCurrentReservedVideos)
                     {
-                        _currentVideo = (isContentVideo, video);
-                        StartVideo(video.VideoPath, duration);
+                        try
+                        {
+                            _syncLogotypes.WaitOne();
+                            if (isContentVideo)
+                            {
+                                _currentVideo = (isContentVideo, video);
+                                StartVideo(video.VideoPath, duration);
+
+                                _logotypes = _logotypesStore.Load();
+                                UpdateLogotypes();
+                            }
+                            else
+                            {
+                                _logotypes.Item1 = new Logotype(Guid.Empty, true, string.Empty);
+                                _logotypes.Item2 = new Logotype(Guid.Empty, false, string.Empty);
+                                UpdateLogotypes();
+
+                                _currentVideo = (isContentVideo, video);
+                                StartVideo(video.VideoPath, duration);
+                            }
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                        finally
+                        {
+                            _syncLogotypes.Set();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -805,6 +916,15 @@ namespace ShowingAds.AndroidApp
                         }
                         else
                         {
+                            lock (_syncClientVideosShowed)
+                            {
+                                var videoId = _currentVideo.Item2.Id.ToString();
+                                if (_clientVideosShowed.ContainsKey(videoId))
+                                    _clientVideosShowed[videoId]++;
+                                else
+                                    _clientVideosShowed.Add(videoId, 1);
+                            }
+
                             if (_advertisingVideos.Count == 0)
                                 _lastAdsShowed.Set();
                         }

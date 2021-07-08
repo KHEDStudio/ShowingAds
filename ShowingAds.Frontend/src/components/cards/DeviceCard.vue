@@ -7,7 +7,7 @@
             <button v-if="editCallback" type="button" class="close mr-3 float-right">
                 <b-icon-sliders @click="editCallback(device)" />
             </button>
-            <button class="card-text float-left btn" :class="device.status & 1 ? 'btn-danger' : 'btn-success'" type="button" @click="clickCallback(device)">
+            <button class="card-text float-left btn" :class="device.info.DeviceStatus & 1 ? 'btn-danger' : 'btn-success'" type="button" @click="clickCallback(device)">
                 <h5 class="m-0">{{ device.name }}</h5>
             </button>
         </div>
@@ -16,16 +16,16 @@
         <p class="card-text ml-2 mb-0">Прогресс скачивания: {{ device.info.DownloadProgress }}%</p>
         <p class="card-text ml-2 mb-0">Скорость скачивания: {{ Math.round(device.info.DownloadSpeed / 1024) }} кбайт/с</p>
         <p class="card-text ml-2 mb-0">Версия ПО: {{ device.info.Version }}</p>
-        <div v-if="device.status & 1" class="card-body p-0 m-0">
+        <div v-if="device.info.DeviceStatus & 1" class="card-body p-0 m-0">
             <p class="card-text ml-2 p-0 mb-1">Статус: Offline</p>
         </div>
         <div v-else class="card-body p-0 m-0">
             <p class="card-text ml-2 p-0 mb-1">Статус: Online</p>
-            <p v-if="device.status != 0" class="card-text ml-2 mb-0 mt-1">Ошибки:</p>
+            <p v-if="device.info.DeviceStatus != 0" class="card-text ml-2 mb-0 mt-1">Ошибки:</p>
             <ul class="ml-2 mb-0 mt-0">
-                <li v-if="device.status >> 1 & 1">Не удается скачать видеоролик</li>
-                <li v-if="device.status >> 2 & 1">Что-то мешает воспроизведению видеоролика</li>
-                <li v-if="device.status >> 3 & 1">HDMI кабель не подсоединен</li>
+                <li v-if="device.info.DeviceStatus >> 1 & 1">Не удается скачать видеоролик</li>
+                <li v-if="device.info.DeviceStatus >> 2 & 1">Что-то мешает воспроизведению видеоролика</li>
+                <li v-if="device.info.DeviceStatus >> 3 & 1">HDMI кабель не подсоединен</li>
             </ul>
         </div>
     </div>

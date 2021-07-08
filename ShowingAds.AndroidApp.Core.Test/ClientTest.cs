@@ -39,7 +39,7 @@ namespace ShowingAds.AndroidApp.Core.Test
             var loginer = new NetworkLoginer();
             var status = loginer.TryLogin(_login);
             _client = loginer.GetClient(parser, TimeSpan.Zero);
-            _client.SendRequest();
+            _client.SendRequestAsync();
             if (status != LoginStatus.SuccessLogin)
                 Assert.Fail();
             Thread.Sleep(TimeSpan.FromSeconds(5));

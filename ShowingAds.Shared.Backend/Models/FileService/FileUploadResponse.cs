@@ -2,7 +2,7 @@
 using ShowingAds.Shared.Core.Converters;
 using System;
 
-namespace ShowingAds.Shared.Core.Models.FilesService
+namespace ShowingAds.Shared.Core.Models.FileService
 {
     public class FileUploadResponse
     {

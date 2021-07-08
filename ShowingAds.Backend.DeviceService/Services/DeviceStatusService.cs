@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using ShowingAds.Backend.DeviceService.Managers;
 using ShowingAds.Shared.Core.Enums;
+using ShowingAds.Shared.Core.Models.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,12 @@ namespace ShowingAds.Backend.DeviceService.Services
     public class DeviceStatusService : BackgroundService
     {
         private readonly System.Timers.Timer _serviceTimer;
+        private readonly DiagnosticInfoManager _infoManager = DiagnosticInfoManager.GetInstance();
 
         public DeviceStatusService()
         {
             var random = new Random();
-            var secondsInterval = random.Next(60, 120);
+            var secondsInterval = random.Next(120, 180);
 
             _serviceTimer = new System.Timers.Timer();
             _serviceTimer.Elapsed += CheckDeviceStatus;
@@ -39,10 +41,16 @@ namespace ShowingAds.Backend.DeviceService.Services
                 var now = DateTime.UtcNow;
                 foreach (var device in devices)
                 {
-                    if (device.LastOnline.Add(TimeSpan.FromMinutes(1)) < now)
+                    if (device.LastOnline.Add(TimeSpan.FromMinutes(3)) < now)
                     {
-                        device.DeviceStatus = DeviceStatus.Offline;
-                        await manager.TryAddOrUpdateAsync(device.Id, device);
+                        var info = await _infoManager.GetOrDefaultAsync(device.Id);
+                        if (info == default || info.DeviceStatus.HasFlag(DeviceStatus.Offline) == false)
+                        {
+                            info ??= new DiagnosticInfo(device.Id);
+                            info.DeviceStatus = DeviceStatus.Offline;
+                            await _infoManager.TryAddOrUpdateAsync(device.Id, info);
+                            await manager.TryAddOrUpdateWithoutProviderAsync(device.Id, device);
+                        }
                     }
                 }
             }

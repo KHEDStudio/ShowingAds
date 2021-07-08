@@ -25,27 +25,11 @@ namespace ShowingAds.AndroidApp.Core
             var log = tag.WhitePlus(msg)
                 .WithTAG(DateTime.UtcNow.ToString());
             Console.WriteLine(log);
-            if (Settings.DeviceId != Guid.Empty)
+            try
             {
-                try
-                {
-                    LogToServer(log);
-                }
-                catch { }
+                ErrorLogs.Add(log);
             }
-        }
-
-        private static void LogToServer(string msg)
-        {
-            ErrorLogs.Add(msg);
-            //using (var httpClient = new HttpClient())
-            //{
-            //    var values = new Dictionary<string, string>();
-            //    values.Add(IdKey, Settings.DeviceId.ToString());
-            //    values.Add(LogKey, msg);
-            //    var content = new StringContent(JsonConvert.SerializeObject(values));
-            //    httpClient.PostAsync(Settings.LogServer, content).Wait();
-            //}
+            catch { }
         }
     }
 }

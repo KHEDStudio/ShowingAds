@@ -49,6 +49,10 @@ const models = {
         baseURL: 'http://84.38.188.128:3700/',
         //baseURL: 'http://localhost:49160/',
         path: 'device'
+    },
+    DeviceTasks: {
+        baseURL: 'http://84.38.188.128:3700/',
+        path: 'device/tasks'
     }
 }
 
@@ -155,7 +159,7 @@ const actions = {
         let isReady = true
         let lastNotify = new Date()
         userHubConnection.on('Notify', async () => {
-            if (isReady && (new Date().getTime() - lastNotify.getTime()) / 1000 > 5) {
+            if (isReady) {
                 isReady = false
                 await getNotifications(that, commit, models, connectionId)
                 lastNotify = new Date()
@@ -170,7 +174,7 @@ const actions = {
         formData.append('file', logo)
 
         await axios.post('logo', formData, {
-            baseURL: 'http://31.184.219.123:3666'
+            baseURL: 'http://31.184.219.123:4000'
         })
         .then(response => {
             callback(response)
@@ -188,7 +192,7 @@ const actions = {
         formData.append('file', video)
 
         await axios.post('video', formData, {
-            baseURL: 'http://31.184.219.123:3666'
+            baseURL: 'http://31.184.219.123:4000'
         })
         .then(response => {
             callback(response)
@@ -218,6 +222,33 @@ async function getNotifications(that, commit, models, connectioId) {
 
 function parseNotification(that, notification, commit, models) {
     notification.model = JSON.parse(notification.model)
+    if (notification.type == 'DiagnosticInfo') {
+        if (notification.model.Id == '11111111-1111-1111-1111-111111111111')
+            console.log(notification)
+        let device = that.state.manager['devices'].find(x => x.id == notification.model.Id)
+        if (device != undefined)
+            device.info = notification.model
+        return
+    }
+    if (notification.type == 'DeviceTasks') {
+        let device = that.state.manager['devices'].find(x => x.id == notification.model.id)
+        if (device != undefined)
+            device.tasks = notification.model
+        return
+    }
+    if (notification.type == 'Device') {
+        let device = that.state.manager['devices'].find(x => x.id == notification.model.id)
+        if (device != undefined) {
+            device.name = notification.model.name
+            device.address = notification.model.address
+            device.latitude = notification.model.latitude
+            device.longitude = notification.model.longitude
+            device.last_online = notification.model.last_online
+            device.account = notification.model.account
+            device.channel = notification.model.channel
+        }
+        return
+    }
     let modelInfo = models[notification.type]
     let newModels = that.state.manager[modelInfo.stateName].filter(x => x.id != notification.model.id)
     if (notification.operation == 1 && notification.type == 'ClientChannel')

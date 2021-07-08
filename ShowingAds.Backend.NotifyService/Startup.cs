@@ -93,6 +93,7 @@ namespace ShowingAds.Backend.NotifyService
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
                 endpoints.MapHub<UserHub>("/user");
+                endpoints.MapHub<DeviceHub>("/device");
             });
         }
     }

@@ -10,14 +10,16 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
     public class ClientHandlerVisitor : BaseVisitor
     {
         private readonly uint _timerCount;
+        private readonly Guid _priorityClient;
         private readonly bool _hasContentVideos;
         private List<ClientInterval> _intervals;
         private List<ClientOrder> _orders;
         private List<(LowLevelCollection<Video>, DateTime)> _clients;
 
-        public ClientHandlerVisitor(uint timerCount, bool hasContentVideos)
+        public ClientHandlerVisitor(uint timerCount, Guid priorityClient, bool hasContentVideos)
         {
             _timerCount = timerCount;
+            _priorityClient = priorityClient;
             _hasContentVideos = hasContentVideos;
             _intervals = new List<ClientInterval>();
             _orders = new List<ClientOrder>();
@@ -32,7 +34,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public override void VisitClientOrder(ClientOrder order)
         {
-            if (_hasContentVideos == false || _intervals.Any(x => x.Id == order.Id))
+            if (_hasContentVideos == false || _intervals.Any(x => x.Id == order.Id) || (_priorityClient != Guid.Empty && _priorityClient == order.Id))
                 _orders.Add(order);
         }
 
@@ -42,6 +44,8 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
         {
             if (collection is LowLevelCollection<Video> client)
             {
+                if (_priorityClient != Guid.Empty && client.Id != _priorityClient)
+                    return;
                 var order = _orders.FirstOrDefault(x => x.Id == client.Id);
                 if (order != default)
                 {

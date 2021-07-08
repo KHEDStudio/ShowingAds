@@ -18,7 +18,9 @@
         },
         computed: {
             devices: function() {
-                return this.$store.state.manager.devices ? this.$store.state.manager.devices.filter(x => x.channel == '00000000-0000-0000-0000-000000000000') : []
+                let channels = this.$store.state.manager.channels ? this.$store.state.manager.channels : []
+                let devices = this.$store.state.manager.devices ? this.$store.state.manager.devices.filter(x => channels.find(y => x.channel == y.id) == undefined) : []
+                return devices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))
             }
         },
         methods: {

@@ -55,7 +55,7 @@
                 </b-collapse>
                 <b-collapse :id="`devices-${channel.id}`" class="border rounded m-1 p-1" :accordion="`accordion-${channel.id}`">
                     <b-icon-plus font-scale="5" class="card plus mb-1" @click="showAddDeviceModal" />
-                    <DeviceCard v-for="device in devices" :key="channel.id + device.id" :device="device" :deleteCallback="removeDevice" />
+                    <DeviceCard v-for="device in devices" :key="channel.id + device.id" :device="device" :clickCallback="showFullDeviceInfo" :deleteCallback="removeDevice" />
                 </b-collapse>
             </div>
         </b-collapse>
@@ -78,6 +78,8 @@
     import AddOrderModal from '../modals/AddOrderModal.vue'
     import AddDeviceModal from '../modals/AddDeviceModal.vue'
     import ClientChannelVideosModal from '../modals/ClientChannelVideosModal.vue'
+
+    import FullDeviceModal from '../modals/FullDeviceModal.vue'
 
     export default {
         name: 'Channel',
@@ -233,6 +235,19 @@
                     ClientChannelForm,
                     {
                         clientChannel: clientChannel
+                    },
+                    {
+                        height: "auto",
+                        width: "60%",
+                        scrollable: true
+                    }
+                )
+            },
+            showFullDeviceInfo: function(device) {
+                this.$modal.show(
+                    FullDeviceModal,
+                    {
+                        device: device
                     },
                     {
                         height: "auto",

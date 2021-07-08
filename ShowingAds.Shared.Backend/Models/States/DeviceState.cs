@@ -6,36 +6,39 @@ using ShowingAds.Shared.Core.Models;
 using ShowingAds.Shared.Core.Models.Login;
 using ShowingAds.Shared.Core.Models.States;
 using System;
+using System.Collections.Generic;
 
 namespace ShowingAds.Shared.Backend.Models.States
 {
     public class DeviceState : Device, IModel<Guid>
     {
-        [JsonProperty("status")]
-        public DeviceStatus DeviceStatus { get; set; }
-        [JsonProperty("priority"), JsonConverter(typeof(GuidConverter))]
-        public Guid PriorityAdvertisingClient { get; set; }
         [JsonProperty("info")]
         public DiagnosticInfo DiagnosticInfo { get; set; }
+        [JsonProperty("tasks")]
+        public DeviceTasks Tasks { get; set; }
 
         [JsonConstructor]
-        public DeviceState(Guid id, string name, string address, double latitude, double longitude, DateTime last_online, int account, Guid channel, 
-            DeviceStatus status, DiagnosticInfo info, Guid priority)
+        public DeviceState(Guid id, string name, string address, double latitude, double longitude, DateTime last_online, int account, 
+            Guid channel, DiagnosticInfo info, Guid priority, bool is_updated, bool take_screenshot, bool reboot)
             : base(id, name, address, latitude, longitude, last_online, account, channel)
         {
-            DeviceStatus = status;
-            DiagnosticInfo = info ?? new DiagnosticInfo("1.0", 0, 0, 0, 0);
-            PriorityAdvertisingClient = priority;
+            DiagnosticInfo = info ?? new DiagnosticInfo(id);
+            Tasks = new DeviceTasks(id, priority, is_updated, take_screenshot, reboot);
         }
 
         public DeviceState(Device device) : base(device) =>
             InitializeEmptyDeviceState();
 
+        public DeviceState(Device device, DiagnosticInfo info, DeviceTasks tasks) : base(device)
+        {
+            DiagnosticInfo = info;
+            Tasks = tasks;
+        }
+
         public DeviceState(Device device, DeviceState deviceState) : base(device)
         {
-            DeviceStatus = deviceState.DeviceStatus;
             DiagnosticInfo = deviceState.DiagnosticInfo;
-            PriorityAdvertisingClient = deviceState.PriorityAdvertisingClient;
+            Tasks = deviceState.Tasks;
         }
 
         public DeviceState(LoginDevice login, int ownerId) : base(login, ownerId) =>
@@ -43,16 +46,14 @@ namespace ShowingAds.Shared.Backend.Models.States
 
         private void InitializeEmptyDeviceState()
         {
-            DeviceStatus = DeviceStatus.Offline;
-            PriorityAdvertisingClient = Guid.Empty;
-            DiagnosticInfo = new DiagnosticInfo("1.0", 0, 0, 0, 0);
+            DiagnosticInfo = new DiagnosticInfo(Id);
+            Tasks = new DeviceTasks(Id);
         }
 
         public new object Clone()
         {
-            var deviceState = MemberwiseClone() as DeviceState;
-            deviceState.DiagnosticInfo = DiagnosticInfo.Clone() as DiagnosticInfo;
-            return deviceState;
+            var json = JsonConvert.SerializeObject(this);
+            return JsonConvert.DeserializeObject<DeviceState>(json);
         }
     }
 }

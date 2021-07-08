@@ -1,5 +1,7 @@
 ﻿using ShowingAds.Backend.NotifyService.Visitors;
 using ShowingAds.Shared.Backend.Models.NotifyService;
+using ShowingAds.Shared.Backend.Models.States;
+using ShowingAds.Shared.Core.Models.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,11 +37,10 @@ namespace ShowingAds.Backend.NotifyService.Models
             _notifications.Add(packet);
             lock (_syncTimer)
             {
-                if (_notifyTimer.Enabled == false)
-                {
+                if (packet.ModelType != nameof(DiagnosticInfo))
                     NotifySubscriber?.Invoke(ConnectionId);
+                if (_notifyTimer.Enabled == false)
                     _notifyTimer.Start();
-                }
             }
         }
 

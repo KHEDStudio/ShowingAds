@@ -1,7 +1,11 @@
 <template>
     <div class="pt-2 pb-2 pr-4 pl-4">
         <b-icon-plus font-scale="5" class="card plus mb-1" @click="addContentVideo" />
-        <VideoCard v-for="contentVideo in contentVideos" :key="contentVideo.id" :video="contentVideo" :deleteCallback="deleteVideo" />
+        <div class="row">
+            <div class="col-md-4 p-1" v-for="contentVideo in contentVideos" :key="contentVideo.id">
+                <VideoCard :video="contentVideo" :deleteCallback="deleteVideo" />
+            </div>
+        </div>
     </div>
 </template>
 

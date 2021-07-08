@@ -8,7 +8,10 @@ namespace ShowingAds.AndroidApp.Core.Network.Interfaces
 {
     public interface IClient
     {
-        void SendRequest();
+        event Action TakeScreenshotChanged;
+        event Action<Guid> PriorityClientChanged;
+
+        Task SendRequestAsync();
         void StartPeriodicTimerRequest(TimeSpan interval);
         void SetDiagnosticInfo(DiagnosticInfo info);
         Task DisposeAsync();

@@ -64,18 +64,7 @@ namespace ShowingAds.Backend.DeviceService
                         h.Password(Settings.RabbitMqPassword);
                     });
                     cfg.Publish<NotifyPacket>(x => x.BindQueue("notify", "notify"));
-                    cfg.ReceiveEndpoint(Guid.NewGuid().ToString(), op =>
-                    {
-                        op.AutoDelete = true;
-                        op.Bind("notify");
-                        op.Consumer<NotifyDeviceStateConsumer>();
-                    });
-                    cfg.ReceiveEndpoint(Guid.NewGuid().ToString(), op =>
-                    {
-                        op.AutoDelete = true;
-                        op.Bind("channel_json");
-                        op.Consumer<ChannelJsonConsumer>();
-                    });
+                    cfg.ReceiveEndpoint("channel_json", op => op.Consumer<ChannelJsonConsumer>());
                 }));
             });
             services.AddMassTransitHostedService(true);

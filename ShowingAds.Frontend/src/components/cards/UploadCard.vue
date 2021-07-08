@@ -45,7 +45,8 @@
                     let params = {
                         video: this.video,
                         callback: async function(response) {
-                            if (response.status == 201) {
+                                console.log(response)
+                            if (response.status == 200) {
                                 that.uploading = await that.upload.uploaded(response.data.file, response.data.duration)
                             } else {
                                 that.uploading = false

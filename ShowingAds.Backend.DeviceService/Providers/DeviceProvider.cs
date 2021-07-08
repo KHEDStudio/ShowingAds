@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShowingAds.Backend.DeviceService.Providers
 {
-    public class DeviceProvider : IDataProvider<Guid, DeviceState>
+    public class DeviceProvider : IDataProvider<Guid, Device>
     {
         public Uri BaseURI { get; private set; }
 
@@ -42,7 +42,7 @@ namespace ShowingAds.Backend.DeviceService.Providers
             }
         }
 
-        public async Task<IEnumerable<DeviceState>> GetModelsOrNullAsync()
+        public async Task<IEnumerable<Device>> GetModelsOrNullAsync()
         {
             try
             {
@@ -52,8 +52,7 @@ namespace ShowingAds.Backend.DeviceService.Providers
                     if (responseMessage.IsSuccessStatusCode == false)
                         throw new HttpRequestException(nameof(BaseURI));
                     var json = await responseMessage.Content.ReadAsStringAsync();
-                    var devices = JsonConvert.DeserializeObject<IEnumerable<Device>>(json);
-                    return devices.Select(x => new DeviceState(x));
+                    return JsonConvert.DeserializeObject<IEnumerable<Device>>(json);
                 }
             }
             catch
@@ -62,7 +61,7 @@ namespace ShowingAds.Backend.DeviceService.Providers
             }
         }
 
-        public async Task<HttpResponseMessage> PostModelAsync(DeviceState model)
+        public async Task<HttpResponseMessage> PostModelAsync(Device model)
         {
             try
             {
@@ -79,7 +78,7 @@ namespace ShowingAds.Backend.DeviceService.Providers
             }
         }
 
-        public async Task<HttpResponseMessage> PutModelAsync(DeviceState model)
+        public async Task<HttpResponseMessage> PutModelAsync(Device model)
         {
             try
             {

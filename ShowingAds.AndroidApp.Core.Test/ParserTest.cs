@@ -42,7 +42,7 @@ namespace ShowingAds.AndroidApp.Core.Test
         [Test]
         public void GetParsedDataTest()
         {
-            _client.SendRequest();
+            _client.SendRequestAsync();
             Assert.Pass();
         }
 

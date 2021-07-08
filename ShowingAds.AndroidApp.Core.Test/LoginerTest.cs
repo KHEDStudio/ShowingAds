@@ -41,7 +41,7 @@ namespace ShowingAds.AndroidApp.Core.Test
             {
                 try
                 {
-                    client.SendRequest();
+                    client.SendRequestAsync();
                     Task.Delay(1000).Wait();
                 }
                 catch { }

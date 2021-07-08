@@ -9,18 +9,20 @@ namespace ShowingAds.AndroidApp.Core
     {
         public static Guid DeviceId = Guid.Empty;
         public static readonly int MaxReadyVideos = 50;
+#if DEBUG
+        public static readonly Uri LogServer = new Uri("http://84.38.188.128:3670/");
         public static readonly Uri ServerPath = new Uri("http://84.38.188.128:3700/");
         //public static readonly Uri ServerPath = new Uri("http://192.168.0.5:49160/");
+        //public static readonly Uri LogServer = new Uri("https://9a7e87ad-8d72-45f8-9a47-3b02aa9b2773.mock.pstmn.io/");
+#else
+        public static readonly Uri LogServer = new Uri("http://84.38.188.128:3670/");
+        public static readonly Uri ServerPath = new Uri("http://84.38.188.128:3700/");
+#endif
         public static readonly Uri LoginPath = new Uri(ServerPath, "session/");
         public static readonly Uri DeviceControllerPath = new Uri(ServerPath, "device/");
         public static readonly Uri ChannelPath = new Uri(DeviceControllerPath, "channel/");
-        public static readonly Uri FilesServicePath = new Uri("http://31.184.219.123:3666/");
-        public static readonly Uri NotifyPath = new Uri("http://31.184.219.123:3669/notify/");
-#if DEBUG
-        public static readonly Uri LogServer = new Uri("https://9a7e87ad-8d72-45f8-9a47-3b02aa9b2773.mock.pstmn.io/");
-#else
-        public static readonly Uri LogServer = new Uri("http://84.38.188.128:3670/");
-#endif
+        public static readonly Uri FilesServicePath = new Uri("http://31.184.219.123:4000/");
+        public static readonly Uri NotifyPath = new Uri("http://84.38.188.128:3680/device/");
 
         public static Uri GetVideoDownloadUri(Guid videoId) => GetVideoDownloadUri(videoId.ToString());
         public static Uri GetVideoDownloadUri(string videoId) => new Uri(FilesServicePath, $"video?video={videoId}");
@@ -35,5 +37,15 @@ namespace ShowingAds.AndroidApp.Core
 
         public static string GetVideoFilesPath(Guid fileName) => GetVideoFilesPath(fileName.ToString());
         public static string GetVideoFilesPath(string fileName) => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fileName);
+
+        public static DriveInfo GetDownloadDriveInfo()
+        {
+            var fileInfo = new FileInfo(GetVideoFilesPath(string.Empty));
+            var drivers = DriveInfo.GetDrives();
+            foreach (var driver in drivers)
+                if (fileInfo.FullName.Contains(driver.RootDirectory.FullName))
+                    return driver;
+            return drivers[0];
+        }
     }
 }

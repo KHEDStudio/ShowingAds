@@ -1,10 +1,10 @@
 <template>
-    <div :class="device.status ? 'card mt-1 mb-0 offline-card' : 'card mt-1 mb-0'">
+    <div :class="device.info.DeviceStatus ? 'card mt-1 mb-0 offline-card' : 'card mt-1 mb-0'">
         <div class="card-title p-2 mb-0">
             <div class="mb-0">
                 <div class="align-items-center pt-2 pr-2 pl-2">
                     <strong class="float-left">
-                        <b-icon v-if="device.status & 1" icon="link45deg" font-scale="2" variant="danger"></b-icon>
+                        <b-icon v-if="device.info.DeviceStatus & 1" icon="link45deg" font-scale="2" variant="danger"></b-icon>
                         <b-icon v-else icon="link45deg" font-scale="2" variant="success"></b-icon>
                         {{ channel != undefined ? `${channel.name} -> ${device.name}` : `${device.name}` }}
                         <small v-if="device.address" class="text-muted ml-2">({{ device.address }})</small>
@@ -15,20 +15,20 @@
                     <button v-if="editCallback" type="button" class="close mr-2 float-right">
                         <b-icon-sliders @click="editCallback(device)" />
                     </button>
-                    <small v-if="device.status & 1" class="text-muted float-right mr-2">{{ timePassed }}</small>
+                    <small v-if="device.info.DeviceStatus & 1" class="text-muted float-right mr-2">{{ timePassed }}</small>
                 </div>
             </div>
         </div>
-        <div v-if="device.status & 1" class="card-body p-0 m-0">
+        <div v-if="device.info.DeviceStatus & 1" class="card-body p-0 m-0">
             <p class="card-text ml-4 p-0 mb-1">Статус: Offline</p>
         </div>
         <div v-else class="card-body p-0 m-0">
             <p class="card-text ml-4 p-0 mb-1">Статус: Online</p>
-            <p v-if="device.status != 0" class="card-text ml-4 mb-0 mt-1">Ошибки:</p>
+            <p v-if="device.info.DeviceStatus != 0" class="card-text ml-4 mb-0 mt-1">Ошибки:</p>
             <ul class="ml-4 mb-0 mt-0">
-                <li v-if="device.status >> 1 & 1">Не удается скачать видеоролик</li>
-                <li v-if="device.status >> 2 & 1">Что-то мешает воспроизведению видеоролика</li>
-                <li v-if="device.status >> 3 & 1">HDMI кабель не подсоединен</li>
+                <li v-if="device.info.DeviceStatus >> 1 & 1">Не удается скачать видеоролик</li>
+                <li v-if="device.info.DeviceStatus >> 2 & 1">Что-то мешает воспроизведению видеоролика</li>
+                <li v-if="device.info.DeviceStatus >> 3 & 1">HDMI кабель не подсоединен</li>
             </ul>
         </div>
     </div>

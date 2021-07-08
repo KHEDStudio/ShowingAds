@@ -5,7 +5,7 @@
                 <b-icon-x variant="danger" @click="deleteCallback(video)" />
             </button>
         </div>
-        <video controls preload="metadata" class="img-fluid rounded">
+        <video ref="video" controls preload="none" class="img-fluid rounded">
             <source :src="`http://31.184.219.123:3666/video?video=${video.id}`" />
         </video>
     </div>

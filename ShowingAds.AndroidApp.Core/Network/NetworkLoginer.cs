@@ -16,7 +16,7 @@ namespace ShowingAds.AndroidApp.Core.Network
     {
         private CookieContainer _cookieContainer = new CookieContainer();
 
-        public IClient GetClient(IParser parser, TimeSpan reconnetInterval) => new NetworkClient(parser, _cookieContainer, reconnetInterval);
+        public IClient GetClient(IParser parser, TimeSpan reconnetInterval) => new NetworkClient(parser, _cookieContainer);
 
         public LoginStatus TryLogin(LoginDevice login)
         {

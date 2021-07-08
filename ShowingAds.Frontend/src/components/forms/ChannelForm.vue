@@ -169,7 +169,7 @@
                 let params = {
                     logo: this.$refs.left.files[0],
                     callback: function(response) {
-                        if (response.status == 201)
+                        if (response.status == 200)
                             that.logo_left = response.data.file
                     }
                 }
@@ -180,7 +180,7 @@
                 let params = {
                     logo: this.$refs.right.files[0],
                     callback: function(response) {
-                        if (response.status == 201)
+                        if (response.status == 200)
                             that.logo_right = response.data.file
                     }
                 }

@@ -16,7 +16,7 @@ namespace ShowingAds.Shared.Backend.Managers
     {
         protected AutoResetEvent _mutex { get; }
         protected IDataProvider<TKey, TModel> _provider { get; set; }
-        protected Dictionary<TKey, TModel> _models { get; set; }
+        private Dictionary<TKey, TModel> _models { get; set; }
 
         protected CachedModelManager(IDataProvider<TKey, TModel> provider)
         {
@@ -83,10 +83,11 @@ namespace ShowingAds.Shared.Backend.Managers
             }
         }
 
-        public bool TryAddOrUpdateWithoutProvider(TKey key, TModel newValue)
+        public async Task<bool> TryAddOrUpdateWithoutProviderAsync(TKey key, TModel newValue)
         {
             try
             {
+                await Task.Yield();
                 _mutex.WaitOne();
                 newValue = (TModel)newValue.Clone();
                 if (_models.ContainsKey(key))
@@ -142,10 +143,11 @@ namespace ShowingAds.Shared.Backend.Managers
             }
         }
 
-        public bool TryDeleteWithoutProvider(TKey key, TModel model)
+        public async Task<bool> TryDeleteWithoutProviderAsync(TKey key, TModel model)
         {
             try
             {
+                await Task.Yield();
                 _mutex.WaitOne();
                 var _model = _models.AsParallel().FirstOrDefault(x => x.Key.Equals(key));
                 if (_model.Equals(default(KeyValuePair<TKey, TModel>)))
@@ -226,9 +228,12 @@ namespace ShowingAds.Shared.Backend.Managers
             try
             {
                 await Task.Yield();
+                var result = new List<TModel>();
                 _mutex.WaitOne();
-                return _models.AsParallel().Where(x => filter(x.Value))
-                    .Select(x => (TModel)x.Value.Clone());
+                var models = _models.Where(x => filter(x.Value));
+                foreach (var model in models)
+                    result.Add(model.Value.Clone() as TModel);
+                return result;
             }
             catch
             {
