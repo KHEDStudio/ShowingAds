@@ -25,8 +25,7 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public override void VisitTopCollection<T>(TopLevelCollection<T> collection)
         {
-            collection.Components.Any(x => x.GetId() == Order.Id)
-                .IfFalse(() => collection.Add(Order));
+            collection.Add(Order);
         }
 
         public override void VisitVideo(Video video) => throw new ArgumentException("Cannot visit video");

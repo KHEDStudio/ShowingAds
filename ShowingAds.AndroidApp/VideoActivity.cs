@@ -137,10 +137,10 @@ namespace ShowingAds.AndroidApp
             _videoView.Completion += VideoShowed;
             _videoView.Error += VideoViewError;
 
-            var taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
-                    TaskContinuationOptions.None, TaskScheduler.Current);
+            //var taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
+            //        TaskContinuationOptions.None, TaskScheduler.Current);
 
-            taskFactory.StartNew(() =>
+            Task.Run(() =>
             {
                 _readyExecutor = new WebClientExecutor<VideoEventArgs>();
                 _readyExecutor.CommandExecuted += ContentVideoDownloaded;
@@ -226,18 +226,18 @@ namespace ShowingAds.AndroidApp
                 var seconds = (1, 6).RandomNumber();
                 var interval = TimeSpan.FromSeconds(seconds);
                 ServerLog.Debug("VideoActivity", "Start network client");
-                new Thread(() => StartNetworkClient(interval)).Start();
+                Task.Run(() => StartNetworkClientAsync(interval));
                 _advertisingTimer.Start();
                 _diagnosticTimer.Start();
-                taskFactory.StartNew(async () =>
+                Task.Run(async () =>
                 {
                     while (true)
                     {
                         try
                         {
-                            if (_logotypesExecutor.TryExecuteCommand() == false)
-                                if (_clientsExecutor.TryExecuteCommand() == false)
-                                    if (_readyExecutor.TryExecuteCommand() == false)
+                            if (await _logotypesExecutor.TryExecuteCommandAsync().ConfigureAwait(false) == false)
+                                if (await _clientsExecutor.TryExecuteCommandAsync().ConfigureAwait(false) == false)
+                                    if (await _readyExecutor.TryExecuteCommandAsync().ConfigureAwait(false) == false)
                                         await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
                         }
                         catch (Exception ex)
@@ -415,11 +415,11 @@ namespace ShowingAds.AndroidApp
             }
         }
 
-        private void StartNetworkClient(TimeSpan interval)
+        private async Task StartNetworkClientAsync(TimeSpan interval)
         {
             var loginer = new NetworkLoginer();
             while (IsLogined(loginer) == false)
-                Thread.Sleep(interval);
+                await Task.Delay(interval).ConfigureAwait(false);
             _networkClient = loginer.GetClient(GetJsonParser(), interval);
             _networkClient.PriorityClientChanged += PriorityClientChanged;
             _networkClient.TakeScreenshotChanged += TakeScreenshot;
@@ -430,10 +430,15 @@ namespace ShowingAds.AndroidApp
         {
             try
             {
-                //var oldValue = _priorityClient;
-                //_priorityClient = client;
-                //if (oldValue != _priorityClient)
-                //    InterruptContentVideo();
+                var oldValue = _priorityClient;
+                _priorityClient = client;
+                if (oldValue != _priorityClient)
+                {
+                    while (_advertisingVideos.TryTake(out var _)) { }
+                    InterruptContentVideo();
+                    if (_advertisingTimer.Enabled)
+                        _advertisingTimer.Interval = 1;
+                }
             }
             catch (Exception ex)
             {
@@ -714,8 +719,8 @@ namespace ShowingAds.AndroidApp
                         _reservedVideo = (_currentVideo.Item1, _currentVideo.Item2, _videoView.CurrentPosition);
                         _videoView.StopPlayback();
                         _currentVideo = (false, null);
+                        _videoShowed.Set();
                     }
-                    _videoShowed.Set();
                 }
             });
         }
@@ -871,12 +876,12 @@ namespace ShowingAds.AndroidApp
         private void VideoViewError(object sender, global::Android.Media.MediaPlayer.ErrorEventArgs e)
         {
             ServerLog.Error("VideoViewError", e.What.ToString());
-            VideoHandler();
+            Task.Run(VideoHandler);
         }
 
         private void VideoShowed(object sender, EventArgs e)
         {
-            VideoHandler();
+            Task.Run(VideoHandler);
         }
 
         private void VideoHandler()

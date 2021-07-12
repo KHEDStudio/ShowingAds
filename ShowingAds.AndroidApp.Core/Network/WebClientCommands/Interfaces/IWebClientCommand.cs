@@ -14,7 +14,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands.Interfaces
         event Action<EventArgs> Completed;
         event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
-        void Execute();
+        Task ExecuteAsync();
         void Undo();
     }
 }

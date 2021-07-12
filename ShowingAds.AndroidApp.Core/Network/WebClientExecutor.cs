@@ -34,7 +34,7 @@ namespace ShowingAds.AndroidApp.Core.Network
 
         public void AddCommandToQueue(IWebClientCommand command) => _queue.Add(command);
 
-        public bool TryExecuteCommand()
+        public async Task<bool> TryExecuteCommandAsync()
         {
             var isExistsCommand = false;
             try
@@ -48,7 +48,7 @@ namespace ShowingAds.AndroidApp.Core.Network
                         _current.Completed += CurrentCompleted;
                         _current.ProgressChanged += CurrentProgressChanged;
                     }
-                    _current.Execute();
+                    await _current.ExecuteAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace ShowingAds.AndroidApp.Core.Network
                 {
                     _queue.Add(_current);
                     ServerLog.Error("WebClientExecutor", ex.Message);
-                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
                 }
             }
             finally

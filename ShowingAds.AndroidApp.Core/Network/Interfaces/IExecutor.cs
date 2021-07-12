@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ShowingAds.AndroidApp.Core.Network.Interfaces
 {
@@ -15,7 +16,7 @@ namespace ShowingAds.AndroidApp.Core.Network.Interfaces
         event Action<DownloadProgressChangedEventArgs> ProgressChanged;
 
         void AddCommandToQueue(IWebClientCommand command);
-        bool TryExecuteCommand();
+        Task<bool> TryExecuteCommandAsync();
         void Filter(BaseFilter filter);
         void Accept(BaseVisitor visitor);
     }

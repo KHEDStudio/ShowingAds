@@ -43,7 +43,7 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
 
         protected abstract void FileDownloaded(object sender, AsyncCompletedEventArgs e);
 
-        public void Execute()
+        public async Task ExecuteAsync()
         {
             try
             {
@@ -51,7 +51,8 @@ namespace ShowingAds.AndroidApp.Core.Network.WebClientCommands
                 {
                     var taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
                         TaskContinuationOptions.None, TaskScheduler.Current);
-                    taskFactory.StartNew(() => _downloader.DownloadFileTaskAsync(_address, _filePath)).Unwrap().Wait();
+                    await _downloader.DownloadFileTaskAsync(_address, _filePath).ConfigureAwait(false);
+                    //taskFactory.StartNew(() => _downloader.DownloadFileTaskAsync(_address, _filePath)).Unwrap().Wait();
                 }
                 lock (_syncRoot)
                     if (_cancellationToken.IsCancellationRequested && File.Exists(_filePath))

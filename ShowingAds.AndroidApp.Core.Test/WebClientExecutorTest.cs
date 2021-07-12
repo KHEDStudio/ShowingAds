@@ -83,7 +83,7 @@ namespace ShowingAds.AndroidApp.Core.Test
             {
                 while (true)
                 {
-                    executor.TryExecuteCommand();
+                    executor.TryExecuteCommandAsync();
                     await Task.Delay(TimeSpan.FromSeconds(1));
                 }
             });

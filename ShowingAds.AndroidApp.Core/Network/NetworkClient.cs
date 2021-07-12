@@ -47,8 +47,8 @@ namespace ShowingAds.AndroidApp.Core.Network
         {
             _parser = parser ?? throw new ArgumentNullException(nameof(parser));
             _cookieContainer = cookieContainer ?? throw new ArgumentNullException(nameof(cookieContainer));
-            _taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
-                TaskContinuationOptions.None, TaskScheduler.Current);
+            //_taskFactory = new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach,
+            //    TaskContinuationOptions.None, TaskScheduler.Current);
             _timerPeriodicRequest = new System.Timers.Timer();
             _timerPeriodicRequest.Elapsed += TimerRequestCallback;
             _timerPeriodicRequest.AutoReset = false;
@@ -56,26 +56,23 @@ namespace ShowingAds.AndroidApp.Core.Network
             _nextDiagnosticTime = DateTime.Now;
         }
 
-        private void TimerRequestCallback(object sender, ElapsedEventArgs e)
+        private async void TimerRequestCallback(object sender, ElapsedEventArgs e)
         {
-            _taskFactory.StartNew(async () =>
+            try
             {
-                try
-                {
-                    if (_nextDiagnosticTime < DateTime.Now)
-                        await SendDiagnosticInfoAsync().ConfigureAwait(false);
-                    if (_nextRequestTime < DateTime.Now || _tasks.IsUpdated)
-                        await SendRequestAsync().ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    ServerLog.Error("TimerRequestCallback", ex.Message);
-                }
-                finally
-                {
-                    _timerPeriodicRequest.Start();
-                }
-            }).ConfigureAwait(false);
+                if (_nextDiagnosticTime < DateTime.Now)
+                    await SendDiagnosticInfoAsync().ConfigureAwait(false);
+                if (_nextRequestTime < DateTime.Now || _tasks.IsUpdated)
+                    await SendRequestAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Error("TimerRequestCallback", ex.Message);
+            }
+            finally
+            {
+                _timerPeriodicRequest.Start();
+            }
         }
 
         private async Task TakeScreenshotAsync()
@@ -140,7 +137,7 @@ namespace ShowingAds.AndroidApp.Core.Network
                         var response = await client.PostAsync(new Uri(Settings.DeviceControllerPath, $"info"), content).ConfigureAwait(false);
                         if (response.IsSuccessStatusCode)
                         {
-                            json = response.Content.ReadAsStringAsync().Result;
+                            json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                             _tasks = JsonConvert.DeserializeObject<DeviceTasks>(json);
                             if (_tasks.TakeScreenshot)
                                 await TakeScreenshotAsync().ConfigureAwait(false);

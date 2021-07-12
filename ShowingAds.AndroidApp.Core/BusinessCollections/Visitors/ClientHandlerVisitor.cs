@@ -46,12 +46,15 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
             {
                 if (_priorityClient != Guid.Empty && client.Id != _priorityClient)
                     return;
-                var order = _orders.FirstOrDefault(x => x.Id == client.Id);
-                if (order != default)
-                {
-                    _clients.Add((client, order.OrderField));
-                    _clients = _clients.OrderBy(x => x.Item2).ToList();
-                }
+                foreach (var order in _orders)
+                    if (order.Id == client.Id)
+                        _clients.Add((client, order.OrderField));
+                //var order = _orders.FirstOrDefault(x => x.Id == client.Id);
+                //if (order != default)
+                //{
+                //    _clients.Add((client, order.OrderField));
+                //    _clients = _clients.OrderBy(x => x.Item2).ToList();
+                //}
             }
         }
 
@@ -63,9 +66,11 @@ namespace ShowingAds.AndroidApp.Core.BusinessCollections.Visitors
 
         public IEnumerable<Video> GetSortedVideos()
         {
-            foreach (var (client, orderField) in _clients)
+            var videos = new List<Video>();
+            foreach (var (client, orderField) in _clients.OrderBy(x => x.Item2))
                 if (client.TryGetNext(out var video))
-                    yield return video;
+                    videos.Add(video);
+            return videos;
         }
     }
 }
